@@ -82,6 +82,22 @@ ActiveRecord::Schema.define(version: 2019_05_13_042323) do
     t.index ["item_name"], name: "index_items_on_item_name"
   end
 
+  create_table "labels", force: :cascade do |t|
+    t.string "label_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["label_name"], name: "index_labels_on_label_name"
+  end
+
+  create_table "responses", force: :cascade do |t|
+    t.string "response_name"
+    t.string "subject"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_responses_on_created_at"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.integer "item_id"
     t.integer "user_id"
@@ -91,33 +107,15 @@ ActiveRecord::Schema.define(version: 2019_05_13_042323) do
     t.index [nil], name: "index_reviews_on_review_id"
   end
 
-  create_table "labels", force: :cascade do |t|
-    t.string "label_name"
+  create_table "ship_to_anothers", force: :cascade do |t|
+    t.string "first_name", limit: 20, null: false
+    t.string "last_name", limit: 20, null: false
+    t.string "first_name_kana", limit: 20, null: false
+    t.string "last_name_kana", limit: 20, null: false
+    t.string "postal_code", limit: 7, null: false
+    t.string "address", limit: 300, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["label_name"], name: "index_labels_on_label_name"
-  end
-
-    create_table "item_carts", force: :cascade do |t|
-      t.integer "item_id"
-      t.integer "cart_id"
-      t.integer "count"
-      t.integer "price"
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
-      t.index ["cart_id"], name: "index_item_carts_on_cart_id"
-      t.index ["item_id"], name: "index_item_carts_on_item_id"
-    end
-
-    create_table "ship_to_anothers", force: :cascade do |t|
-      t.string "first_name", limit: 20, null: false
-      t.string "last_name", limit: 20, null: false
-      t.string "first_name_kana", limit: 20, null: false
-      t.string "last_name_kana", limit: 20, null: false
-      t.string "postal_code", limit: 7, null: false
-      t.string "address", limit: 300, null: false
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
   end
 
   create_table "songs", force: :cascade do |t|
