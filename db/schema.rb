@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 2019_05_13_042323) do
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.string "last_name"
+    t.string "first_name"
+    t.string "email"
+    t.string "subject"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_contacts_on_created_at"
+  end
+
   create_table "genres", force: :cascade do |t|
     t.string "genre_name", null: false
     t.datetime "created_at", null: false
