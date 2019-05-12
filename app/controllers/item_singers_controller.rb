@@ -1,0 +1,2 @@
+class ItemSingersController < ApplicationController
+end
