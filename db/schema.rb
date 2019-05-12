@@ -13,9 +13,10 @@
 ActiveRecord::Schema.define(version: 2019_05_12_025330) do
 
   create_table "genres", force: :cascade do |t|
-    t.string "genre_name"
+    t.string "genre_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["genre_name"], name: "index_genres_on_genre_name"
   end
 
 end
