@@ -18,6 +18,6 @@ Rails.application.routes.draw do
   resources :carts,            only: [:index, :new, :create, :update]
   resources :ship_to_anothers, only: [:create, :new, :update]
 
-    resources :labels
-
+  resources :labels
+  resources :contacts, only: [:new, :create]
 end
