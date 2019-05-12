@@ -80,41 +80,12 @@ ActiveRecord::Schema.define(version: 2019_05_13_042323) do
     t.index [nil], name: "index_reviews_on_review_id"
   end
 
-  create_table "ship_to_anothers", force: :cascade do |t|
-    t.string "first_name", limit: 20, null: false
-    t.string "last_name", limit: 20, null: false
-    t.string "first_name_kana", limit: 20, null: false
-    t.string "last_name_kana", limit: 20, null: false
-    t.string "postal_code", limit: 7, null: false
-    t.string "address", limit: 300, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-
   create_table "labels", force: :cascade do |t|
     t.string "label_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["label_name"], name: "index_labels_on_label_name"
-
-    create_table "carts", force: :cascade do |t|
-      t.integer "user_id"
-      t.integer "ship_to_another_id"
-      t.integer "payment"
-      t.integer "total_price"
-      t.integer "status", default: 1
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
-      t.index ["ship_to_another_id"], name: "index_carts_on_ship_to_another_id"
-      t.index ["updated_at"], name: "index_carts_on_updated_at"
-      t.index ["user_id"], name: "index_carts_on_user_id"
-    end
-
-    create_table "genres", force: :cascade do |t|
-      t.string "genre_name", null: false
-      t.datetime "created_at", null: false
-      t.datetime "updated_at", null: false
-      t.index ["genre_name"], name: "index_genres_on_genre_name"
-    end
+  end
 
     create_table "item_carts", force: :cascade do |t|
       t.integer "item_id"
