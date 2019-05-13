@@ -1,9 +1,11 @@
 class ItemsController < ApplicationController
 
   def index
+    @items = Item.all
   end
 
   def show
+    @item = item.find(params[:id])
   end
 
   def new
