@@ -11,12 +11,13 @@ Rails.application.routes.draw do
   get 'carts/:id/ship_to_another/edit', to: 'catrs#edit', as: 'ship_to_another_edit'
   get 'carts/:id/payment/edit',         to: 'catrs#edit', as: 'payment_edit'
   get 'carts/:id/confirm/edit',         to: 'catrs#edit', as: 'confirm_edit'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   resources :items do
     resource :item_carts,  only: [:create, :update]
     resource :item_singer, only: [:create]
     resource :review,      only: [:index, :new, :create, :update, :destroy]
   end
+
   resources :stock,            only: [:create, :update]
   resources :review,           only: [:index, :edit]
   resources :item_singer,      only: [:update]
@@ -25,4 +26,7 @@ Rails.application.routes.draw do
   resources :carts,            only: [:index, :new, :create, :update]
   resources :ship_to_anothers, only: [:create, :new, :update]
 
+  resources :labels
+  resources :contacts, only: [:new, :create]
+  resources :responses, only: [:new, :create]
 end
