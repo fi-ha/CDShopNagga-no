@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_12_115437) do
+ActiveRecord::Schema.define(version: 2019_05_13_042323) do
 
   create_table "carts", force: :cascade do |t|
     t.integer "user_id"
@@ -43,6 +43,43 @@ ActiveRecord::Schema.define(version: 2019_05_12_115437) do
     t.index ["item_id"], name: "index_item_carts_on_item_id"
   end
 
+  create_table "item_genres", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "genre_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["genre_id"], name: "index_item_genres_on_genre_id"
+  end
+
+  create_table "item_singers", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "singer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index [nil, "singer_id"], name: "index_item_singers_on_item_singer_id_and_singer_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.integer "label_id"
+    t.string "item_name"
+    t.string "image_id"
+    t.integer "price"
+    t.text "description"
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_name"], name: "index_items_on_item_name"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "user_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index [nil], name: "index_reviews_on_review_id"
+  end
+
   create_table "ship_to_anothers", force: :cascade do |t|
     t.string "first_name", limit: 20, null: false
     t.string "last_name", limit: 20, null: false
@@ -52,6 +89,24 @@ ActiveRecord::Schema.define(version: 2019_05_12_115437) do
     t.string "address", limit: 300, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "songs", force: :cascade do |t|
+    t.integer "item_id"
+    t.string "song_name"
+    t.string "disk"
+    t.integer "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["disk", "number"], name: "index_songs_on_disk_and_number"
+  end
+
+  create_table "stocks", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["updated_at"], name: "index_stocks_on_updated_at"
   end
 
 end
