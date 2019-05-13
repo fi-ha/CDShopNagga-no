@@ -33,30 +33,30 @@
           </a>
         </div>
       </div>
+      <!--headerのトリガーを押したあとに出てくるmenu -->
+      <nav class="hamburger-menu">
+        <ul class="hamburger-menu">
+          <!--リンク先は各ページ設定の後、変更して下さい -->
+          <li><%= link_to "TOP", genres_path %></li>
+          <li><%= link_to "おすすめプレーヤー", genres_path %></li>
+          <li><%= link_to "商品一覧", genres_path %></li>
+          <li><%= link_to "マイページ", genres_path %></li><!--ログイン時のみ表示link_to_ifを使うと便利 -->
+          <li><%= link_to "カート", genres_path %></li><!--ログイン時のみ表示link_to_ifを使うと便利 -->
+          <li><%= link_to "カート", genres_path %></li><!--ログアウト時のみ表示リンク先は新規登録フォームlink_to_unlessを使うと便利 -->
+          <li><%= link_to "コンセプト", genres_path %></li>
+          <li><%= link_to "ログイン", genres_path %></li><!--ログアウト時のみ表示link_to_ifを使うと便利 -->
+          <li><%= link_to "新規登録", genres_path %></li><!--ログアウト時のみ表示link_to_ifを使うと便利 -->
+          <li><%= link_to "お問い合わせ", genres_path %></li>
+          <li><%= link_to "ログアウト", genres_path %></li><!--ログイン時のみ表示link_to_ifを使うと便利 -->
+        </ul>
+      </nav>
     </header>
-    
-    <!--headerのトリガーを押したあとに出てくるmenu -->
-    <nav class="hamburger-menu">
-      <ul class="hamburger-menu">
-        <!--リンク先は各ページ設定の後、変更して下さい -->
-        <li><%= link_to "TOP", genres_path %></li>
-        <li><%= link_to "おすすめプレーヤー", genres_path %></li>
-        <li><%= link_to "商品一覧", genres_path %></li>
-        <li><%= link_to "マイページ", genres_path %></li><!--ログイン時のみ表示link_to_ifを使うと便利 -->
-        <li><%= link_to "カート", genres_path %></li><!--ログイン時のみ表示link_to_ifを使うと便利 -->
-        <li><%= link_to "カート", genres_path %></li><!--ログアウト時のみ表示リンク先は新規登録フォームlink_to_unlessを使うと便利 -->
-        <li><%= link_to "コンセプト", genres_path %></li>
-        <li><%= link_to "ログイン", genres_path %></li><!--ログアウト時のみ表示link_to_ifを使うと便利 -->
-        <li><%= link_to "新規登録", genres_path %></li><!--ログアウト時のみ表示link_to_ifを使うと便利 -->
-        <li><%= link_to "お問い合わせ", genres_path %></li>
-        <li><%= link_to "ログアウト", genres_path %></li><!--ログイン時のみ表示link_to_ifを使うと便利 -->
-      </ul>
-    </nav>
     <!-- ===================================================================================================== -->
     <%= yield %>
     <script type="text/javascript">
       $('.menu-trigger-box').on('click', function(){
         $(this).children('.menu-trigger').toggleClass('active');
+        $('.hamburger-menu').toggleClass('active');
       });
     </script>
   </body>
