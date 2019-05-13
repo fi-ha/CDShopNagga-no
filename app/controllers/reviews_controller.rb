@@ -1,5 +1,7 @@
 class ReviewsController < ApplicationController
+
   def index
+  	@reviews = Review.all
   end
 
   def new
@@ -7,4 +9,18 @@ class ReviewsController < ApplicationController
 
   def show
   end
+
+  def create
+  end
+
+  def update
+  end
+
+  def destroy
+  end
+
+  private
+  	def review_params
+  		params.require(:review).permit(:review)
+
 end
