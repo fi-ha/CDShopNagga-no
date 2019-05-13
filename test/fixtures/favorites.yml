@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  favorite_id: 1
+  item_id: 1
+  user_id: 1
+  created_at: 2019-05-13 05:53:47
+  updated_at: 2019-05-13 05:53:47
+
+two:
+  favorite_id: 1
+  item_id: 1
+  user_id: 1
+  created_at: 2019-05-13 05:53:47
+  updated_at: 2019-05-13 05:53:47

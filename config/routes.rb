@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+
+  devise_for :users
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :users
+  resources :singers
+  resources :favorites
+
+
   get 'carts/:id/edit',                 to: 'carts#edit', as: 'cart_edit'
   get 'carts/:id/ship_to_another/edit', to: 'catrs#edit', as: 'ship_to_another_edit'
   get 'carts/:id/payment/edit',         to: 'catrs#edit', as: 'payment_edit'
