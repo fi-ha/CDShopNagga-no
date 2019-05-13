@@ -5,4 +5,7 @@ class Contact < ApplicationRecord
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i　format: { with: VALID_EMAIL_REGEX }
     validates :subject, length:{in: 1..60}
     validates :body, presence: true, length:{1..5000}
+
+    belongs_to :user
+    has_one :response
 end
