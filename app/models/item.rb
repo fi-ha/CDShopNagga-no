@@ -15,4 +15,6 @@ class Item < ApplicationRecord
 	has_many :reviews, dependent: :destroy
 	has_many :favorites, dependent: :destroy
 	belong_to :label
+
+	attachment :image_id
 end
