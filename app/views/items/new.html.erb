@@ -1,7 +1,3 @@
-<h1>Items#new</h1>
-<p>Find me in app/views/items/new.html.erb</p>
-
-
 
 <div class='container'>
     <div class='row'>
@@ -23,20 +19,24 @@
 <!-- タブ内容 -->
 <div class="tab-content">
 	<div class="tab-pane active" id="cd">
+
+    <%= form_for(@item) do |f| %>
+
 		<h4>アーティスト名</h4>
-        <h4>シングル/アルバム名</h4>
-        <h4>ジャケット画像</h4>
-        <h4>価格（税別）</h4>
+        <h4>シングル/アルバム名 <%= f.text_field :item_name %></h4>
+        <h4>ジャケット画像<%= f.attachment_field :image_id, placeholder: "ジャケット画像" %></h4>
+        <h4>価格（税別） <%= f.text_field :price %></h4>
         <h4>レーベル名</h4>
         <h4>ジャンル</h4>
         <h4>曲名</h4>
         <h4>在庫数</h4>
 
 
-  <div class="actions">
-   <p class = "btn btn bg-primary", data:{confirm: "本当に登録しますか？"} > 登録する </p>
+  <div>
+   <%= f.submit '登録する', class: "btn btn bg-primary", data:{confirm: "本当に登録しますか？"} %>
   </div>
 
+<% end %>
 
 
 
@@ -46,17 +46,22 @@
 
 
 	<div class="tab-pane" id="player">
-		<h4>Player名</h4>
-        <h4>Player画像</h4>
-        <h4>価格（税別）</h4>
+
+    <%= form_for(@item) do |f|%>
+
+		<h4>Player名 <%= f.text_field :item_name %></h4>
+        <h4>Player画像<%= f.attachment_field :image_id, placeholder: "ジャケット画像" %></h4>
+        <h4>価格（税別）<%= f.text_field :price %></h4>
         <h4>ジャンル</h4>
-        <h4>商品説明</h4>
+        <h4>商品説明<%= f.text_area :description, :rows => "7" %></h4>
         <h4>在庫数</h4>
 
 
-  <div class="actions">
-   <p class = "btn btn bg-danger", {confirm: "本当に削除しますか？"} > 登録する </p>
+  <div>
+   <%= f.submit '登録する', class: "btn btn bg-danger", data:{confirm: "本当に登録しますか？"} %>
   </div>
+
+  <% end %>
 
 	</div>
 </div>

@@ -14,7 +14,8 @@ class Item < ApplicationRecord
 	has_many :stocks, dependent: :destroy
 	has_many :reviews, dependent: :destroy
 	has_many :favorites, dependent: :destroy
-	belong_to :label
+	belongs_to :label
 
+	#画像
 	attachment :image_id
 end
