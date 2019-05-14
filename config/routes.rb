@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get 'carts/:id/confirm/edit',         to: 'catrs#edit', as: 'confirm_edit'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :items do
-    resource :item_carts,  only: [:create, :update]
+    resource :item_carts,  only: [:create, :update, :destroy]
     resource :item_singer, only: [:create]
     resource :review,      only: [:index, :new, :create, :update, :destroy]
   end
