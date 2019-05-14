@@ -23,12 +23,26 @@
     <%= form_for(@item) do |f| %>
 
 		<h4>アーティスト名</h4>
+
+
         <h4>シングル/アルバム名 <%= f.text_field :item_name %></h4>
         <h4>ジャケット画像<%= f.attachment_field :image_id, placeholder: "ジャケット画像" %></h4>
         <h4>価格（税別） <%= f.text_field :price %></h4>
+
+
         <h4>レーベル名</h4>
+        <%= f.collection_select :label, Label.all, :id, :label_name, include_blank: true %>
+
+
         <h4>ジャンル</h4>
+
+
+      <%= form_for @song,:url => {:action => :create} do |f| %>
         <h4>曲名</h4>
+        <p>ディスク名<%= f.text_field :disk %></p>
+        <p>number<%= f.text_field :number, :size=> "3" %><%= f.text_field :song_name %></p>
+        <% end %>
+
         <%= form_for @stock,:url => {:action => :create} do |f| %>
         <h4>在庫数<%= f.text_field :count %></h4>
         <% end %>

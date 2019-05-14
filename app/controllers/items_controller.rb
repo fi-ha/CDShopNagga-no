@@ -11,8 +11,8 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @labels = Label.all
-    @stocks = Stock.all
     @stock = Stock.new
+    @song = Song.new
   end
 
   def edit
