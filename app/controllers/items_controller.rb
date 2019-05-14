@@ -11,6 +11,8 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @labels = Label.all
+    @stocks = Stock.all
+    @stock = Stock.new
   end
 
   def edit
@@ -35,5 +37,11 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:item_name, :image_id, :price, :description)
   end
+
+  private
+	def stock_params
+		params.require(:stock).permit(:count)
+	end
+
 
 end

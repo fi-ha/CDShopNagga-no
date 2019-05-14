@@ -29,7 +29,9 @@
         <h4>レーベル名</h4>
         <h4>ジャンル</h4>
         <h4>曲名</h4>
-        <h4>在庫数</h4>
+        <%= form_for @stock,:url => {:action => :create} do |f| %>
+        <h4>在庫数<%= f.text_field :count %></h4>
+        <% end %>
 
 
   <div>
@@ -39,10 +41,7 @@
 <% end %>
 
 
-
 	</div>
-
-
 
 
 	<div class="tab-pane" id="player">
@@ -54,7 +53,9 @@
         <h4>価格（税別）<%= f.text_field :price %></h4>
         <h4>ジャンル</h4>
         <h4>商品説明<%= f.text_area :description, :rows => "7" %></h4>
-        <h4>在庫数</h4>
+        <%= form_for @stock,:url => {:action => :create} do |f| %>
+        <h4>在庫数<%= f.text_field :count %></h4>
+        <% end %>
 
 
   <div>

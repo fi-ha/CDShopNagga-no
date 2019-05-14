@@ -29,4 +29,6 @@ Rails.application.routes.draw do
   resources :labels
   resources :contacts, only: [:new, :create]
   resources :responses, only: [:new, :create]
+
+  resources :songs, only: [:create, :update, :destroy]
 end
