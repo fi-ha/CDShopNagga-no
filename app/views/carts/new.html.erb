@@ -1,2 +1,73 @@
 <h1>Cart</h1>
 <p>内容がよろしければ発送先選択ページへお進み下さい</p>
+
+<!-- ============ こからカートの中身 ============== -->
+<form class="" action="index.html" method="post">
+  <section class="cart-items">
+    <table>
+      <!-- カートの中身繰り返し処理 -->
+      <%# もしCDだったら %>
+      <tbody class="cart-in-CD">
+        <tr>
+          <td rowspan="5">画像</td>
+          <td rowspan="2"><p>CDタイトル</p><h3>CDタイトル</h3></td>
+          <td></td>
+          <td rowspan="5">
+            <input type="hidden" class="sum-maney" name="" value="1000" type="hidden">下記inputで枚数を取得、金額を変更</td>
+          <td rowspan="5">削除</td>
+        </tr>
+        <tr>
+          <td><input class="number-maney" type="number" name="example2" value="1">枚</td>
+        </tr>
+        <tr>
+          <td>アーティスト名</td>
+          <td>在庫状況</td>
+        </tr>
+        <tr>
+          <td>レーベル名</td>
+          <td rowspan="2">お気に入り登録ボタン</td>
+        </tr>
+        <tr>
+          <td>ジャンル</td>
+        </tr>
+      </tbody>
+      <%# もしプレイヤーだったら %>
+      <tbody class="cart-in-Player">
+        <tr>
+          <td rowspan="4">画像</td>
+          <td rowspan="4">CDタイトル</td>
+          <td></td>
+          <td rowspan="4">金額</td>
+          <td rowspan="4">削除</td>
+        </tr>
+        <tr>
+          <td><input type="number" name="example2" value="1">台</td>
+        </tr>
+        <tr>
+          <td>在庫状況</td>
+        </tr>
+        <tr>
+          <td>お気に入り登録ボタン</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</form>
+
+<script type="text/javascript">
+  $(function() {
+    $('.number-money').on('input', function(e) {
+      const money = $(this).closest('.cart-in-CD').find('.sum-many');
+      console.log(money);
+      const output = money.parents();
+      console.log(output);
+      const money_val = $output.val();
+      console.log(money_val);
+      const number = $(this).val();
+      console.log(number);
+      const sum = money * number;
+      console.log(sum);
+      output.text(sum);
+    });
+  });
+</script>
