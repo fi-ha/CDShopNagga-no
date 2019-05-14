@@ -1,2 +1,67 @@
 <h1>Items#new</h1>
 <p>Find me in app/views/items/new.html.erb</p>
+
+
+
+<div class='container'>
+    <div class='row'>
+      <div class='col-xs-10 col-xs-offset-2'>
+<h1>商品登録</h1>
+<ul class="nav nav-tabs">
+	<li class = "active"><a href="#cd" data-toggle="tab">CD</a></li>
+	<li><a href="#player" data-toggle="tab">Palyer</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+
+<div class='container'>
+    <div class='row'>
+      <div class='col-xs-9 col-xs-offset-3'>
+
+<!-- タブ内容 -->
+<div class="tab-content">
+	<div class="tab-pane active" id="cd">
+		<h4>アーティスト名</h4>
+        <h4>シングル/アルバム名</h4>
+        <h4>ジャケット画像</h4>
+        <h4>価格（税別）</h4>
+        <h4>レーベル名</h4>
+        <h4>ジャンル</h4>
+        <h4>曲名</h4>
+        <h4>在庫数</h4>
+
+
+  <div class="actions">
+   <p class = "btn btn bg-primary", data:{confirm: "本当に登録しますか？"} > 登録する </p>
+  </div>
+
+
+
+
+	</div>
+
+
+
+
+	<div class="tab-pane" id="player">
+		<h4>Player名</h4>
+        <h4>Player画像</h4>
+        <h4>価格（税別）</h4>
+        <h4>ジャンル</h4>
+        <h4>商品説明</h4>
+        <h4>在庫数</h4>
+
+
+  <div class="actions">
+   <p class = "btn btn bg-danger", {confirm: "本当に削除しますか？"} > 登録する </p>
+  </div>
+
+	</div>
+</div>
+
+
+    </div>
+  </div>
+</div>
