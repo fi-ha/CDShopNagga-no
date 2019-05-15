@@ -10,6 +10,7 @@ class Item < ApplicationRecord
 	has_many :songs, dependent: :destroy
 	has_many :item_genres, dependent: :destroy
 	has_many :item_singers, dependent: :destroy
+	has_many :singers, through: :item_singers
 	has_many :item_carts, dependent: :destroy
 	has_many :stocks, dependent: :destroy
 	has_many :reviews, dependent: :destroy

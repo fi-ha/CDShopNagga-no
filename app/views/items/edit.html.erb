@@ -1,2 +1,23 @@
-<h1>Items#edit</h1>
-<p>Find me in app/views/items/edit.html.erb</p>
+<h1>商品編集</h1>
+
+<%= form_for(@item) do |f| %>
+
+	<p>Player名</p>
+	<%= f.text_field :item_name %>
+
+	<p>Player画像</p>
+	<%= attachment_image_tag @item, :image, :fill, 60, 60, format: 'jpeg' %>
+	<%= f.attachment_field :image, placeholder: 'プロフィール画像' %>
+
+	<p>価格</p>
+	<%= f.text_field :price %>
+	<p>ジャンル</p>
+
+	<p>商品説明</p>
+	<%= f.text_area @item, :description %>
+
+	<p>在庫数</p>
+
+	<p>登録時点でユーザーから見れるようにする</p>
+	<%= f.submit '編集' %>
+<% end %>
