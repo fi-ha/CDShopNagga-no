@@ -1,11 +1,16 @@
 class SingersController < ApplicationController
 	def create
+		@singer = Singer.new(singer_params)
+		@singer.save
+		redirect_to new_singer_path
 	end
 
 	def index
 	end
 
 	def new
+		@singer = Singer.new
+		@singers = Singer.all
 	end
 
 	def edit
@@ -17,5 +22,9 @@ class SingersController < ApplicationController
 	def update
 	end
 
+	private
+	def singer_params
+		params.require(:singer).permit(:singer_name)
+	end
 
 end
