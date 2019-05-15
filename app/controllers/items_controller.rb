@@ -20,7 +20,8 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    if @item.save
+    @stock = Stock.new(stock_params)
+    if @item.save && @stock.save
     redirect_to items_path
     else
       render :new
