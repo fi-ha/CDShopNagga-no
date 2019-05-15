@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 2019_05_13_055347) do
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.string "last_name"
+    t.string "first_name"
+    t.string "email"
+    t.string "subject"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_contacts_on_created_at"
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.integer "favorite_id"
     t.integer "item_id"
@@ -77,6 +88,22 @@ ActiveRecord::Schema.define(version: 2019_05_13_055347) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_name"], name: "index_items_on_item_name"
+  end
+
+  create_table "labels", force: :cascade do |t|
+    t.string "label_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["label_name"], name: "index_labels_on_label_name"
+  end
+
+  create_table "responses", force: :cascade do |t|
+    t.string "response_name"
+    t.string "subject"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_responses_on_created_at"
   end
 
   create_table "reviews", force: :cascade do |t|

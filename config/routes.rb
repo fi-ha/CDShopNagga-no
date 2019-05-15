@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
+}
 
-  devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :users
   resources :singers
   resources :favorites
+  resources :users, only: [:show]
 
 
   get 'carts/:id/edit',                 to: 'carts#edit', as: 'cart_edit'
@@ -18,6 +21,7 @@ Rails.application.routes.draw do
     resource :item_singer, only: [:create]
     resource :review,      only: [:index, :new, :create, :update, :destroy]
   end
+
   resources :stock,            only: [:create, :update]
   resources :review,           only: [:index, :edit]
   resources :item_singer,      only: [:update]
@@ -26,4 +30,9 @@ Rails.application.routes.draw do
   resources :carts,            only: [:index, :new, :create, :update]
   resources :ship_to_anothers, only: [:create, :new, :update]
 
+  resources :labels, only: [:new, :create, :edit, :update, :destroy]
+  resources :contacts, only: [:new, :create]
+  resources :responses, only: [:new, :create]
+
+  resources :songs, only: [:create, :update, :destroy]
 end
