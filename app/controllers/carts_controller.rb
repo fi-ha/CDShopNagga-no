@@ -6,20 +6,20 @@ class CartsController < ApplicationController
   end
 
   def edit
-    Cartの中から現在のログインユーザーかつ、statusがカート状態のカートを取り出す関数定義
+    # Cartの中から現在のログインユーザーかつ、statusがカート状態のカートを取り出す関数定義
     def current_cart_id
       current_cart = Cart.where(user_id: current_user.id).where(status: 1)
       current_cart_id = current_cart.id
       return current_cart_id
     end
-    cartのidとアソシエーションしているItem_cartを取り出す
+    # cartのidとアソシエーションしているItem_cartを取り出す
     item_carts = Item_carts.find(cart_id: current_cart_id)
-    更にitem_cartsとアソシエーションしているitemsを取り出す
+    # 更にitem_cartsとアソシエーションしているitemsを取り出す
     @items = item_carts.items
-    itemとアソシエーションしているitem_singers、item_genres、を取り出す
+    # itemとアソシエーションしているitem_singers、item_genres、を取り出す
     @item_singers = @items.item_singers
     @item_genres = @items.item_genres
-    Genre,Stocks,Singer,Labelsからアソシエーションで関連しているデータを取り出す。
+    # Genre,Stocks,Singer,Labelsからアソシエーションで関連しているデータを取り出す。
     @genres = @item_genres.Genres
     @stocks = @item.Stocks
     @singers = @item_singers.Singer
