@@ -1,1 +1,12 @@
 new.html.erb
+
+<%= form_for @singer do |f| %>
+	singer_name:
+	<%= f.text_field :singer_name %>
+	<%= f.submit '登録' %>
+<% end %>
+
+<% @singers.each do |singer| %>
+singer_name:<%= singer.singer_name %>
+<% end %>
+
