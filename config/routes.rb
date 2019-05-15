@@ -29,7 +29,9 @@ Rails.application.routes.draw do
   resources :carts,            only: [:index, :new, :create, :update]
   resources :ship_to_anothers, only: [:create, :new, :update]
 
-  resources :labels
+  resources :labels, only: [:new, :create, :edit, :update, :destroy]
   resources :contacts, only: [:new, :create]
   resources :responses, only: [:new, :create]
+
+  resources :songs, only: [:create, :update, :destroy]
 end
