@@ -9,16 +9,17 @@ class User < ApplicationRecord
          has_many :reviews, dependent: :destroy
          has_many :favorites, dependent: :destroy
 
-         validates :last_name, presence: true, length: {minimum: 1, maximum: 20}
-         validates :first_name, presence: true, length: {minimum: 1, maximum: 20}
-         validates :last_name_kana, presence: true, length: {minimum: 1, maximum: 20}
-         validates :first_name_kana, presence: true, length: {minimum: 1, maximum: 20}
-         validates :postal_code, presence: true, length: {maximum: 7}
-         validates :phone_number, presence: true, length: {minimum: 1 , maximum: 15}
-         validates :encrypted_password, presence: true, length: {minimum: 6}
+         validates :last_name, presence: true, format: {with: /^[一-龥ぁ-ん]/, :multiline => true }, length: {minimum: 1, maximum: 20}
+         validates :first_name, presence: true, format: {with: /^[一-龥ぁ-ん]/, :multiline => true }, length: {minimum: 1, maximum: 20}
+         validates :last_name_kana, presence: true, format: {with: /^[ァ-ンー－]+$/, :multiline => true }, length: {minimum: 1, maximum: 20}
+         validates :first_name_kana, presence: true, format: {with: /^[ァ-ンー－]+$/, :multiline => true  }, length: {minimum: 1, maximum: 20}
+         validates :postal_code, presence: true, format: {with: /^\d{7}$/, :multiline => true }, length: {maximum: 7}
+         validates :addres, presence: true, length: {minimum: 1, maximum: 300}
+         validates :phone_number, presence: true, length: {maximum: 15}
+
 
          VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-         validates :email, presence: true, format: {with: VALID_EMAIL_REGEX}, uniqueness: {case_sensitive: false}, length: {maximum: 254}
+         validates :email, presence: true, format: {with: VALID_EMAIL_REGEX }, uniqueness: {case_sensitive: false}, length: {maximum: 254}
 
 
 
