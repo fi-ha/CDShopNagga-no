@@ -67,6 +67,50 @@ class CartsController < ApplicationController
     redirect_to confirm_edit_path
   end
 
+  def confirm
+    # ここはeditアクションと同じ記述だからどこかに逃したい
+    # cartのidとアソシエーションしているItem_cartを取り出す
+    # @item_carts = Item_carts.find(cart_id: current_cart_id)
+    # 更にitem_cartsとアソシエーションしているitemsを取り出す
+    # @items = item_carts.items
+    # itemとアソシエーションしているitem_singers、item_genres、を取り出す
+    # @item_singers = @items.item_singers
+    # @item_genres = @items.item_genres
+    # Genre,Stocks,Singer,Labelsからアソシエーションで関連しているデータを取り出す。
+    # @genres = @item_genres.Genres
+    # @stocks = @item.Stocks
+    # @singers = @item_singers.Singer
+    # @labels = @items.Labels
+    # for で itemsをitemに変換し繰り返すその中で計算合計を出すさらにitem_stockにpriceを保管、sumpriceをcartに保管@sumprice
+    # @ship_to_another = current_cart_id.ship_to_anothers
+    # case cart.payment
+    # when 1 then
+    #   @payment = "<p>銀行振込</p><%= link_to "支払い方法選択に戻る", payment_edit_path %><%= render "購入確定"  template: "cart/ginko" %>"
+    # when 2 then
+    #   @payment = "<p>代金引換</p><%= link_to "支払い方法選択に戻る", payment_edit_path %><%= render "購入確定"  template: "cart/daibiki" %>"
+    # when 3 then
+    #   @payment = "<p>クレジットカード</p><%= link_to "支払い方法選択に戻る", payment_edit_path %><%= render "購入確定"  template: "cart/cred" %>"
+    # else
+    #   @payment = "<p>支払い方法が選択されておりません</p><%= link_to "支払い方法選択に戻る" , payment_edit_path %>"
+    # end
+  end
+
+  def ginko
+    # 発送メール送信
+    redirect_to finish_path
+  end
+
+  def daibiki
+    # 発送メール送信
+    redirect_to finish_edit_path
+  end
+
+  def cred
+    # payjp処理
+    # 発送メール送信
+    redirect_to finish_edit_path
+  end
+
   def create
   end
 
