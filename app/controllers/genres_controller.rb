@@ -1,8 +1,11 @@
 class GenresController < ApplicationController
+    before_action :authenticate_user!
+  
   def index
   end
 
   def new
+    @genre = Genre.new
   end
 
   def edit
