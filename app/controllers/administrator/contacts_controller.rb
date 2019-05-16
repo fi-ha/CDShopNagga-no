@@ -7,6 +7,6 @@ class Administrator::ContactsController < ApplicationController
 
     private
     def admin_user
-        redirect_to(items_path) unless current_user.administorator?
+        redirect_to(items_path) unless current_user.administrator?
     end
 end
