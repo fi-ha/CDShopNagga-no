@@ -1,8 +1,11 @@
 class LabelsController < ApplicationController
+　before_action :authenticate_user!
+
     def index
     end
 
     def new
+      @label =Lebel.new
     end
 
     def edit
