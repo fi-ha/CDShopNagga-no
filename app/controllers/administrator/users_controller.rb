@@ -1,8 +1,12 @@
 class Administrator::UsersController < ApplicationController
-    before_action :admin_user
+    # before_action :admin_user    adminを作って動作確認する時、ここと下のコメントアウト外してください
 
-    private
-    def admin_user
-        redirect_to(root_url) unless current_user.administrator?
+    def index
+        @users = User.all
     end
+
+    # private
+    # def admin_user
+        # redirect_to(items_path) unless current_user.administrator?
+    # end
 end
