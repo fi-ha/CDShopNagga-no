@@ -1,2 +1,94 @@
-<h1>Carts#edit</h1>
-<p>Find me in app/views/carts/edit.html.erb</p>
+<h1>Coformation</h1>
+<p>内容がよろしければ確定ボタンを押してください。</p>
+
+<h3>ご注文内容</h3>
+
+<%= link_to "カートに戻る", cart_edit_path %>
+
+<section class="cart-items">
+  <table>
+
+    <!-- カート内のitemを繰り返し表示 -->
+    <%# @items.each do |item| %>
+
+    <!-- ここで該当する歌手、ジャンル、レーベル、、ストックを取り出す -->
+    <%# singer = @singers.find(id: item.@item_singers.singer_id) %>
+    <%# genre = @genres.find(id: item.@item_genres.genre_id) %>
+    <%# stock = @stocks.find(id: item.item_id) %>
+    <%# label = @labels.find(id: item.label_id) %>
+    <%# <%= price =  item.price * @item_carts(id: item.id).count %> %>
+
+    <!-- もしCDだったら -->
+    <%# if item.description.empty? %>
+    <tbody class="cart-in-CD">
+      <tr>
+        <td rowspan="5"><%= "attachment_image_tag モデル名, :image, :fill, 横幅の数値(例: 100), 縦幅の数値, format: '拡張子名(例: jpg)'" %></td>
+        <td rowspan="2"><p>CDタイトル</p><h3><%= "item.name" %></h3></td>
+        <td></td>
+        <td class='multiply_price' rowspan="5"><%= " price.to_s(:delimited) " %>円</td>
+      </tr>
+      <tr>
+        <td rowspan="5"><p><%=" @item_carts(id: item.id).count" %>枚</p></td>
+      </tr>
+      <tr>
+        <td><p>歌手</p><%= "singer.name" %></td>
+      </tr>
+      <tr>
+        <td><p>レーベル名</p><%= "label.name" %></td>
+      </tr>
+      <tr>
+        <td><p>ジャンル</p><%= "genre.name" %></td>
+      </tr>
+    </tbody>
+    <%# もしプレイヤーだったら %>
+    <%# else %>
+    <tbody class="cart-in-Player">
+      <tr>
+        <td rowspan="4"><%= "attachment_image_tag モデル名, :image, :fill, 横幅の数値(例: 100), 縦幅の数値, format: '拡張子名(例: jpg)'" %></td>
+        <td rowspan="4"><p>プレーヤー名</p><h3><%= "item.name" %></h3></td>
+        <td></td>
+        <td class='multiply_price' rowspan="4"><%= "price.to_s(:delimited)" %>円</td>
+      </tr>
+      <tr>
+        <td><p><%=" @item_carts(id: item.id).count" %>台</p></td>
+      </tr>
+    </tbody>
+    <%# end %>
+    <%# end %>
+  </table>
+</section>
+
+<h4>合計<%= "@sumprice"  %></h4>
+<h4>送料全国どこでも500円</h4>
+<h4>総合計<%= "@sumprice + 500" %></h4>
+
+<h3>配送先</h3>
+
+<%if "@ship_to_another.isnot" %>
+<h4>登録している住所</h4>
+<p>郵便番号</p>
+<%= "@User.postalcode" %>
+<p>住所</p>
+<%= "@User.address" %>
+<p>電話番号</p>
+<%=" @User.phonenumber" %>
+
+<% else %>
+<h4>他の住所</h4>
+<p>郵便番号</p>
+<%= "@ship_to_another.postalcode" %>
+<p>住所</p>
+<%= "@ship_to_another.address" %>
+<p>電話番号</p>
+<%= "@ship_to_another.phonenumber" %>
+
+<% end %>
+
+<%= link_to "住所選択に戻る", ship_to_another_path %>
+
+<h3>支払い方法</h3>
+
+<%= "@payment" %>
+<p>銀行振込</p>
+<%= link_to "支払い方法選択に戻る", payment_edit_path %>
+<%= render "購入確定"  template: "cart/ginko %>
