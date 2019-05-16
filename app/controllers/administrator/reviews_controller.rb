@@ -1,8 +1,12 @@
-class Administrator::UsersController < ApplicationController
+class Administrator::ReviewsController < ApplicationController
     before_action :admin_user
 
     def index
-        @users = User.all
+        @reviews = Review.all
+    end
+
+    def edit
+        @review = Review.find(params)
     end
 
     private

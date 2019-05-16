@@ -1,8 +1,8 @@
-class Administrator::UsersController < ApplicationController
+class Administrator::ItemsController < ApplicationController
     before_action :admin_user
 
     def index
-        @users = User.all
+        @items = Item.all
     end
 
     private

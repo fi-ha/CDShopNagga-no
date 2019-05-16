@@ -1,8 +1,8 @@
-class Administrator::UsersController < ApplicationController
+class Administrator::ContactsController < ApplicationController
     before_action :admin_user
 
     def index
-        @users = User.all
+        @contacts = Contact.all
     end
 
     private
