@@ -62,8 +62,8 @@ class CartsController < ApplicationController
   end
 
   def payedit
-    cart = current_cart_id
-    cart.update(post_params)
+    # cart = current_cart_id
+    # cart.update(post_params)
     redirect_to confirm_edit_path
   end
 
