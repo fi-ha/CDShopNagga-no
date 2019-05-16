@@ -42,4 +42,6 @@ Rails.application.routes.draw do
     resources :users, only: [:index]
     resources :contacts, only: [:index]
   end
+
+  resources :concepts, only: [:index]
 end
