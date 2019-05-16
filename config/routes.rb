@@ -11,12 +11,14 @@ Rails.application.routes.draw do
 
 
   get 'carts/:id/edit',                 to: 'carts#edit', as: 'cart_edit'
-  get 'carts/:id/ship_to_another/edit', to: 'catrs#edit', as: 'ship_to_another_edit'
-  get 'carts/:id/payment/edit',         to: 'catrs#edit', as: 'payment_edit'
-  get 'carts/:id/confirm/edit',         to: 'catrs#edit', as: 'confirm_edit'
-
+  post 'carts/:id/edit',                to: 'carts#cartedit', as: 'cart_cartedit'
+  get 'carts/:id/ship_to_another/edit', to: 'carts#ship', as: 'ship_to_another_edit'
+  post 'carts/:id/ship_to_another/edit', to: 'carts#shipedit', as: 'ship_to_another_shipedit'
+  get 'carts/:id/payment/edit',         to: 'carts#pay', as: 'payment_edit'
+  get 'carts/:id/confirm/edit',         to: 'carts#edit', as: 'confirm_edit'
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :items do
-    resource :item_carts,  only: [:create, :update]
+    resource :item_carts,  only: [:create, :update, :destroy]
     resource :item_singer, only: [:create]
     resource :review,      only: [:index, :new, :create, :update, :destroy]
   end
@@ -29,7 +31,9 @@ Rails.application.routes.draw do
   resources :carts,            only: [:index, :new, :create, :update]
   resources :ship_to_anothers, only: [:create, :new, :update]
 
-  resources :labels
+  resources :labels, only: [:new, :create, :edit, :update, :destroy]
   resources :contacts, only: [:new, :create]
   resources :responses, only: [:new, :create]
+
+  resources :songs, only: [:create, :update, :destroy]
 end
