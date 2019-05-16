@@ -1,0 +1,41 @@
+<h1>発送先選択</h1>
+<p>内容がよろしければ支払い方法選択ページへお進み下さい</p>
+
+<input type="radio" name="optionsRadios" value="サンプル" checked>登録している住所
+<p>〒<%= "@user.postal_code" %> </p>
+<p><%= "@user.address" %> </p>
+<input class='open' type="radio" name="optionsRadios" value="1">別の発送先を入力する
+<%= form_with scope: :post, url: ship_to_another_shipedit_path , local: true, class: 'hidden_form'  do |form| %>
+  <label for="name">名前(姓・名)</label>
+  <%= form.text_field :first_name, id: "name" %>
+  <%= form.text_field :last_name %>
+
+  <label for="kana">名前(カナ姓・カナ名)</label>
+  <%= form.text_field :first_name_kana, id: "kana" %>
+  <%= form.text_field :last_name_kana %>
+
+  <label for="postal">郵便番号　〒</label>
+  <%= form.text_field :postal_code, id: "postal" %>
+
+  <label for="address">住所</label>
+  <%= form.text_field :address, id: "address" %>
+
+  <%= form.submit "確定"%>
+<% end %>
+  <%= link_to '金額選択', payment_edit_path, class: 'link active' %>
+<script type="text/javascript">
+  $(function() {
+    $('input[name="optionsRadios"]:radio').change(function(){
+      let radioval = $(this).val();
+      console.log(radioval);
+      if(radioval == 1){
+        $('.hidden_form').addClass('active');
+        $('.link').removeClass('active');
+      }else{
+        $('.hidden_form').removeClass('active');
+        $('.link').addClass('active');
+        };
+      });
+
+    });
+  </script>
