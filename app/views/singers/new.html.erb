@@ -1,1 +1,21 @@
-new.html.erb
+
+<%= form_for(@singer) do |f| %>
+
+　　<table>
+	 <tbody>
+		 <tr>
+		 	<td class="artist">
+		 		<h5>
+		 		    <strong>アーティスト名</strong>
+		 		</h5>
+		 	</td>
+			<td>
+				<%= f.text_field :singer_name, class: "singer_name", :size => '75' %>
+			</td>
+			<td>
+				<%= f.submit '登録', class: "btn btn-warning" %>
+			</td>
+		 </tr>
+	 </tbody>
+   </table>
+ <% end %>

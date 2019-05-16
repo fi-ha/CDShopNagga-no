@@ -1,4 +1,6 @@
 class SingersController < ApplicationController
+  before_action :authenticate_user!
+
 	def create
 	end
 
@@ -6,6 +8,7 @@ class SingersController < ApplicationController
 	end
 
 	def new
+		@singer = Singer.new
 	end
 
 	def edit
@@ -16,6 +19,4 @@ class SingersController < ApplicationController
 
 	def update
 	end
-
-
 end
