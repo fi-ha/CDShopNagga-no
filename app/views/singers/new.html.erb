@@ -1,3 +1,21 @@
-<h1>
-	<strong>アーティスト登録</strong>
-</h1>
+
+<%= form_for(@singer) do |f| %>
+
+　　<table>
+	 <tbody>
+		 <tr>
+		 	<td class="artist">
+		 		<h5>
+		 		    <strong>アーティスト名</strong>
+		 		</h5>
+		 	</td>
+			<td>
+				<%= f.text_field :singer_name, class: "singer_name", :size => '75' %>
+			</td>
+			<td>
+				<button class="btn btn-warning">登録</button>
+			</td>
+		 </tr>
+	 </tbody>
+   </table>
+ <% end %>

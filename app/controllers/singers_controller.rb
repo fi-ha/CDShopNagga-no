@@ -6,6 +6,7 @@ class SingersController < ApplicationController
 	end
 
 	def new
+		@singer = Singer.new
 	end
 
 	def edit
@@ -16,6 +17,4 @@ class SingersController < ApplicationController
 
 	def update
 	end
-
-
 end
