@@ -7,8 +7,10 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :singers
-  resources :favorites
-  resources :users, only: [:show]
+
+  resources :users, only: [:show] do
+    resource :favorites, only: [:index]
+  end
 
 
   get 'carts/:id/edit',                 to: 'carts#edit', as: 'cart_edit'
@@ -19,8 +21,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :items do
     resource :item_carts,  only: [:create, :update, :destroy]
-    resource :item_singer, only: [:create]
-    resource :review,      only: [:index, :new, :create, :update, :destroy]
+    resource :item_singers, only: [:create]
+    resource :reviews,      only: [:index, :new, :create, :update, :destroy]
+    resource :favorites,    only: [:create, :destroy]
   end
 
   resources :stock,            only: [:create, :update]

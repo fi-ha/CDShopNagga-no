@@ -1,2 +1,74 @@
 <h1>Items#show</h1>
 <p>Find me in app/views/items/show.html.erb</p>
+<div class="">
+	<div class="">
+		<%= @item.image_id %>
+	</div>
+	<div class="">
+		<%= @item.item_name %>
+		<%= @item.singer.singer_name %>
+		<%= @item.genre.genre_name %>
+		<%= @item.label.label_name %>
+		<%= @item.price %>
+		在庫：<%= @item.stock %>点
+	</div>
+	<div class="">
+		<h2>収録曲</h2>
+		<%= @item.song.disk %>
+		<ul>
+			<li></li>
+		</ul>
+	</div>
+	<div class="">
+		<% if @item.favorited_by?(current_user) %>
+			<p>
+				<%= link_to 'お気に入り登録済み', item_favorites_path(@item), method: :delete %>
+			</p>
+		<% else %>
+			<p>
+				<%= link_to 'お気に入り登録する', item_favorites_path(@item), method: :post %>
+			</p>
+		<% end %>
+		<p>
+			<%= link_to 'カートに追加する', new_cart_path %>
+		</p>
+		<p>
+			<%= link_to '購入', new_cart_path %>
+		</p>
+		<p>
+			<%= link_to 'レビューを投稿する', new_item_review_path %>
+		</p>
+	</div>
+	<!-- 商品に基づいたレビューを一覧表示させる -->
+	<table class="">
+		<tr>
+			<td>投稿者</td>
+			<td>レビュー</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<% @item.review.each do |review| %>
+		<tr>
+			<td>
+				<%= review.users.last_name %> 
+				<%= review.users.first_name %>
+			</td>
+			<td>
+				<%= review.body %>
+			</td>
+			<!-- レビュー投稿ユーザーなら”編集”、”削除”を表示させる -->
+			<% if review.user == current_user %>
+				<td>
+					<%= link_to "編集", edit_review_path(review.id) %>
+				</td>
+				<td>
+					<%= link_ti "削除", item_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
+				</td>
+			<% else %>
+				<td></td>
+				<td></td>
+			<% end %>
+		</tr>
+		<% end %>
+	</table>
+</div>
