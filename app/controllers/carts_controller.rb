@@ -46,17 +46,25 @@ class CartsController < ApplicationController
     #   return current_cart_id
     # end
     # @user = User.find(id: current_user.id)
-    # 次ページのship_anotherのテーブルを新規で作る
-    # @ship = Ship_to_another.new
   end
 
   def shipedit
-    # @ship.update
+    # @ship = Ship_to_another.new
+    # attributesメソッドで一気にカラムを指定できるが設定方法これで合ってるのか？
+    # @ship.attributes = {first_name: first_name, last_name: last_name, first_name_kana: first_name_kana, last_name_kana: last_name_kana, postal_codeaddress: postal_codeaddress, email: email}
+    # 保存が必要
+    # @ship.save
     redirect_to payment_edit_path
   end
 
   def pay
+    # 特に呼び出すものなし画面を表示しているだけ
+  end
 
+  def payedit
+    cart = current_cart_id
+    cart.update(post_params)
+    redirect_to confirm_edit_path
   end
 
   def create
@@ -68,7 +76,8 @@ class CartsController < ApplicationController
   private
 
     def post_params
-        params.require(:cart).permit(:title, :body)
+      # ストロングパラメーター、ビューフォームからのコントローラーへの情報受け渡しを以下のカラムのみ許可
+        params.require(:cart).permit(:title, :body, :payment, :status)
     end
 
     def item_cart_params
