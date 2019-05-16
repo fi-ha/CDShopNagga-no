@@ -9,23 +9,15 @@ Rails.application.routes.draw do
   resources :favorites
   resources :users, only: [:show]
 
-<<<<<<< HEAD
   # Cart画面は上から順にこのルーティングで進んで行きます。あとから修正している為ちょっと無理矢理感のあるルーティングとなっています。
-=======
->>>>>>> develop
   get 'carts/:id/edit',                 to: 'carts#edit', as: 'cart_edit'
   post 'carts/:id/edit',                to: 'carts#cartedit', as: 'cart_cartedit'
   get 'carts/:id/ship_to_another/edit', to: 'carts#ship', as: 'ship_to_another_edit'
   post 'carts/:id/ship_to_another/edit', to: 'carts#shipedit', as: 'ship_to_another_shipedit'
   get 'carts/:id/payment/edit',         to: 'carts#pay', as: 'payment_edit'
-<<<<<<< HEAD
   post 'carts/:id/payment/edit',         to: 'carts#payedit', as: 'payment_payedit'
   get 'carts/:id/confirm/edit',         to: 'carts#confirm', as: 'confirm_edit'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-=======
-  get 'carts/:id/confirm/edit',         to: 'carts#edit', as: 'confirm_edit'
-
->>>>>>> develop
   resources :items do
     resource :item_cart,  only: [:create, :update]
     resource :item_singer, only: [:create]
