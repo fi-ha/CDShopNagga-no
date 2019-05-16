@@ -1,0 +1,22 @@
+<h1>レーベル登録</h1>
+
+
+<%= form_for(@label) do |f|%>
+<h4>レーベル名<%= f.text_field :label_name %><%= f.submit "登録", class: "btn btn bg-success", data:{confirm:"本当に登録しますか？"} %></h4>
+<% end %>
+
+
+<h4>登録レーベル一覧</h4>
+
+<table>
+  <tbody>
+    <% @labels.each do |label| %>
+      <tr>
+        <td><%= label.label_name %></td>
+        <td><%= link_to "編集", edit_label_path(label.id), class:"btn btn bg-success" %>
+        <%= link_to "削除", label_path(label.id), class:"btn btn bg-danger", method: :delete, data:{confirm: "本当に削除しますか？"} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
