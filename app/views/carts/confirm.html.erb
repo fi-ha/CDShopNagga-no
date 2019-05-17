@@ -16,7 +16,7 @@
     <%# genre = @genres.find(id: item.@item_genres.genre_id) %>
     <%# stock = @stocks.find(id: item.item_id) %>
     <%# label = @labels.find(id: item.label_id) %>
-    <%# <%= price =  item.price * @item_carts(id: item.id).count %> %>
+    <%# price =  item.price * @item_carts(id: item.id).count %>
 
     <!-- もしCDだったら -->
     <%# if item.description.empty? %>
@@ -40,6 +40,7 @@
         <td><p>ジャンル</p><%= "genre.name" %></td>
       </tr>
     </tbody>
+
     <%# もしプレイヤーだったら %>
     <%# else %>
     <tbody class="cart-in-Player">
@@ -50,10 +51,12 @@
         <td class='multiply_price' rowspan="4"><%= "price.to_s(:delimited)" %>円</td>
       </tr>
       <tr>
-        <td><p><%=" @item_carts(id: item.id).count" %>台</p></td>
+        <td><p><%= " @item_carts(id: item.id).count" %>台</p></td>
       </tr>
     </tbody>
+
     <%# end %>
+
     <%# end %>
   </table>
 </section>
@@ -64,16 +67,16 @@
 
 <h3>配送先</h3>
 
-<%if "@ship_to_another.isnot" %>
+<%#if @ship_to_another.isnot %>
 <h4>登録している住所</h4>
 <p>郵便番号</p>
 <%= "@User.postalcode" %>
 <p>住所</p>
 <%= "@User.address" %>
 <p>電話番号</p>
-<%=" @User.phonenumber" %>
+<%= " @User.phonenumber" %>
 
-<% else %>
+<%# else %>
 <h4>他の住所</h4>
 <p>郵便番号</p>
 <%= "@ship_to_another.postalcode" %>
@@ -82,13 +85,14 @@
 <p>電話番号</p>
 <%= "@ship_to_another.phonenumber" %>
 
-<% end %>
+<%# end %>
 
-<%= link_to "住所選択に戻る", ship_to_another_path %>
+<%#= link_to "住所選択に戻る", ship_to_another_path %>
 
 <h3>支払い方法</h3>
 
+<!-- ここはコントローラーでstatusから表示内容を変えてみる -->
 <%= "@payment" %>
-<p>銀行振込</p>
+
 <%= link_to "支払い方法選択に戻る", payment_edit_path %>
-<%= render "購入確定"  template: "cart/ginko %>
+<%= link_to "購入確定", confirm_ginko_path %>
