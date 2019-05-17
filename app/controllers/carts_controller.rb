@@ -85,11 +85,11 @@ class CartsController < ApplicationController
     # @ship_to_another = current_cart_id.ship_to_anothers
     # case cart.payment
     # when 1 then
-    #   @payment = "<p>銀行振込</p><%= link_to "支払い方法選択に戻る", payment_edit_path %><%= render "購入確定"  template: "cart/ginko" %>"
+    #   @payment = "<p>銀行振込</p><%= link_to "支払い方法選択に戻る", payment_edit_path %><%= link_to "購入確定", confirm_ginko_path %>"
     # when 2 then
-    #   @payment = "<p>代金引換</p><%= link_to "支払い方法選択に戻る", payment_edit_path %><%= render "購入確定"  template: "cart/daibiki" %>"
+    #   @payment = "<p>代金引換</p><%= link_to "支払い方法選択に戻る", payment_edit_path %><%= link_to "購入確定", confirm_daibiki_path %>"
     # when 3 then
-    #   @payment = "<p>クレジットカード</p><%= link_to "支払い方法選択に戻る", payment_edit_path %><%= render "購入確定"  template: "cart/cred" %>"
+    #   @payment = "<p>クレジットカード</p><%= link_to "支払い方法選択に戻る", payment_edit_path %><%= link_to "購入確定", confirm_cred_path %>"
     # else
     #   @payment = "<p>支払い方法が選択されておりません</p><%= link_to "支払い方法選択に戻る" , payment_edit_path %>"
     # end
