@@ -3,11 +3,14 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
     }
+  root :to => "items#index"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :singers
-  resources :favorites
-  resources :users, only: [:show]
+
+  resources :users, only: [:show] do
+    resource :favorites, only: [:index]
+  end
 
   get 'carts/:id/edit',                 to: 'carts#edit', as: 'cart_edit'
   post 'carts/:id/edit',                to: 'carts#cartedit', as: 'cart_cartedit'
@@ -17,9 +20,10 @@ Rails.application.routes.draw do
   get 'carts/:id/confirm/edit',         to: 'carts#edit', as: 'confirm_edit'
 
   resources :items do
-    resource :item_cart,  only: [:create, :update]
-    resource :item_singer, only: [:create]
-    resource :review,      only: [:index, :new, :create, :update, :destroy]
+    resource :item_carts,  only: [:create, :update, :destroy]
+    resource :item_singers, only: [:create]
+    resource :reviews,      only: [:index, :new, :create, :update, :destroy]
+    resource :favorites,    only: [:create, :destroy]
   end
 
   resources :stocks,            only: [:create, :update]
@@ -30,9 +34,9 @@ Rails.application.routes.draw do
   resources :carts,            only: [:index, :new, :create, :update]
   resources :ship_to_anothers, only: [:create, :new, :update]
 
-  resources :labels, only: [:new, :create, :edit, :update, :destroy]
-  resources :contacts, only: [:new, :create]
-  resources :responses, only: [:new, :create]
+  resources :labels,           only: [:new, :create, :edit, :update, :destroy]
+  resources :contacts,         only: [:new, :create]
+  resources :responses,        only: [:new, :create]
 
   resources :songs, only: [:create, :update, :destroy]
 

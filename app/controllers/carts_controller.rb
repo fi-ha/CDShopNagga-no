@@ -7,6 +7,8 @@ class CartsController < ApplicationController
 
   def edit
     # Cartの中から現在のログインユーザーかつ、statusがカート状態のカートを取り出す関数定義
+  end
+
     # def current_cart_id
     #   current_cart = Cart.where(user_id: current_user.id).where(status: 1)
     #   current_cart_id = current_cart.id
@@ -24,7 +26,6 @@ class CartsController < ApplicationController
     # @stocks = @item.Stocks
     # @singers = @item_singers.Singer
     # @labels = @items.Labels
-  end
 
   def cartedit
     # カートページからはitemに対応するitem_cart.countとその時の価格を保存する
