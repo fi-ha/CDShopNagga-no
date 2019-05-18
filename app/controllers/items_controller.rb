@@ -19,7 +19,11 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @item.save
+    if @item.save
+    redirect_to new_item_path
+    else
+      render :index
+    end
   end
 
   def update
@@ -30,6 +34,6 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    params.require(:item).permit(:item_name, :image, :price, :description, stocks_attributes: [:count])
+    params.require(:item).permit(:item_name, :image, :price, :description, stocks_attributes: [:id, :count])
   end
 end
