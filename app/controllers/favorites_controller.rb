@@ -1,6 +1,10 @@
 class FavoritesController < ApplicationController
 
 	def create
+		item = Item.find(params[:item_id])
+		favorite = current_user.favorites.new(item_id: item.id)
+		favorite.save
+		redirect_to item_path(item.id)
 	end
 
 	def index
@@ -9,10 +13,10 @@ class FavoritesController < ApplicationController
 	def show
 	end
 
-	def edit
-    end
-
     def destroy
+    	item = Item.find(params[:item_id])
+    	favorite = current_user.favorites.find_by(:item_id item.id)
+    	favorite.destroy
+    	redirect_to item_path(item.id)
     end
-    
 end
