@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   resources :songs, only: [:create, :update, :destroy]
 
   namespace :administrator do
-    resources :items, only: [:index]
+    resources :items, only: [:index, :edit, :update, :destroy]
     resources :carts, only: [:index, :show]
     resources :reviews, only: [:index, :edit]
     resources :users, only: [:index]

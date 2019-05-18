@@ -5,6 +5,22 @@ class Administrator::ItemsController < ApplicationController
         @items = Item.all
     end
 
+    def edit
+    	@item = Item.find(params[:id])
+    end
+
+    def update
+    	@item = Item.find(params[:id])
+    	@item.update
+    	redirect_to administrator_item_path
+    end
+
+    def destroy
+    	item = Item.find(params[:id])
+    	item.destroy
+    	redirect_to administrator_items_path
+    end
+
     # private
     # def admin_user
         # redirect_to(items_path) unless current_user.administrator?
