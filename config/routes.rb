@@ -17,9 +17,9 @@ Rails.application.routes.draw do
   get  'carts/:id/payment/edit',        to: 'carts#pay',     as: 'payment_edit'
   post 'carts/:id/payment/edit',        to: 'carts#payedit', as: 'payment_payedit'
   get  'carts/:id/confirm/edit',        to: 'carts#confirm', as: 'confirm_edit'
-  get  'carts/:id/confirm/edit',        to: 'carts#ginko',   as: 'confirm_ginko'
-  get  'carts/:id/confirm/edit',        to: 'carts#daibiki',   as: 'confirm_daibiki'
-  get  'carts/:id/confirm/edit',        to: 'carts#cred',   as: 'confirm_cred'
+  get  'carts/:id/ginko/edit',          to: 'carts#ginko',   as: 'confirm_ginko'
+  get  'carts/:id/daibiki/edit',        to: 'carts#daibiki', as: 'confirm_daibiki'
+  get  'carts/:id/cred/edit',           to: 'carts#cred',    as: 'confirm_cred'
   get  'carts/:id/finish',              to: 'carts#finish',  as: 'finish'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :items do

@@ -102,13 +102,13 @@ class CartsController < ApplicationController
 
   def daibiki
     # 発送メール送信
-    redirect_to finish_edit_path
+    redirect_to finish_path
   end
 
   def cred
     # payjp処理
     # 発送メール送信
-    redirect_to finish_edit_path
+    redirect_to finish_path
   end
 
   def create
