@@ -27,6 +27,8 @@
  box-sizing: border-box;
 }
 
+
+// ===========================ここからヘッダー=====================================
 header {
   position: sticky;
   top: 0;
@@ -34,6 +36,10 @@ header {
   margin-left: 30px;
   margin-right: 30px;
   display: flex;
+}
+
+li {
+  list-style-type: none;
 }
 .header-left {
   height: 50px;
@@ -64,6 +70,7 @@ header {
 .menu-trigger-box {
   height: 50px;
   padding-top: 16px;
+  z-index: 11;
 }
 .menu-trigger,
 .menu-trigger span {
@@ -75,6 +82,7 @@ header {
   position: relative;
   width: 40px;
   height: 34px;
+  z-index: 12;
 }
 .menu-trigger span {
   position: absolute;
@@ -83,6 +91,7 @@ header {
   height: 5px;
   background-color: black;
   border-radius: 4px;
+  z-index: 13;
 }
 .menu-trigger span:nth-of-type(1) {
   top: 0;
@@ -111,9 +120,31 @@ header {
 }
 
 .hamburger-menu {
-  display: none;
+  width: 250px;
+  height: 100%;
+  padding-top: 100px;
+  background-color: rgba(16, 69, 153, 0.8);
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  // 左上の頂点をwidhtで指定した250px右にずらす
+  transform: translate(250px);
+  transition: all .5s;
 }
-.hamburger-menu.active {
-  display: block;
+.hamburger-menu a {
+  color: black;
 }
+.hamburger-menu.open {
+  // 左上の頂点元の位置に戻す
+  transform: translateZ(0);
+}
+// =============================================================================
 
+// ================ここからモーダルウィンドウのメールフォーム==========================
+
+
+// =============================================================================
+
+// ============================ここからフッター====================================
+// =============================================================================
