@@ -118,14 +118,16 @@
       const money = 1000;
       // 個数×金額
       multiply = money * number;
-      // $.ajax(url: '/carts/new', type: "GET", data:{text:"hello world"});
+      // データ属性に金額を含める
+      output.attr("data",multiply);
+      // ここで金額を表示する変数を作成
       const multiplyResult = multiply.toLocaleString() + "円";
       // outputのテキストを変更する
-      output.text(multiplyResult).data("price", multiply);
-      console.log(output.data("price"));
+      output.text(multiplyResult);
       // output.text("<input class='money' type='hidden' name='' value="${multiply}" >" + multiplyResult).data("price", multiply);
       // multiply_sum(multiply);
     }); //.on('input', function(event) {でinput操作を発火
+
 
   //   $('.multiply_price').each(function(i. n){
   //     p = 0;

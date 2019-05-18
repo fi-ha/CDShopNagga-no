@@ -1,4 +1,6 @@
 class SingersController < ApplicationController
+  before_action :authenticate_user!
+
 	def create
 		@singer = Singer.new(singer_params)
 		@singer.save
@@ -26,5 +28,4 @@ class SingersController < ApplicationController
 	def singer_params
 		params.require(:singer).permit(:singer_name)
 	end
-
 end
