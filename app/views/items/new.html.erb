@@ -23,7 +23,7 @@
     <%= form_for (@item) do |f| %>
 
 		<h4>アーティスト名</h4>
-
+    <%# <%= f.collection_select :singer, Singer.all, :id, :singer_name, include_blank: true %> %>
 
         <h4>シングル/アルバム名 <%= f.text_field :item_name %></h4>
 
@@ -41,6 +41,9 @@
 
 
         <h4>ジャンル</h4>
+        <%# <%= f.collection_radio_buttons(:genre, :type_ids, Genre.all, :id, :genre_name) do |b| %> %>
+         <%# s<%= b.label {b.radio_button + b.text} %> %>
+        <%# <% end %> %>
 
 
 
@@ -64,7 +67,7 @@
 
 	<div class="tab-pane" id="player">
 
-    <%= form_for (@item) do |f|%>
+    <%= form_for @item do |f|%>
 
 		    <h4>Player名 <%= f.text_field :item_name %></h4>
 
@@ -73,15 +76,14 @@
 
         <%= f.attachment_field :image, placeholder: "ジャケット画像" %>
 
-
         <h4>価格（税別）<%= f.text_field :price %></h4>
 
         <%# <h4>ジャンル</h4> %>
 
         <h4>商品説明<%= f.text_area :description, :rows => "7" %></h4>
 
-        <%= fields_for (@stock) do |stock| %>
-        <h4>在庫数<%= stock.text_field :count %></h4>
+        <%= f.fields_for :stocks do |i| %>
+        <h4>在庫数<%= i.text_field :count %></h4>
         <%end%>
 
   <div>

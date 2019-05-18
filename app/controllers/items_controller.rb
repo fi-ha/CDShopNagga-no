@@ -13,8 +13,6 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @labels = Label.all
-    @song = Song.new
-    @stock = Stock.new
     @item.stocks.build
   end
 
@@ -25,8 +23,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @stock = Stock.new(stock_params)
-    if @item.save && @stock.save
+    if @item.save
     redirect_to new_item_path
     else
       render :index
@@ -45,10 +42,6 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    params.require(:item).permit(:item_name, :image, :price, :description)
-  end
-
-  def stock_params
-    params.require(:stock).permit(:count)
+    params.require(:item).permit(:item_name, :image, :price, :description, stocks_attributes: [:id, :count])
   end
 end
