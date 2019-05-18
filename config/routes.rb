@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   resources :ship_to_anothers, only: [:create, :new, :update]
 
   resources :labels,           only: [:new, :create, :edit, :update, :destroy]
-  resources :contacts,         only: [:new, :create]
+  resources :contacts,         only: [:new, :create, :index, :show, :update]
   resources :responses,        only: [:new, :create]
 
   resources :songs, only: [:create, :update, :destroy]
