@@ -2,6 +2,7 @@ class GenresController < ApplicationController
     before_action :authenticate_user!
   
   def index
+    @genres = Genre.all
   end
 
   def new
@@ -12,6 +13,9 @@ class GenresController < ApplicationController
   end
 
   def create
+    @genre = Genre.new(genre_params)
+    @genre.save
+    redirect_to genres_path
   end
 
   def update
