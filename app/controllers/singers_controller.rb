@@ -8,6 +8,7 @@ class SingersController < ApplicationController
 	end
 
 	def index
+		@singers = Singer.all
 	end
 
 	def new

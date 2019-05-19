@@ -1,0 +1,13 @@
+<!-- cocoonでrenderするファイル
+class="nested-fields"の位置から、増やしたフォームを削除する場所を特定。
+消すと削除できなくなります。 -->
+<div class="nested-fields">
+	disc<%= f.text_field :disk, size: 10, value: "1" %><br>
+	<!-- step: ~ 数字を刻む間隔
+		 min: ~ 最小値
+		 value: ~ 初期値
+		 required: ~ バリデーションみたいなもの（いらない） -->
+	番号<%= f.number_field :number, step: '1', min: '1', value: "1", required: true %>
+	曲名<%= f.text_field :song_name %>
+	<%= link_to_remove_association "削除する", f %>
+</div>

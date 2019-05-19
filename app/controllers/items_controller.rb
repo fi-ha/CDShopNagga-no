@@ -10,12 +10,13 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  # .build ・・・fields_forでネストした子モデルのデータを作成するメソッド
   def new
     @item = Item.new
-    @labels = Label.all
-    @song = Song.new
-    @stock = Stock.new
+    @item.songs.build
     @item.stocks.build
+    @item.item_singers.build
+    @item.item_genres.build
   end
 
   def edit
@@ -25,12 +26,8 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @stock = Stock.new(stock_params)
-    if @item.save && @stock.save
+    @item.save
     redirect_to new_item_path
-    else
-      render :index
-    end
   end
 
   def update
@@ -43,12 +40,14 @@ class ItemsController < ApplicationController
   def destroy
   end
 
+  # _attributes: []
+  # fields_forでネストしたモデルへデータを渡す際に、paramsを設定する
   private
   def item_params
-    params.require(:item).permit(:item_name, :image, :price, :description)
-  end
-
-  def stock_params
-    params.require(:stock).permit(:count)
+    params.require(:item).permit(:item_name, :label_id, :image, :price, :description,
+      stocks_attributes: [:id, :count, :_destroy],
+      item_singers_attributes: [:id, :singer_id, :_destroy],
+      item_genres_attributes: [:id, :genre_id, :_destroy],
+      songs_attributes: [:id, :song_name, :disk, :number, :_destroy])
   end
 end
