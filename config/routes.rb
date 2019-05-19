@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   root :to => "items#index"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :singers, only: [:index, :edit, :create, :update, :destroy]
+  resources :favorites
+  resources :users, only: [:show]
+
   resources :singers
 
   resources :users, only: [:show] do
@@ -36,10 +41,13 @@ Rails.application.routes.draw do
   resources :reviews,           only: [:index, :edit]
   resources :item_singers,      only: [:update]
   resources :item_genres,      only: [:create, :update]
-  resources :genres,           only: [:index, :new, :edit, :create, :update, :destroy]
+  resources :genres,           only: [:index, :edit, :create, :update, :destroy]
   resources :carts,            only: [:index, :new, :create, :update]
   resources :ship_to_anothers, only: [:create, :new, :update]
 
+  resources :labels, only: [:index, :create, :edit, :update, :destroy]
+  resources :contacts, only: [:new, :create]
+  resources :responses, only: [:new, :create]
   resources :labels,           only: [:new, :create, :edit, :update, :destroy]
   resources :contacts,         only: [:new, :create]
   resources :responses,        only: [:new, :create]
