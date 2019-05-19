@@ -20,13 +20,19 @@
 <div class="tab-content">
 	<div class="tab-pane active" id="cd">
 
-    <%= form_for(@item) do |f| %>
+    <%= form_for (@item) do |f| %>
 
 		<h4>アーティスト名</h4>
-
+    <%# <%= f.collection_select :singer, Singer.all, :id, :singer_name, include_blank: true %> %>
 
         <h4>シングル/アルバム名 <%= f.text_field :item_name %></h4>
-        <h4>ジャケット画像<%= f.attachment_field :image_id, placeholder: "ジャケット画像" %></h4>
+
+        <h4>ジャケット画像</h4>
+
+        <%= attachment_image_tag @item, :image, :fill, 60, 60, fallback: "no_image.jpg"%>
+        <%= f.attachment_field :image, placeholder: "ジャケット画像" %>
+
+
         <h4>価格（税別） <%= f.text_field :price %></h4>
 
 
@@ -35,17 +41,18 @@
 
 
         <h4>ジャンル</h4>
+        <%# <%= f.collection_radio_buttons(:genre, :type_ids, Genre.all, :id, :genre_name) do |b| %> %>
+         <%# s<%= b.label {b.radio_button + b.text} %> %>
+        <%# <% end %> %>
 
 
-      <%= form_for @song,:url => {:action => :create} do |f| %>
+
         <h4>曲名</h4>
-        <p>ディスク名<%= f.text_field :disk %></p>
-        <p>number<%= f.text_field :number, :size=> "3" %><%= f.text_field :song_name %></p>
-        <% end %>
+        <p>ディスク名</p>
 
-        <%= form_for @stock,:url => {:action => :create} do |f| %>
-        <h4>在庫数<%= f.text_field :count %></h4>
-        <% end %>
+        <%= fields_for (@stocks) do |stock| %>
+        <h4>在庫数<%= stock.text_field :count %></h4>
+        <%end%>
 
 
   <div>
@@ -60,17 +67,24 @@
 
 	<div class="tab-pane" id="player">
 
-    <%= form_for(@item) do |f|%>
+    <%= form_for @item do |f|%>
 
-		<h4>Player名 <%= f.text_field :item_name %></h4>
-        <h4>Player画像<%= f.attachment_field :image_id, placeholder: "ジャケット画像" %></h4>
+		    <h4>Player名 <%= f.text_field :item_name %></h4>
+
+        <h4>Player画像</h4>
+        <%= attachment_image_tag @item, :image, :fill, 60, 60, fallback: "no_image.jpg"%>
+
+        <%= f.attachment_field :image, placeholder: "ジャケット画像" %>
+
         <h4>価格（税別）<%= f.text_field :price %></h4>
-        <h4>ジャンル</h4>
-        <h4>商品説明<%= f.text_area :description, :rows => "7" %></h4>
-        <%= form_for @stock,:url => {:action => :create} do |f| %>
-        <h4>在庫数<%= f.text_field :count %></h4>
-        <% end %>
 
+        <%# <h4>ジャンル</h4> %>
+
+        <h4>商品説明<%= f.text_area :description, :rows => "7" %></h4>
+
+        <%= f.fields_for :stocks do |i| %>
+        <h4>在庫数<%= i.text_field :count %></h4>
+        <%end%>
 
   <div>
    <%= f.submit '登録する', class: "btn btn bg-danger", data:{confirm: "本当に登録しますか？"} %>

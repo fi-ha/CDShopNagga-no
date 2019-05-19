@@ -1,9 +1,10 @@
 <!-- トップビジュアル（円盤） -->
+<div class="main">
 
 
 <!-- プレイヤー説明 -->
 <div class="">
-	<h1 class="">Player</h1>
+	<h1 class="content-text">Player</h1>
 	<p class="">持ち運びも簡単！</p>
 	<p class="">お洒落で機能的なプレーヤーを厳選しました！</p>
 </div>
@@ -11,20 +12,23 @@
 <!-- プレーヤー表示（skippr) -->
 
 <!-- MUSIC説明 -->
-<div class="">
-	<h1 class="">Music</h1>
-	<p class="">様々なジャンルを揃えています！</p>
-	<p class="">お気に入りを見つけてみて下さい</p>
+	<div class="content-text">
+		<h1 class="">Music</h1>
+		<p class="">様々なジャンルを揃えています！</p>
+		<p class="">お気に入りを見つけてみて下さい</p>
+	</div>
+	<!-- 検索ボックス -->
+
+
+	<!-- 商品一覧表示 -->
+	<div class="">
+		<% @items.each do |item| %>
+			<div class="items">
+				<%= attachment_image_tag item, :image_id, :fill, 300, 300, format: 'jpeg' %>
+				<%= item.item_name %>
+				<%= item.singer.singer_name %>
+				<%= (BigDecimal("item.price") * BigDecimal("1.08")).ceil %>
+			</div>
+		<% end %>
+	</div>
 </div>
-
-<!-- 検索ボックス -->
-
-
-<!-- 商品一覧表示 -->
-<table class="">
-	<tr>
-		<td class="">商品１</td>
-		<td class="">商品２</td>
-		<td class="">商品３</td>
-	</tr>
-</table>
