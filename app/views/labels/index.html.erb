@@ -14,7 +14,7 @@
       <tr>
         <td><%= label.label_name %></td>
         <td><%= link_to "編集", edit_label_path(label.id), class:"btn btn bg-success" %>
-        <%= link_to "削除", label_path(label.id), class:"btn btn bg-danger", method: :delete, data:{confirm: "本当に削除しますか？"} %></td>
+        <%= link_to "削除", labels_path(label.id), class:"btn btn bg-danger", method: :delete, data:{confirm: "本当に削除しますか？"} %></td>
       </tr>
     <% end %>
   </tbody>

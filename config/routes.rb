@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     }
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :singers
+  resources :singers, only: [:index, :edit, :create, :update, :destroy]
   resources :favorites
   resources :users, only: [:show]
 
@@ -27,11 +27,11 @@ Rails.application.routes.draw do
   resources :review,           only: [:index, :edit]
   resources :item_singer,      only: [:update]
   resources :item_genres,      only: [:create, :update]
-  resources :genres,           only: [:index, :new, :edit, :create, :update, :destroy]
+  resources :genres,           only: [:index, :edit, :create, :update, :destroy]
   resources :carts,            only: [:index, :new, :create, :update]
   resources :ship_to_anothers, only: [:create, :new, :update]
 
-  resources :labels, only: [:new, :create, :edit, :update, :destroy]
+  resources :labels, only: [:index, :create, :edit, :update, :destroy]
   resources :contacts, only: [:new, :create]
   resources :responses, only: [:new, :create]
 
