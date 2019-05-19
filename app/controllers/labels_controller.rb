@@ -5,7 +5,7 @@ class LabelsController < ApplicationController
     end
 
     def new
-        @label = Label.new
+
         @labels = Label.all
     end
 
