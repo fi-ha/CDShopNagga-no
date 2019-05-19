@@ -4,9 +4,6 @@ class SingersController < ApplicationController
 	  singer = Singer.new(singer_params)
 	  singer.save
 	  redirect_to singers_path
-		@singer = Singer.new(singer_params)
-		@singer.save
-		redirect_to new_singer_path
 	end
 
 	def index
