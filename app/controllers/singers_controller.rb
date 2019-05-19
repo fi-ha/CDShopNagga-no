@@ -1,4 +1,6 @@
 class SingersController < ApplicationController
+	    before_action :authenticate_user!
+
 
 	def create
 	  singer = Singer.new(singer_params)
@@ -9,13 +11,6 @@ class SingersController < ApplicationController
 	def index
 		@singer = Singer.new
        @singers =Singer.all
-	end
-
-	def new
-
-		@singer = Singer.new
-		@singers = Singer.all
-
 	end
 
 	def edit
