@@ -75,4 +75,10 @@ yarn-debug.log*
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+<<<<<<< HEAD
 *.DS_Store
+=======
+.DS_Store
+
+config/environment.rb
+>>>>>>> 8600a33ca15ffd1849e8c8a87be8886383ab69eb
