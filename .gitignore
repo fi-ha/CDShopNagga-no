@@ -76,3 +76,5 @@ yarn-debug.log*
 /config/master.key
 
 .DS_Store
+
+config/environment.rb
