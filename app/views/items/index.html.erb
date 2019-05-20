@@ -24,10 +24,10 @@
 	<div class="">
 		<% @items.each do |item| %>
 			<div class="items">
-				<%= attachment_image_tag item, :image_id, :fill, 300, 300, format: 'jpeg' %>
+				<%= attachment_image_tag(item, :image, :fill, 300, 300, format: 'jpeg') %>
 				<%= item.item_name %>
-				<%= item.singer.singer_name %>
-				<%= (BigDecimal("item.price") * BigDecimal("1.08")).ceil %>
+				
+				<%= item.price %>
 			</div>
 		<% end %>
 	</div>
