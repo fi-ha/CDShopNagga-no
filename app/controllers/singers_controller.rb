@@ -14,6 +14,7 @@ class SingersController < ApplicationController
 	end
 
 	def edit
+		@singer = Singer.find(params[:id])
 	end
 
 	def destroy
