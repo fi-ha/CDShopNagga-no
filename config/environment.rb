@@ -11,7 +11,7 @@ config.action_mailer.raise_delivery_errors = true
     address:              'smtp.gmail.com',
     domain:               'smtp.gmail.com',
     user_name:            '<YOUR EMAIL ADDRESS>',
-    password:             '<YOUR EMAIL PASSWORD>',
+    password:             'テスト編集<YOUR EMAIL PASSWORD>',
     authentication:       'login',
     enable_starttls_auto: true
   }
