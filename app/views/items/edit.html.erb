@@ -1,3 +1,7 @@
+<div class='container'>
+    <div class='row'>
+      <div class='col-xs-10 col-xs-offset-2'>
+
 <h1>商品編集</h1>
 
 <%= form_for(@item) do |f| %>
@@ -58,6 +62,8 @@
 	 <div class="">
         <%= f.submit '編集する', class: "btn btn bg-primary", "data-confirm" => "本当に編集しますか？" %>
     </div>
+	<% end %>
 
-<% end %>
-
+    </div>
+  </div>
+</div>
