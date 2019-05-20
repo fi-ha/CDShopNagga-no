@@ -1,14 +1,14 @@
 class Item < ApplicationRecord
 	# フォームを保存する際に以下のバリデーションを設定している
-	validates :item_name, presence: true
-	validates :image, presence: true
-	validates :price, presence: true
-	validates :description, presence: true
-	validates :active, presence: true
+	validates :item_name,  presence: true
+	validates :image, 	   presence: true
+	validates :price,      presence: true
+	validates :description,presence: true
+	validates :active,     presence: true
 
 	# アソシエーション設定
-	has_many :songs, dependent: :destroy
-	has_many :item_genres, dependent: :destroy
+	has_many :songs,      dependent: :destroy
+	has_many :item_genres,dependent: :destroy
 	# itemから中間テーブル(item_genre)を経由して、item_idに対応したgenreのカラムを呼び出す為。多対多のときにhas_many throughを使う。
 	has_many :genres, through: :item_genres
 	has_many :item_singers, dependent: :destroy
