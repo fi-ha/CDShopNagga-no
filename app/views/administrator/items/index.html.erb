@@ -3,14 +3,15 @@
 <% @items.each do |item| %>
 	<div class="">
 	<div class="">
-		<%= attachment_image_tag item.image_id %>
+		<%= attachment_image_tag(item, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg") %>
 	</div>
 	<div class="">
 		商品名：<%= item.item_name %>
-		アーティスト名<%= item.singer.singer_name %>
+		<%# アーティスト名<%= singer.singer_name(item.id) %> %>
 		価格：<%= item.price %>
 	</div>
-	<%= link_to '編集', edit_administrator_item_path %>
-	<%= link_to '削除', administrator_item_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
+	<%= link_to '編集', edit_item_path(item.id) %>
+	<%= link_to '削除', item_path(item.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
 	</div>
 <% end %>
+
