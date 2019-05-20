@@ -27,17 +27,20 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.save
-    redirect_to new_item_path
+    redirect_to administrator_items_path
   end
 
   def update
     # パラメータを呼び出し、アップデート。
     @item = Item.find(params[:id])
     @item.update(item_params)
-    redirect_to item_path
+    redirect_to administrator_items_path
   end
 
   def destroy
+    @item = Item.find(params[:id])
+    @item.destroy
+    redirect_to administrator_items_path
   end
 
   # _attributes: []

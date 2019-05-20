@@ -48,7 +48,6 @@ Rails.application.routes.draw do
   resources :labels, only: [:index, :create, :edit, :update, :destroy]
   resources :contacts, only: [:new, :create]
   resources :responses, only: [:new, :create]
-  resources :labels,           only: [:new, :create, :edit, :update, :destroy]
   resources :contacts,         only: [:new, :create]
   resources :responses,        only: [:new, :create]
 

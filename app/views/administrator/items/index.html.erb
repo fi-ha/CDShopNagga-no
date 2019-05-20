@@ -1,16 +1,39 @@
+
+<div class='container'>
+    <div class='row'>
+      <div class='col-xs-8 col-xs-offset-4'>
+
+
 <h1>商品一覧画面</h1>
 <!-- 歌手、ジャンル、ぷれーやーでタブ分け -->
 <% @items.each do |item| %>
-	<div class="">
-	<div class="">
-		<%= attachment_image_tag item.image_id %>
-	</div>
-	<div class="">
+	<div class="", style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+	  <div class="">
+		<%= attachment_image_tag(item, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg") %>
+	  </div>
+	    <div class="">
 		商品名：<%= item.item_name %>
-		アーティスト名<%= item.singer.singer_name %>
+		</div>
+		<div>
+		<% item.singers.each do |singer|%>
+		アーティスト名<%= singer.singer_name %>
+		<%end%>
+		</div>
+		<div>
 		価格：<%= item.price %>
-	</div>
-	<%= link_to '編集', edit_administrator_item_path %>
-	<%= link_to '削除', administrator_item_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
+		</div>
+		<div>
+		<% item.stocks.each do |stock| %>
+		在庫数：<%= stock.count %>
+		<% end %>
+		</div>
+		<%= link_to '編集', edit_item_path(item.id) %>
+		<%= link_to '削除', item_path(item.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
 	</div>
 <% end %>
+
+
+
+	</div>
+  </div>
+</div>
