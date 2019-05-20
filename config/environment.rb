@@ -10,8 +10,8 @@ config.action_mailer.raise_delivery_errors = true
     port:                 587,
     address:              'smtp.gmail.com',
     domain:               'smtp.gmail.com',
-    user_name:            ENV['MAIL_ADDRESS_KEY'],
-    password:             ENV['MAIL_PASSWORD_KEY'],
+    user_name:            "ENV['MAIL_ADDRESS_KEY']",
+    password:             "ENV['MAIL_PASSWORD_KEY']",
     authentication:       'login',
     enable_starttls_auto: true
   }
