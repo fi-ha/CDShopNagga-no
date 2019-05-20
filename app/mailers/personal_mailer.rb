@@ -1,0 +1,2 @@
+class PersonalMailer < ApplicationMailer
+end
