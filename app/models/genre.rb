@@ -5,7 +5,7 @@ class Genre < ApplicationRecord
 
   # フォームを保存する際に以下のバリデーションを設定している
   validates :genre_name,
-  	presence: true, # 空では無い
-    uniqueness: true # 他と同じでは無い
+		     presence: true, # 空では無い
+    		 uniqueness: true # 他と同じでは無い
 
 end

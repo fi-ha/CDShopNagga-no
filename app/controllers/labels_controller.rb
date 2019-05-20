@@ -1,12 +1,9 @@
 class LabelsController < ApplicationController
-　before_action :authenticate_user!
+    before_action :authenticate_user!
 
     def index
-    end
-
-    def new
-
-        @labels = Label.all
+      @label = Label.new
+      @labels = Label.all
     end
 
     def edit
