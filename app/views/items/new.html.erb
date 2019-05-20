@@ -68,9 +68,6 @@
         </div>
       <% end %>
 
-      <h4>商品説明</h4>
-      <%= f.text_area :description %>
-
       <h4>在庫数</h4>
       <%= f.fields_for :stocks do |stock| %>
         <%= stock.text_field :count %>
