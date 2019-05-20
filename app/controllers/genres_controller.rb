@@ -1,27 +1,31 @@
 class GenresController < ApplicationController
-    before_action :authenticate_user!
-  
-  def index
-    @genres = Genre.all
+
+    # before_action :authenticate_user!
+
+   def create
+    genre = Genre.new(genre_params)
+    genre.save
+    redirect_to genres_path
   end
 
-  def new
+  def index
     @genre = Genre.new
+    @genres = Genre.all
   end
 
   def edit
   end
 
-  def create
-    @genre = Genre.new(genre_params)
-    @genre.save
+  def update
+    genre = Genre.find(params[:id])
+    genre.update(genre_params)
     redirect_to genres_path
   end
 
-  def update
-  end
-
   def destroy
+    genre = Genre.find(params[:id])
+    genre.destroy
+    redirect_to genres_path
   end
 
   private

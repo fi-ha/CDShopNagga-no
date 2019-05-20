@@ -1,1 +1,5 @@
-edit.html.erb
+<h2>アーティスト名編集</h2>
+<%= form_for(@singer) do |f| %>
+     <h4>アーティスト名<%= f.text_field :singer_name, :size => '50' %></h4>
+     	<%= f.submit "編集", class: "btn btn bg-success"%>
+	 <% end %>

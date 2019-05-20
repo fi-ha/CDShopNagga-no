@@ -14,17 +14,17 @@
       <% end %>
 
 
-	<h4>シングル・アルバム名/Player名</h4>
+	<h4>シングル・アルバム名</h4>
 	<%= f.text_field :item_name %>
 
-	<h4>ジャケット画像/Player画像</h4>
+	<h4>ジャケット画像</h4>
 	<%= attachment_image_tag @item, :image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg" %>
 	<%= f.attachment_field :image, placeholder: 'ジャッケット画像' %>
 
 	<h4>価格</h4>
 	<%= f.text_field :price %>
 
-	<h4>レーベル/メーカー</h4>
+	<h4>レーベル</h4>
 	<%= f.label :label_id %>
     <%= f.collection_select :label_id, Label.all, :id, :label_name %>
 
@@ -46,9 +46,6 @@
           <%= link_to_add_association "曲名を追加する", f, :songs %><br/>
         </div>
       <% end %>
-
-	  <h4>商品説明</h4>
-      <%= f.text_area :description %>
 
 	<h4>在庫数</h4>
 	<%= f.fields_for :stocks do |stock| %>

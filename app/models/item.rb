@@ -1,10 +1,9 @@
 class Item < ApplicationRecord
 	# フォームを保存する際に以下のバリデーションを設定している
-	validates :item_name,  presence: true
-	validates :image, 	   presence: true
-	validates :price,      presence: true
-	validates :description,presence: true
-	validates :active,     presence: true
+	validates :item_name, presence: true
+	# validates :image, presence: true
+	validates :price, presence: true
+	validates :active, presence: true
 
 	# アソシエーション設定
 	has_many :songs,      dependent: :destroy
@@ -16,14 +15,17 @@ class Item < ApplicationRecord
 	has_many :item_carts, dependent: :destroy
 	has_many :stocks, dependent: :destroy
 
-	accepts_nested_attributes_for :stocks
+	# fields_forでネストする子モデルを指定
+	# allow_destroyはcocoonのフォーム削除に関連
+	accepts_nested_attributes_for :item_singers, :item_genres, :stocks
+	accepts_nested_attributes_for :songs, allow_destroy: true
 
 	has_many :reviews, dependent: :destroy
 	has_many :favorites, dependent: :destroy
 	belongs_to :label
 
 	#画像
-	attachment :image_id
+	attachment :image
 
 	# 中間テーブルfavoritesにおいて、ユーザーidに基づくitemsが存在するかどうかの判別式を定義
 	# http://railsdoc.com/references/where
