@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_20_072406) do
+ActiveRecord::Schema.define(version: 2019_05_21_093825) do
 
   create_table "carts", force: :cascade do |t|
     t.integer "user_id"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 2019_05_20_072406) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "contact_id"
     t.index ["created_at"], name: "index_responses_on_created_at"
   end
 
@@ -164,13 +165,6 @@ ActiveRecord::Schema.define(version: 2019_05_20_072406) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.integer "user_id"
-    t.string "last_name"
-    t.string "first_name"
-    t.string "last_name_kana"
-    t.string "first_name_kana"
-    t.string "postal_code"
-    t.string "addres"
-    t.string "phone_number"
     t.boolean "admin"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
