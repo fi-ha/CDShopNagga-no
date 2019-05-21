@@ -12,13 +12,26 @@
     <%# <%= cart.created_at%>
     の注文</strong>   注文番号：
     <%# <%= cart.cart.id %>
-    ユーザー名：
-    <%# <%= user.user_name %>
+
+    <%# <% cart.users.each do |user|%> %>
+		  ユーザー名：
+      <%# <%= user.user_name %> %>
+		  <%# <%end%> %>
+
+
     注文金額：
     <%# <%= cart.payment%>
-    <button class="btn btn-primary" >
-	  	詳細
-	  </button>
+
+    <a class="btn btn-default" data-toggle="collapse" href="#1">
+	    詳細
+    </a>
+    <div class="collapse" id="1">
+	      <div class="well">
+		        カートの中身が入る感じ
+	      </div>
+    </div>
+
+
     </p>
 
 
@@ -27,16 +40,27 @@
     <%# <%= cart.created_at%>
     の注文</strong>   注文番号：
     <%# <%= cart.cart.id %>
-    ユーザー名：
-    <%# <%= user.user_name %>
+
+
+     <%# <% cart.users.each do |user|%> %>
+		  ユーザー名：
+      <%# <%= user.user_name %> %>
+		  <%# <%end%> %>
+
     注文金額：
     <%# <%= cart.payment%>
-    <button class="btn btn-primary" >
-		詳細
-	</button>
+
+
+    <a class="btn btn-default" data-toggle="collapse" href="#1">
+	    詳細
+    </a>
+    <div class="collapse" id="1">
+	      <div class="well">
+		        カートの中身が入る感じ
+	      </div>
+    </div>
+
     </p>
-
-
 
 <%# <% end %>
 
