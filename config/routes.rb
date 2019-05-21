@@ -56,7 +56,7 @@ Rails.application.routes.draw do
     resources :reviews,  only: [:index, :edit]
     resources :users,    only: [:index]
     resources :contacts, only: [:index, :show]
-    resources :responses,only: [:new, :create]
+    resources :responses,only: [:create]
   end
 
   resources :concepts, only: [:index]
