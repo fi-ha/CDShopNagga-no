@@ -1,24 +1,9 @@
-
 <div class='container'>
     <div class='row'>
-      <div class='col-lg-3'>
-	<div style="margin-top: 150px;">
-	<p>
-	<%= link_to "カート", administrator_carts_path %><br>
-	<%= link_to "商品登録", new_item_path %><br>
-	<%= link_to "アーティスト編集", singers_path %><br>
-	<%= link_to "レーベル編集", labels_path %><br>
-	<%= link_to "ジャンル編集", genres_path %><br>
-	<%= link_to "商品一覧", administrator_items_path %><br>
-	<%= link_to "顧客一覧", administrator_users_path %><br>
-	<%= link_to "レビュー一覧", administrator_reviews_path %><br>
-	<%= link_to "問い合わせ一覧", labels_path %><br>
-	</p>
-	</div>
-	  </div>
+<!---左のタブの部分テンプレート--->
+<%= render 'administrator/tab' %>
 
-
-	<div class= 'col-lg-7'>
+<div class= 'col-lg-7'>
 	<h1>商品一覧画面</h1>
 
 	<p>商品名検索</p>
@@ -31,33 +16,37 @@
 	<!-- 歌手、ジャンル、ぷれーやーでタブ分け -->
 	<% @items.each do |item| %>
 	<div class="", style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
-	  <div class="">
-		<%= attachment_image_tag(item, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg") %>
+
+	  <div>
+		  <%= attachment_image_tag(item, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg") %>
 	  </div>
-	    <div class="">
-		商品名：<%= item.item_name %>
-		</div>
+
 		<div>
-		<% item.singers.each do |singer|%>
-		アーティスト名：<%= singer.singer_name %>
-		<%end%>
+		  商品名：<%= item.item_name %>
 		</div>
+
 		<div>
-		価格：<%= item.price %>
+		  <% item.singers.each do |singer|%>
+		  アーティスト名：<%= singer.singer_name %>
+		  <%end%>
 		</div>
+
 		<div>
-		<% item.stocks.each do |stock| %>
-		在庫数：<%= stock.count %>
-		<% end %>
+		  価格：<%= item.price %>
 		</div>
-		<%= link_to '編集', edit_item_path(item.id) %>
-		<%= link_to '削除', item_path(item.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+
+		<div>
+		  <% item.stocks.each do |stock| %>
+  	  在庫数：<%= stock.count %>
+		  <% end %>
+		</div>
+
+		<%= link_to '編集', edit_item_path(item.id),class: "btn btn bg-success" %>
+		<%= link_to '削除', item_path(item.id),class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
 	</div>
 <% end %>
 
+</div>
 
-
-	</div>
-
-  </div>
+    </div>
 </div>
