@@ -47,10 +47,10 @@ Rails.application.configure do
     # 下記はgmailの設定です。user_name: password:は自分の環境変数にメールアドレスとパスワードを登録して使用して下さい
       port:                 587,
       address:              'smtp.gmail.com',
-      domain:               'smtp.gmail.com',
-      user_name:            "ENV['MAIL_ADDRESS_KEY']",
-      password:             "ENV['MAIL_PASSWORD_KEY']",
-      authentication:       'login',
+      domain:               'gmail.com',
+      user_name:            ENV['MAIL_ADDRESS_KEY'],
+      password:             ENV['MAIL_PASSWORD_KEY'],
+      authentication:       'plain',
       enable_starttls_auto: true
     }
   # ============================================================================
