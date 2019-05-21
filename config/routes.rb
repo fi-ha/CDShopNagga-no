@@ -47,16 +47,16 @@ Rails.application.routes.draw do
 
   resources :labels,   only: [:index, :create, :edit, :update, :destroy]
   resources :contacts, only: [:new, :create]
-  resources :responses,only: [:new, :create]
 
   resources :songs, only: [:create, :update, :destroy]
 
   namespace :administrator do
-    resources :items,   only: [:index, :edit, :update, :destroy]
-    resources :carts,   only: [:index, :show]
-    resources :reviews, only: [:index, :edit]
-    resources :users,   only: [:index]
-    resources :contacts,only: [:index]
+    resources :items,    only: [:index, :edit, :update, :destroy]
+    resources :carts,    only: [:index, :show]
+    resources :reviews,  only: [:index, :edit]
+    resources :users,    only: [:index]
+    resources :contacts, only: [:index]
+    resources :responses,only: [:new, :create]
   end
 
   resources :concepts, only: [:index]
