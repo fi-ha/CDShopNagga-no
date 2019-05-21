@@ -12,10 +12,11 @@ class ContactsController < ApplicationController
         # 一致するユーザーが入ればユーザーidを入れる
         @contact.user_id = user.id
       end
-      
+
       # htmlに返すインスタンスを複数設定する場合にrespond_toを使用する
       respond_to do |format|
         if @contact.save
+          PersonalMailer.send_when_contact_to_user(@contact).deliver
           #以下の記述でcreate.js.erbに飛ぶ
           format.js
           # htmlには以下を返す
