@@ -75,4 +75,7 @@ yarn-debug.log*
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-.DS_Store
+*.DS_Store
+
+# 環境変数を記載しているファイルは除外する
+/.env

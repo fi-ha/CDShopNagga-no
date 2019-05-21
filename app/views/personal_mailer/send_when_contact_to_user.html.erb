@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta content="text/html; charset=UTF-8" />
+</head>
+<body>
+  <h2><%= @contact.last_name + @contact.first_name %> 様からのお問い合わせです。</h2>
+  <hr/>
+  <h3>題名</h3>
+  <p><%= @contact.subject %></p>
+  <hr/>
+  <h3>本文</h3>
+  <p><%= @contact.body %></p>
+  <hr/>
+  <h3>メールアドレス</h3>
+  <p><%= @contact.email %></p>
+  今後ここに管理者画面空の返信フォームに飛べたら便利やな
+</body>
+</html>

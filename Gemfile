@@ -73,3 +73,6 @@ gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 
 gem "cocoon"
+
+# 環境変数を設定して各々共有したくない内容を隠せるgem
+gem 'dotenv-rails'
