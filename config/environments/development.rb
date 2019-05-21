@@ -36,7 +36,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # 上記はデフォルトで設定してあったいじっていません
-  # =========ここからアクションメーラー(railsでメールを送信する機能)の設定を行う============
+  # =========ここからアクションメーラー(railsでメールを送信する機能)の設定を行う==========
 
   # メール配信に失敗した場合にエラーを発生するかどうかを指定
   config.action_mailer.raise_delivery_errors = true
@@ -53,7 +53,7 @@ Rails.application.configure do
       authentication:       'login',
       enable_starttls_auto: true
     }
-  # ==============================================================================
+  # ============================================================================
 
 
   # Print deprecation notices to the Rails logger.
