@@ -7,6 +7,7 @@ class CartsController < ApplicationController
 
   def edits
     # # Cartの中から現在のログインユーザーかつ、statusがカート状態のカートを取り出す関数定義
+    # 下記のdefineを別のファイルに保存する場合そのモデルに対応する.rbに書くとよろしい
     # def current_cart_id
     #   current_cart = Cart.where(user_id: current_user.id).where(status: 1)
     #   current_cart_id = current_cart.id
