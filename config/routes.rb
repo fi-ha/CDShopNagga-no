@@ -55,7 +55,7 @@ Rails.application.routes.draw do
     resources :carts,    only: [:index, :show]
     resources :reviews,  only: [:index, :edit]
     resources :users,    only: [:index]
-    resources :contacts, only: [:index]
+    resources :contacts, only: [:index, :show]
     resources :responses,only: [:new, :create]
   end
 
