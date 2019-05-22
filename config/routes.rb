@@ -51,20 +51,12 @@ Rails.application.routes.draw do
   resources :songs, only: [:create, :update, :destroy]
 
   namespace :administrator do
-<<<<<<< HEAD
     resources :items,    only: [:index, :edit, :update, :destroy]
     resources :carts,    only: [:index, :show]
     resources :reviews,  only: [:index, :edit]
     resources :users,    only: [:index]
     resources :contacts, only: [:index, :show]
     resources :respons,only: [:create, :new, :show]
-=======
-    resources :items, only: [:index, :edit, :update, :destroy]
-    resources :carts, only: [:index, :show]
-    resources :reviews, only: [:index]
-    resources :users, only: [:index]
-    resources :contacts, only: [:index]
->>>>>>> develop
   end
 
   resources :concepts, only: [:index]
