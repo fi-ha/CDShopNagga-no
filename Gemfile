@@ -73,3 +73,8 @@ gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 
 gem "cocoon"
+gem 'pry-rails'
+gem 'pry-doc'
+gem 'pry-stack_explorer'
+gem 'pry-byebug'
+gem 'dotenv-rails'

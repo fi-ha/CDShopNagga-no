@@ -5,28 +5,41 @@ class ReviewsController < ApplicationController
   end
 
   def new
-    @reviews = Review.new
+    @review = Review.new
+    @item = Item.find(params[:item_id])
   end
 
   def show
   end
 
   def create
-    @review = Review.new(review_params)
-    @review.item_id = Item.find(params[:id]).item_id
-    @review.user_id = current_user.id
+    @item = Item.find(params[:item_id])
+    @review = current_user.reviews.new(review_params)
+    @review.item_id = @item.id
     @review.save
-    redirect_to item_path
+    redirect_to item_path(@item.id)
+  end
+
+  def edit
+    @review = Review.find(params[:id])
   end
 
   def update
+    @review = Review.find(params[:id])
+    @review.update(review_params)
+    @review.save
+    redirect_to reviews_path
   end
 
   def destroy
+    @review = Review.find(params[:id])
+    @review.destroy
+    redirect_to reviews_path
   end
 
   private
   	def review_params
-  		params.require(:review).permit(:body)
+  		params.require(:review).permit(:item_id, :user_id, :body)
+    end
 
 end

@@ -21,14 +21,20 @@
 
 
 	<!-- 商品一覧表示 -->
-	<div class="">
-		<% @items.each do |item| %>
-			<div class="items">
-				<%= attachment_image_tag(item, :image, :fill, 300, 300, format: 'jpeg') %>
-				<%= item.item_name %>
-				
-				<%= item.price %>
-			</div>
-		<% end %>
-	</div>
+		<div class="">
+			<% @items.each do |item| %>
+				<% if item.description.blank? %>
+					<div class="items">
+						<%= attachment_image_tag(item, :image, :fill, 300, 300, format: 'jpeg') %><br>
+						<%= link_to item_path(item.id) do %>
+							<%= item.item_name %><br>
+							<% item.singers.each do |singer| %>
+								<%= singer.singer_name %><br>
+							<% end %>
+							価格(税込)：<%= (item.price*BigDecimal("1.08")).ceil %>円
+						<% end %>
+					</div>
+				<% end %>
+			<% end %>
+		</div>
 </div>

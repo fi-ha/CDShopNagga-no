@@ -13,7 +13,7 @@ class LabelsController < ApplicationController
     def create
         @label = Label.new(label_params)
         @label.save
-        redirect_to new_label_path
+        redirect_to labels_path
     end
 
     def update

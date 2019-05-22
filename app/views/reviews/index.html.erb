@@ -1,2 +1,22 @@
-<h1>Reviews#index</h1>
+<h1>マイページのレビュー一覧</h1>
 <p>Find me in app/views/reviews/index.html.erb</p>
+
+<% @reviews.each do |review| %>
+	<div class="">
+		<table>
+			<tr>
+				<td>
+					<%= attachment_image_tag(review.item, :image, :fill, 60, 60, format: 'jpeg') %><br>
+					<%= review.item.item_name %>
+				</td>
+				<td>
+					<%= review.body %>
+				</td>
+				<td>
+					<%= link_to '編集', edit_review_path(review.id) %> 
+					<%= link_to '削除', review_path(review.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+				</td>
+			</tr>
+		</table>
+	</div>
+<% end %>
