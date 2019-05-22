@@ -7,15 +7,9 @@ class FavoritesController < ApplicationController
 		redirect_to item_path(item.id)
 	end
 
-	def index
-	end
-
-	def show
-	end
-
     def destroy
     	item = Item.find(params[:item_id])
-    	favorite = current_user.favorites.find_by(:item_id item.id)
+    	favorite = current_user.favorites.find_by(item_id: item.id)
     	favorite.destroy
     	redirect_to item_path(item.id)
     end

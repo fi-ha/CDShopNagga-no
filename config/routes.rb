@@ -34,12 +34,12 @@ Rails.application.routes.draw do
     resource :item_carts,  only: [:create, :update, :destroy]
     resource :item_singers,only: [:create]
     resources :item_genres,only: [:create, :update]
-    resource :reviews,     only: [:index, :new, :create, :update, :destroy]
+    resource :reviews,     only: [:new, :create]
     resource :favorites,   only: [:create, :destroy]
   end
 
   resources :stocks,          only: [:create, :update]
-  resources :reviews,         only: [:index, :edit]
+  resources :reviews,         only: [:index, :edit, :update, :destroy]
   resources :item_singers,    only: [:update]
   resources :genres,          only: [:index, :new, :edit, :create, :update, :destroy]
   resources :carts,           only: [:index, :new, :create, :update]
@@ -51,12 +51,20 @@ Rails.application.routes.draw do
   resources :songs, only: [:create, :update, :destroy]
 
   namespace :administrator do
+<<<<<<< HEAD
     resources :items,    only: [:index, :edit, :update, :destroy]
     resources :carts,    only: [:index, :show]
     resources :reviews,  only: [:index, :edit]
     resources :users,    only: [:index]
     resources :contacts, only: [:index, :show]
     resources :respons,only: [:create, :new, :show]
+=======
+    resources :items, only: [:index, :edit, :update, :destroy]
+    resources :carts, only: [:index, :show]
+    resources :reviews, only: [:index]
+    resources :users, only: [:index]
+    resources :contacts, only: [:index]
+>>>>>>> develop
   end
 
   resources :concepts, only: [:index]
