@@ -7,7 +7,9 @@ class Administrator::ContactsController < ApplicationController
     end
 
     def index
-      @unreplycontacts = Contact.all
+      contacts = Contact.all
+      @replyedcontacts =  contacts.select do |a| a.respon != nil end
+      @unreplycontacts =  contacts.select do |a| a.respon == nil end
     end
 
     def show
