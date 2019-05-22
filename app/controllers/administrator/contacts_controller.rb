@@ -1,6 +1,7 @@
 class Administrator::ContactsController < ApplicationController
     # before_action :admin_user     adminを作って動作確認する時、ここと下のコメントアウト外してください
     # foreignキーが設定されていればユーザーを取り出す
+
     def find_user(parent)
       return User.find_by(id: parent.user_id) if parent.user_id
     end
@@ -10,7 +11,10 @@ class Administrator::ContactsController < ApplicationController
     end
 
     def show
-      
+      id = params[:id]
+      @contact = Contact.find_by(id: id)
+      @user = find_user(@contact)
+      @respon = Respon.new
     end
 
     # private
