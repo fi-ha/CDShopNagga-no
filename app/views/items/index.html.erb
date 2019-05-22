@@ -3,36 +3,37 @@
 
 
 <!-- プレイヤー説明 -->
-<div class="">
+  <div class="">
 	<h1 class="content-text">Player</h1>
 	<p class="">持ち運びも簡単！</p>
 	<p class="">お洒落で機能的なプレーヤーを厳選しました！</p>
-</div>
+  </div>
 
 <!-- プレーヤー表示（skippr) -->
 
 <!-- MUSIC説明 -->
-	<div class="content-text">
+
+    <div class="content-text">
 		<h1 class="">Music</h1>
 		<p class="">様々なジャンルを揃えています！</p>
 		<p class="">お気に入りを見つけてみて下さい</p>
 	</div>
 	<!-- 検索ボックス -->
-
-		<p>商品名検索</p>
+	<div>
+	<h4>商品名検索</h4>
 	<%= form_tag(items_path,:method => 'get') do %>
   	<%= text_field_tag :search %>
   	<%= submit_tag 'Search', :item_name => nil %>
 	<% end %>
-
+	</div>
 
 	<!-- 商品一覧表示 -->
 		<div class="">
 			<% @items.each do |item| %>
 				<% if item.description.blank? %>
 					<div class="items">
-						<%= attachment_image_tag(item, :image, :fill, 300, 300, format: 'jpeg') %><br>
 						<%= link_to item_path(item.id) do %>
+							<%= attachment_image_tag(item, :image, :fill, 300, 300, format: 'jpeg') %><br>
 							<%= item.item_name %><br>
 							<% item.singers.each do |singer| %>
 								<%= singer.singer_name %><br>

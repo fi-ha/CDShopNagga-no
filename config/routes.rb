@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   namespace :administrator do
     resources :items, only: [:index, :edit, :update, :destroy]
     resources :carts, only: [:index, :show]
-    resources :reviews, only: [:index]
+    resources :reviews, only: [:index, :destroy]
     resources :users, only: [:index]
     resources :contacts, only: [:index]
   end

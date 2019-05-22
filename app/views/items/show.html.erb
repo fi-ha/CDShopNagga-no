@@ -1,19 +1,19 @@
 <h1><%= @item.item_name %>の詳細</h1>
 <div class="">
 	<div class="">
-		<%= attachment_image_tag @item,:image %>
+		<%= attachment_image_tag @item,:image, :fill, 300, 300 %>
 	</div>
 	<div class="">
-		<%= @item.item_name %><br>
-		<% @item.singers.each do |singer| %>
+		<strong>商品名：</strong><%= @item.item_name %><br>
+		<strong>アーティスト名：</strong><% @item.singers.each do |singer| %>
 			<%= singer.singer_name %><br>
 		<% end %>
-		<% @item.genres.each do |genre| %>
+		<strong>ジャンル：</strong><% @item.genres.each do |genre| %>
 			<%= genre.genre_name %><br>
 		<% end %>
-		<%= @item.label.label_name %><br>
-		価格(税込)：<%= (@item.price*BigDecimal("1.08")).ceil %>円<br>
-		在庫：<%= @item.stock.count %>点
+		<strong>レーベル名：</strong><%= @item.label.label_name %><br>
+		<strong>価格(税込)：</strong><%= (@item.price*BigDecimal("1.08")).ceil %>円<br>
+		<strong>在庫：</strong><%= @item.stock.count %>点
 	</div>
 
 	<div class="">
@@ -47,9 +47,9 @@
 			<%= link_to 'レビューを投稿する', new_item_reviews_path(@item.id) %>
 		</p>
 	</div>
-	<h1>Reviews#new</h1>
-<p>Find me in app/views/reviews/new.html.erb</p>
+
 <%= form_for [@item, @review] do |f| %>
+	レビュー
 	<%= f.text_area :body %>
 	<%= f.submit '投稿' %>
 <% end %>
@@ -64,7 +64,7 @@
 		<% @item.reviews.each do |review| %>
 		<tr>
 			<td>
-				<%= review.user.last_name %> 
+				<%= review.user.last_name %>
 				<%= review.user.first_name %>
 			</td>
 			<td>
@@ -73,10 +73,10 @@
 			<!-- レビュー投稿ユーザーなら”編集”、”削除”を表示させる -->
 			<% if review.user == current_user %>
 				<td>
-					<%= link_to "編集", edit_review_path(review.id) %>
+					<%= link_to "編集", edit_review_path(review.id), class: "btn btn bg-success" %>
 				</td>
 				<td>
-					<%= link_to "削除", item_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
+					<%= link_to "削除", review_path(review.id), class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
 				</td>
 			<% else %>
 				<td></td>

@@ -5,6 +5,12 @@ class Administrator::ReviewsController < ApplicationController
         @reviews = Review.all
     end
 
+    def destroy
+        review = Review.find(params[:id])
+        review.destroy
+        redirect_to administrator_reviews_path
+    end
+
     # private
     # def admin_user
         # redirect_to(items_path) unless current_user.administrator?
