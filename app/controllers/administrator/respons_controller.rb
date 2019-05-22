@@ -6,7 +6,7 @@ class Administrator::ResponsController < ApplicationController
       respond_to do |format|
         if @respon.save
           #下記記述で問い合わせフォーム専用のメールを送信出来るようにする.deliverを最後に付けることで送信
-          # PersonalMailer.send_when_respon_to_user(@respon).deliver
+          PersonalMailer.send_when_respon_to_user(@respon).deliver
           #以下の記述でcreate.js.erbに飛ぶ
           format.js
           # htmlには以下を返す
