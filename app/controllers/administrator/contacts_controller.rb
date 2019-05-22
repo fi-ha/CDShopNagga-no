@@ -16,6 +16,10 @@ class Administrator::ContactsController < ApplicationController
       id = params[:id]
       @contact = Contact.find_by(id: id)
       @user = find_user(@contact)
+      contacts = Contact.all
+      replyedcontacts =  contacts.select do |a| a.respon != nil end
+      @replyedcontacts = replyedcontacts.select do |e| e.email == @contact.email end
+      @respons = Respon.all
       @respon = Respon.new
     end
 

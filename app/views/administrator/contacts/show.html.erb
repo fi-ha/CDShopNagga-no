@@ -39,4 +39,54 @@
   <%= form.submit  "送信"%>
   <% end %>
 </div>
+
+<% @replyedcontacts.each do |replyedcontact| %>
+<%= respon = @respons.find_by(contact_id: replyedcontact.id) %>
+<table>
+  <tbody>
+    <tr>
+      <td colspan="2"><p><strong>投稿日時:</strong><%= replyedcontact.created_at %></p></td>
+      <td colspan="2"><p><strong>投稿者:</strong>
+        <%= if @user
+              link_to "#{@user.first_name + @user.first_name}様"
+            else
+              replyedcontact.email
+            end %></p></td>
+    </tr>
+    <tr>
+      <td colspan="3"><p><strong>題名:</strong><%= replyedcontact.subject %></p></td>
+      <td ></td>
+    </tr>
+    <tr>
+      <td colspan="4">本文</td>
+    </tr>
+    <tr>
+      <td colspan="4"><%= replyedcontact.body %></td>
+    </tr>
+  </tbody>
+</table>
+<i class="fas fa-reply"></i>
+<div class="respon_table">
+  <table>
+    <tbody>
+      <tr>
+        <td colspan="2"><p><strong>返信日時:</strong>
+          <%= respon.created_at %></p></td>
+        <td colspan="2"><p><strong>返信者:</strong>
+          <%= respon.respon_name %></p></td>
+      </tr>
+      <tr>
+        <td colspan="3"><p><strong>題名:</strong><%= respon.subject %></p></td>
+        <td ></td>
+      </tr>
+      <tr>
+        <td colspan="4">本文</td>
+      </tr>
+      <tr>
+        <td colspan="4"><%= respon.body %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<% end %>
 <!-- 今後この下に過去の履歴が受信と送信交互にだせると見やすい -->
