@@ -20,6 +20,10 @@ class Administrator::ResponsController < ApplicationController
       end
     end
 
+    def show
+      @respon = Respon.find_by(contact_id: params[:id])
+    end
+
     private
     def respon_params
         params.require(:respon).permit(:respon_name, :subject, :body, :contact_id)
