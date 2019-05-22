@@ -1,1 +1,35 @@
-aaaaaaaa
+
+
+<div class="col-md-8">
+
+
+<h1>
+	<strong>顧客一覧</strong>
+</h1>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>名前</th>
+			<th>メールアドレス</th>
+			<th>最新購入日</th>
+			<th></th>
+		</tr>
+	</thead>
+	<% @users.each do |user| %>
+	<tbody>
+		<tr>
+			<td><%= user.last_name %><%= user.first_name %></td>
+			<td><%= user.email %></td>
+			<% if Cart.exists?(user_id: user.id) %>
+			<td>last buy: <%= user.carts.last.created_at %></td>
+			<% else %>
+			<td>購入履歴がありません</td>
+			<% end %>
+		    <td><%= link_to "閲覧", user_path(user.id), class: "user_#{user.id} btn btn-success active" %></td>
+		   	
+		</tr>
+	</tbody>
+	<% end %>
+</table>
+</div>

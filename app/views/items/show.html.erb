@@ -1,25 +1,31 @@
-<h1>Items#show</h1>
-<p>Find me in app/views/items/show.html.erb</p>
+<h1><%= @item.item_name %>の詳細</h1>
 <div class="">
 	<div class="">
-		<%= @item.image_id %>
+		<%= attachment_image_tag @item,:image %>
 	</div>
 	<div class="">
-		<%= @item.item_name %>
+		<%= @item.item_name %><br>
 		<% @item.singers.each do |singer| %>
-		<%= singer.singer_name %>
+			<%= singer.singer_name %><br>
 		<% end %>
-		<%= @item.genres.genre_name %>
-		<%= @item.label.label_name %>
-		<%= @item.price %>
-		在庫：<%= @item.stock %>点
+		<% @item.genres.each do |genre| %>
+			<%= genre.genre_name %><br>
+		<% end %>
+		<%= @item.label.label_name %><br>
+		価格(税込)：<%= (@item.price*BigDecimal("1.08")).ceil %>円<br>
+		在庫：<%= @item.stock.count %>点
 	</div>
+
 	<div class="">
 		<h2>収録曲</h2>
-		<%= @item.song.disk %>
-		<ul>
-			<li></li>
-		</ul>
+		<% @item.songs.each do |song| %>
+			<%= song.disk %>
+		<% end %>
+			<ul>
+				<% @item.songs.each do |song| %>
+					<li><%= song.song_name %></li>
+				<% end %>
+			</ul>
 	</div>
 	<div class="">
 		<% if @item.favorited_by?(current_user) %>
@@ -38,9 +44,15 @@
 			<%= link_to '購入', new_cart_path %>
 		</p>
 		<p>
-			<%= link_to 'レビューを投稿する', new_item_review_path %>
+			<%= link_to 'レビューを投稿する', new_item_reviews_path(@item.id) %>
 		</p>
 	</div>
+	<h1>Reviews#new</h1>
+<p>Find me in app/views/reviews/new.html.erb</p>
+<%= form_for [@item, @review] do |f| %>
+	<%= f.text_area :body %>
+	<%= f.submit '投稿' %>
+<% end %>
 	<!-- 商品に基づいたレビューを一覧表示させる -->
 	<table class="">
 		<tr>
@@ -49,11 +61,11 @@
 			<td></td>
 			<td></td>
 		</tr>
-		<% @item.review.each do |review| %>
+		<% @item.reviews.each do |review| %>
 		<tr>
 			<td>
-				<%= review.users.last_name %> 
-				<%= review.users.first_name %>
+				<%= review.user.last_name %> 
+				<%= review.user.first_name %>
 			</td>
 			<td>
 				<%= review.body %>
@@ -64,7 +76,7 @@
 					<%= link_to "編集", edit_review_path(review.id) %>
 				</td>
 				<td>
-					<%= link_ti "削除", item_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
+					<%= link_to "削除", item_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
 				</td>
 			<% else %>
 				<td></td>
