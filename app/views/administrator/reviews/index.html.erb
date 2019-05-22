@@ -6,7 +6,41 @@
         <div class="col-lg-7">
 
             <h1>レビュー一覧</h1>
-
+            <table class= "table table-striped">
+		        <% @reviews.each do |review| %>
+			        <tbody>
+				        <tr>
+                            <th>日付</th>
+                            <th>商品名</th>
+                            <th>投稿者名</th>
+                            <th>内容</th>
+                        </tr>
+                        <tr>
+                            <td>
+                            <%= review.created_at %>
+                            </td>
+                            <td>
+                            <% review.items.each do |item| %>
+                            <%= item.item_name %>
+                            <% end %>
+                            </td>
+                            <% review.users.each do |user| %>
+                            <%= user.last_name %>
+                            <%= user.first_name %>
+                            <% end %>
+				    	    <td>
+                		    <%= review.body %>
+					        </td>
+					        <td>
+					        <%= link_to "編集", edit_review_path(review.id), class: "btn btn bg-success" %>
+			            	</td>
+				            <td>
+					        <%= link_to "削除", review_path(review.id), method: :delete, class: "btn btn bg-danger", "data-confirm" => "本当に削除しますか？" %>
+					        </td>
+				        </tr>
+			        </tbody>
+		        <% end %>
+	        </table>
         </div>
     </div>
 </div>

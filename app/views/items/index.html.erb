@@ -19,6 +19,12 @@
 	</div>
 	<!-- 検索ボックス -->
 
+		<p>商品名検索</p>
+	<%= form_tag(items_path,:method => 'get') do %>
+  	<%= text_field_tag :search %>
+  	<%= submit_tag 'Search', :item_name => nil %>
+	<% end %>
+
 
 	<!-- 商品一覧表示 -->
 		<div class="">

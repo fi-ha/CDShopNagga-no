@@ -5,10 +5,6 @@ class Administrator::ReviewsController < ApplicationController
         @reviews = Review.all
     end
 
-    def edit
-        @review = Review.find(params)
-    end
-
     # private
     # def admin_user
         # redirect_to(items_path) unless current_user.administrator?
