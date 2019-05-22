@@ -1,20 +1,19 @@
+<div class='container'>
+    <div class='row'>
+<!---左のタブの部分テンプレート--->
+<%= render 'administrator/tab' %>
+
+<div class='col-lg-7'>
+  <h1>商品登録</h1>
+    <ul class="nav nav-tabs">
+	    <li class = "active"><a href="#cd" data-toggle="tab">CD</a></li>
+	    <li><a href="#player" data-toggle="tab">Palyer</a></li>
+    </ul>
+
 
 <div class='container'>
     <div class='row'>
-      <div class='col-xs-10 col-xs-offset-2'>
-<h1>商品登録</h1>
-<ul class="nav nav-tabs">
-	<li class = "active"><a href="#cd" data-toggle="tab">CD</a></li>
-	<li><a href="#player" data-toggle="tab">Palyer</a></li>
-</ul>
-    </div>
-  </div>
-</div>
-
-
-<div class='container'>
-    <div class='row'>
-      <div class='col-xs-9 col-xs-offset-3'>
+      <div class='col-xs-7'>
 
 <!-- タブ内容 -->
 <div class="tab-content">
@@ -81,14 +80,11 @@
         <%= stock.text_field :count %>
       <%end%>
 
-      <div class="">
+      <div>
         <%= f.submit '登録する', class: "btn btn bg-primary", "data-confirm" => "本当に登録しますか？" %>
       </div>
-
     <% end %>
-
 	</div>
-
 
 	<div class="tab-pane" id="player">
 
@@ -123,14 +119,13 @@
         <%= stock.text_field :count %>
       <% end %>
 
-      <%= f.submit '登録する', "data-confirm" => "本当に登録しますか？" %>
-
-    <% end %>
+      <div>
+      <%= f.submit '登録する', class: "btn btn bg-primary", "data-confirm" => "本当に登録しますか？" %>
+      <% end %>
+      </div>
 
   </div>
-
 </div>
-
 
     </div>
   </div>

@@ -1,23 +1,116 @@
-<h1>商品編集</h1>
+<div class='container'>
+    <div class='row'>
+<!---左のタブの部分テンプレート--->
+<%= render 'administrator/tab' %>
 
-<%= form_for(@item) do |f| %>
+<div class='col-lg-7'>
+  <h1>商品編集</h1>
+   <ul class="nav nav-tabs">
+	    <li class = "active"><a href="#cd" data-toggle="tab">CD</a></li>
+	    <li><a href="#player" data-toggle="tab">Palyer</a></li>
+    </ul>
 
-	<p>Player名</p>
-	<%= f.text_field :item_name %>
+<div class='container'>
+    <div class='row'>
+      <div class='col-xs-7'>
 
-	<p>Player画像</p>
-	<%= attachment_image_tag @item, :image, :fill, 60, 60, format: 'jpeg' %>
-	<%= f.attachment_field :image, placeholder: 'プロフィール画像' %>
+<!-- タブ内容 -->
+<div class="tab-content">
+	<div class="tab-pane active" id="cd">
 
-	<p>価格</p>
-	<%= f.text_field :price %>
-	<p>ジャンル</p>
+    <%= form_for (@item) do |f| %>
 
-	<p>商品説明</p>
-	<%= f.text_area @item, :description %>
+      <!-- f.fields_for() do || ・・・ネストするモデルのDBへ、親モデルのform_forと同一formで投稿する
+        :item_singersは,ItemとSingersの中間モデル-->
+      <h4>アーティスト名</h4>
+      <%= f.fields_for :item_singers do |item_singer| %>
+        <!--f.collection_select A, B, C, D
+          A= モデルへ渡すカラムの場所
+          B= 表示させるデータ
+          C= Aで指定したカラムに渡すデータ
+          D= 一覧表示させるカラム名
+         中間モデルの:singer_idカラムに対して、Singer.allでSingerのマスタデータを一覧表示し、一覧の中から:idを渡すデータとし、選択表示は:singer_nameを表示させる -->
+        <%= item_singer.collection_select :singer_id, Singer.all, :id, :singer_name %>
+      <% end %>
 
-	<p>在庫数</p>
+      <h4>シングル/アルバム名</h4>
+      <%= f.text_field :item_name %>
 
-	<p>登録時点でユーザーから見れるようにする</p>
-	<%= f.submit '編集' %>
-<% end %>
+      <h4>ジャケット画像</h4>
+	    <%= attachment_image_tag @item, :image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg" %>
+      <%= f.attachment_field :image, placeholder: "ジャケット画像" %>
+
+      <h4>価格(税別)</h4>
+      <%= f.text_field :price %>
+
+      <h4>レーベル名</h4>
+      <%= f.label :label_id %>
+      <%= f.collection_select :label_id, Label.all, :id, :label_name %>
+
+      <h4>ジャンル</h4>
+      <%= f.fields_for :item_genres do |item_genre| %>
+        <%= item_genre.label :genre_id %>
+        <%= item_genre.collection_select :genre_id, Genre.all, :id, :genre_name %>
+      <% end %>
+
+      <!-- cocoonで動的にフォームを追加表示・削除可能に -->
+      <h4>曲名</h4>
+      <%= f.fields_for :songs do |song| %>
+        <!-- テンプレートビューを作成（views/items/_song_fields.html.erb)
+          テンプレをrender指定。その際にテンプレ内の"f" => "song" -->
+        <%= render 'song_fields', f: song %>
+        <!-- id="links"〜link_to_add_associationはcocoonの定型文
+        id="links"の位置を目印とし、フォームを追加する。
+        消すとフォームが増えなくなります。 -->
+        <div id="links">
+          <%= link_to_add_association "曲名を追加する", f, :songs %><br/>
+        </div>
+      <% end %>
+
+      <h4>在庫数</h4>
+      <%= f.fields_for :stocks do |stock| %>
+        <%= stock.text_field :count %>
+      <%end%>
+
+      <div>
+        <%= f.submit '編集する', class: "btn btn bg-primary", "data-confirm" => "本当に編集しますか？" %>
+      </div>
+    <% end %>
+	</div>
+
+	<div class="tab-pane" id="player">
+
+    <%= form_for (@item) do |f| %>
+
+      <h4>Player名</h4>
+      <%= f.text_field :item_name %>
+
+      <h4>Player画像</h4>
+	    <%= attachment_image_tag @item, :image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg" %>
+      <%= f.attachment_field :image, placeholder: "イメージ画像" %>
+
+      <h4>価格（税別）</h4>
+      <%= f.text_field :price %>
+
+      <h4>メーカー</h4>
+      <%= f.collection_select :label_id, Label.all, :id, :label_name %>
+
+      <h4>商品説明</h4>
+      <%= f.text_area :description %>
+
+      <h4>在庫数</h4>
+      <%= f.fields_for :stocks do |stock| %>
+        <%= stock.text_field :count %>
+      <% end %>
+
+      <div>
+      <%= f.submit '編集する', class: "btn btn bg-primary", "data-confirm" => "本当に編集しますか？" %>
+      <% end %>
+      </div>
+
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>

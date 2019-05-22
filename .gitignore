@@ -76,4 +76,5 @@ yarn-debug.log*
 /config/master.key
 
 .DS_Store
+# 環境変数を記載しているファイルは除外する
 .env

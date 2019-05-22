@@ -5,8 +5,8 @@ class Item < ApplicationRecord
 	validates :active, presence: true
 
 	# アソシエーション設定
-	has_many :songs, dependent: :destroy
-	has_many :item_genres, dependent: :destroy
+	has_many :songs,      dependent: :destroy
+	has_many :item_genres,dependent: :destroy
 	# itemから中間テーブル(item_genre)を経由して、item_idに対応したgenreのカラムを呼び出す為。多対多のときにhas_many throughを使う。
 	has_many :genres, through: :item_genres
 	has_many :item_singers, dependent: :destroy
@@ -32,4 +32,21 @@ class Item < ApplicationRecord
 	def favorited_by?(user)
 		favorites.where(user_id: user.id).exists?
 	end
+
+
+
+    def self.search(search)
+        if search
+            Item.where(['item_name LIKE ?', "%#{search}%"])
+        else
+            Item.all
+        end
+    end
+
+
+
+
+
+
+
 end

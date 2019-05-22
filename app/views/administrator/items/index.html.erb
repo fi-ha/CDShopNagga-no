@@ -1,31 +1,52 @@
-<h1>商品一覧画面</h1>
-<!-- 歌手、ジャンル、ぷれーやーでタブ分け -->
-<div class="">
+<div class='container'>
+    <div class='row'>
+<!---左のタブの部分テンプレート--->
+<%= render 'administrator/tab' %>
 
-<% @items.each do |item| %>
-	<div class="">
-		<div class="">
-			<%= attachment_image_tag(item, :image, :fill, 60, 60, format: 'jpeg')  %>
-		</div>
-		<table>
-			<tr>
-				<td>商品名：</td>
-				<td><%= item.item_name %></td>
-			</tr>
-			<% item.singers.each do |singer| %>
-				<tr>
-					<td>アーティスト名：</td>
-					<td><%= singer.singer_name %></td>
-				</tr>
+		<div class= 'col-lg-7'>
+			<h1>商品一覧画面</h1>
+
+			<p>商品名検索</p>
+			<%= form_tag(administrator_items_path,:method => 'get') do %>
+		  	<%= text_field_tag :search %>
+		  	<%= submit_tag 'Search', :item_name => nil %>
 			<% end %>
-			<tr>
-				<td>価格：</td>
-				<td><%= item.price %></td>
-			</tr>
-		</table>
-		<%= link_to '編集', edit_item_path(item.id) %>
-		<%= link_to '削除', item_path(item.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-	</div>
-<% end %>
 
+
+			<!-- 歌手、ジャンル、ぷれーやーでタブ分け -->
+			<% @items.each do |item| %>
+			<div class="", style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+
+			  <div>
+				  <%= attachment_image_tag(item, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg") %>
+			  </div>
+
+				<div>
+				  商品名：<%= item.item_name %>
+				</div>
+
+				<div>
+				  <% item.singers.each do |singer|%>
+				  アーティスト名：<%= singer.singer_name %>
+				  <%end%>
+				</div>
+
+				<div>
+				  価格：<%= item.price %>
+				</div>
+
+				<div>
+				  <% item.stocks.each do |stock| %>
+		  	  在庫数：<%= stock.count %>
+				  <% end %>
+				</div>
+
+				<%= link_to '編集', edit_item_path(item.id),class: "btn btn bg-success" %>
+				<%= link_to '削除', item_path(item.id),class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
+			</div>
+			<% end %>
+
+		</div>
+
+    </div>
 </div>

@@ -10,28 +10,28 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
   </head>
 
-  <body>
-    <!-- ==============================header部分float:auto;により常に上部に表示=============================== -->
-    <header>
-      <!--headerの左側 -->
-      <div class="header-left">
-        <%= link_to genres_path, class: "header-logo" do %><!--リンク先はルート設定の後変更して下さい -->
-          <%= image_tag "naganologo.png", alt: "CDショップナッガ〜ノのロゴ",class: "logo-img" %>
-        <% end %>
-        <%= link_to genres_path, class: "header-icon" do %><!--リンク先はdevise設定の後、変更して下さい、ボタンの表示はlink_to_ifを使うと便利 -->
-          <i class="fas fa-user">　<%= "ユーザー名" %></i>
-        <% end %>
-      </div>
-      <!--headerの右側 -->
-      <div class="header-right">
-        <!-- menu-trigger部分 -->
-        <div class="menu-trigger-box">
-          <a class="menu-trigger">
-            <span></span>
-            <span></span>
-            <span></span>
-          </a>
-        </div>
+  <body class="overlay">
+    <!-- ============eader部分float:auto;により常に上部に表示=================== -->
+
+  <header>
+    <!--headerの左側 -->
+    <div class="header-left">
+      <%= link_to genres_path, class: "header-logo" do %><!--リンク先はルート設定の後変更して下さい -->
+      <%= image_tag "naganologo.png", alt: "CDショップナッガ〜ノのロゴ",class: "logo-img" %>
+      <% end %>
+      <%= link_to genres_path, class: "header-icon" do %><!--リンク先はdevise設定の後、変更して下さい、ボタンの表示はlink_to_ifを使うと便利 -->
+      <i class="fas fa-user">　<%= "ユーザー名" %></i>
+      <% end %>
+    </div>
+    <!--headerの右側 -->
+    <div class="header-right">
+      <!-- menu-trigger部分 -->
+      <div class="menu-trigger-box">
+        <a class="menu-trigger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
       </div>
       <!--headerのトリガーを押したあとに出てくるmenu -->
       <nav class="hamburger-menu">
@@ -39,25 +39,63 @@
           <!--リンク先は各ページ設定の後、変更して下さい -->
           <li><%= link_to "TOP", root_path %></li>
           <li><%= link_to "おすすめプレーヤー", genres_path %></li>
-          <li><%= link_to "商品一覧", genres_path %></li>
+          <li><%= link_to "商品一覧", root_path %></li>
           <li><%= link_to "マイページ", genres_path %></li><!--ログイン時のみ表示link_to_ifを使うと便利 -->
           <li><%= link_to "カート", genres_path %></li><!--ログイン時のみ表示link_to_ifを使うと便利 -->
           <li><%= link_to "カート", genres_path %></li><!--ログアウト時のみ表示リンク先は新規登録フォームlink_to_unlessを使うと便利 -->
           <li><%= link_to "コンセプト", concepts_path %></li>
           <li><%= link_to "ログイン", genres_path %></li><!--ログアウト時のみ表示link_to_ifを使うと便利 -->
           <li><%= link_to "新規登録", genres_path %></li><!--ログアウト時のみ表示link_to_ifを使うと便利 -->
-          <li><%= link_to "お問い合わせ", genres_path %></li>
+          <li><%= link_to 'お問い合わせ', new_contact_path, remote: true %></li>
           <li><%= link_to "ログアウト", genres_path %></li><!--ログイン時のみ表示link_to_ifを使うと便利 -->
         </ul>
       </nav>
     </header>
     <!-- ===================================================================================================== -->
     <%= yield %>
+
+
+
+      <!--=====================モーダルウィンドウ表示部分======================== -->
+      <!-- ここは中心に表示させるモーダルウィンドウを表示する部分です。
+        ここの中にrenderでモーダルウィンドウを指定して下さい
+        見本としてフッターからのメール送信モーダルを作成しています。-->
+      <div class="modal-window">
+      </div>
+      <!--================================================================== -->
+
+  </div>
+
+
+  <!--=================================フッター============================== -->
+  <footer>
+    <div class="footer-left">
+      <%= link_to genres_path, class: "footer-logo" do %><!--リンク先はルート設定の後変更して下さい -->
+      <%= image_tag "naganologo.png", alt: "CDショップナッガ〜ノのロゴ", class: "footer-logo-img" %>
+      <% end %>
+    </div>
+    <div class="footer-right">
+      <!-- menu-trigger部分 -->
+      <!-- ここで追加したのはremote: trueの部分です。このオプションを付け加えることで、リンクからの呼び出し先がnew.html.erbからnew.js.erbに変更されます。 -->
+      <%= link_to 'お問い合わせ', new_contact_path, remote: true %>
+    </div>
+  </footer>
+  <!--====================================================================== -->
+
+
     <script type="text/javascript">
+      // =================ヘッダーのハンバーガーメニュー制御==========================
       $('.menu-trigger-box').on('click', function(){
         $(this).children('.menu-trigger').toggleClass('active');
-        $('.hamburger-menu').toggleClass('active');
+        $('.hamburger-menu').toggleClass('open');
       });
+      // =======================================================================
+
+      // =======================中心モーダルウィンドウ制御==========================
+      // =======================================================================
+
+
     </script>
+
   </body>
 </html>
