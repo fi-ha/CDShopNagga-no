@@ -7,5 +7,5 @@ class Contact < ApplicationRecord
     validates :body,      length:{in: 1..5000},presence: true
 
     belongs_to :user,  optional: true
-    has_one :response
+    has_one :respon
 end
