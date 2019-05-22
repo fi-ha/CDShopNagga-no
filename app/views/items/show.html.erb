@@ -6,8 +6,10 @@
 	</div>
 	<div class="">
 		<%= @item.item_name %>
-		<%= @item.singer.singer_name %>
-		<%= @item.genre.genre_name %>
+		<% @item.singers.each do |singer| %>
+		<%= singer.singer_name %>
+		<% end %>
+		<%= @item.genres.genre_name %>
 		<%= @item.label.label_name %>
 		<%= @item.price %>
 		在庫：<%= @item.stock %>点

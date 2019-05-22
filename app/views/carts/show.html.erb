@@ -1,0 +1,33 @@
+<h1>Cart</h1>
+<p>内容がよろしければ発送先選択ページへお進み下さい</p>
+
+  <!-- ======================= こからカートの中身 ============================== -->
+  <section class="cart-items">
+    <table>
+
+      <!-- カート内のitemを繰り返し表示 -->
+      <% @item_carts.each do |item_cart| %>
+
+      <!-- ここで該当する歌手、ジャンル、レーベル、、ストックを取り出す -->
+
+      <!-- もしCDだったら -->
+      <% if item_cart.item.description.empty? %>
+      <tbody class="cart-in-CD">
+        <!-- <%= hidden_field(:item, :token) %> 左記述でhiddenのvalueに@item.idを取り出し下のjqueryにわたす -->
+        <tr>
+          <td rowspan="5"><%= attachment_image_tag (item_cart.item, :image, :fill, 60, 60, format: "jpg") %></td>
+          <td rowspan="2"><p>CDタイトル</p><h3><%= "item_cart.item.item_name" %></h3></td>
+          <td></td>
+          <td class='multiply_price' rowspan="5"><%= item_cart.item.price.to_s(:delimited) %>円</td>
+          <td rowspan="5"><%= link_to "削除", destroy_cart_path, method: :delete, remote: true %></td><!-- とりあえずidは1本当はitem.id -->
+        </tr>
+        <tr>
+          <%= f.fields_for "item_cart[]", :item_carts do |item_cart| %>
+          <td>
+            <input class="number" type="number" name="" value="1" min="1">枚
+            <%=  item_cart.number_field(:count, プロパティ名, オプション,class: "number", min: "1",value: "1",max: @Stock.item_id)枚 %>
+            <%= item_cart.hidden_field(:price, プロパティ名, オプション, value: item.price %>
+
+
+      </tbody>
+

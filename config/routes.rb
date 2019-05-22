@@ -17,6 +17,10 @@ Rails.application.routes.draw do
     resource :favorites, only: [:index]
   end
 
+  post '/add_item' => 'carts#add_item', as: 'add_cart'
+  post '/update_item' => 'carts#update_item', as: 'update_cart'
+  delete '/delete_item' => 'carts#delete_item', as: 'delete_cart'
+
   # Cart画面は上から順にこのルーティングで進んで行きます。あとから修正している為ちょっと無理矢理感のあるルーティングとなっています。
   get  'carts/:id/edit',                to: 'carts#edit',    as: 'cart_edit'
   post 'carts/:id/edit',                to: 'carts#cartedit',as: 'cart_cartedit'

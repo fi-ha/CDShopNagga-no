@@ -1,4 +1,7 @@
 class Cart < ApplicationRecord
+
+　include ApplicationHelper
+
   # アソシエーション設定
   belongs_to :user            # usersモデルにアソシエーション
   has_many   :item_carts      # item_carts中間モデルにアソシエーション
