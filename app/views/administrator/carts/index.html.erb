@@ -1,6 +1,13 @@
-<h2>未発送一覧</h2>
+<div class='container'>
+    <div class='row'>
+<!---左のタブの部分テンプレート--->
+<%= render 'administrator/tab' %>
 
-<%# <% @carts.each do |cart| %>
+<div class="col-lg-7">
+
+    <h2>未発送一覧</h2>
+
+    <%# <% @carts.each do |cart| %>
     <p><strong>
     <%# <%= cart.created_at%>
     の注文</strong>   注文番号：
@@ -10,8 +17,8 @@
     注文金額：
     <%# <%= cart.payment%>
     <button class="btn btn-primary" >
-		詳細
-	</button>
+	  	詳細
+	  </button>
     </p>
 
 
@@ -31,6 +38,9 @@
 
 
 
-
-
 <%# <% end %>
+
+
+    </div>
+  </div>
+</div>
