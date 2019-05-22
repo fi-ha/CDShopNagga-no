@@ -1,2 +1,10 @@
-<h1>Genres#edit</h1>
-<p>Find me in app/views/genres/edit.html.erb</p>
+<h1>ジャンル編集</h1>
+
+<%= form_for(@genre) do |f| %>
+
+<h4>ジャンル名
+<%= f.text_field :genre_name %>
+<%= f.submit "編集する", class: "btn btn-success"%>
+</h4>
+
+<%end%>
