@@ -3,3 +3,6 @@
      <h4>アーティスト名<%= f.text_field :singer_name, :size => '50' %></h4>
      	<%= f.submit "編集", class: "btn btn bg-success"%>
 	 <% end %>
+   <%= f.text_field :singer_name, :size => '50' %>
+   <%= f.submit "編集", class: "edit_#{@singer.id} btn btn bg-success"%>
+<% end %>

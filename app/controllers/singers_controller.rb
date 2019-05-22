@@ -33,8 +33,4 @@ class SingersController < ApplicationController
 	 def singer_params
 	 	params.require(:singer).permit(:singer_name)
 	 end
-
-	def singer_params
-		params.require(:singer).permit(:singer_name)
-	end
 end
