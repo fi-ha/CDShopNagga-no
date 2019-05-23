@@ -2,8 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-
+/*MY PAGE部分のcss
+*/
 .mypage{
 	width: 40%;
 	float: left;
@@ -11,10 +11,13 @@
 
 
 .mypage1{
-	font-size: 80px;
+	margin-left: 10px;
+	font-size: 60px;
 	font-weight: bold;
 	}
 
+/*アカウント名表示のcss
+*/
 .username{
 	width: 40%;
     float: right;
@@ -22,12 +25,51 @@
 
 .username1{
     font-size: 40px;
-    margin-top: 50px;
+    margin-top: 20px;
  }
 
+/*編集&削除ボタン&ボタン装飾のcss
+*/
+.btn{
+    display: table-cell;
+    float: right;
+    margin-left: 90px;
+     }
 
-.button{
-	width: 30%;
-	float: right;
-	margin-right: 90px;
+.btn-square {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background: #FF0040;/*ボタン色*/
+  color: #FFF;
+  border-bottom: solid 4px #627295;
+  border-radius: 3px;
+}
+.btn-square:active {
+  /*ボタンを押したとき*/
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px);/*下に動く*/
+  border-bottom: none;/*線を消す*/
+}
+
+/*購入履歴タイトルのcss
+*/
+.purchase{
+	margin-right: 20px;
+}
+
+.purchase1{
+	text-align: center;
+	font-size: 60px;
+}
+
+
+
+
+
+/*未発送のcss*/
+
+.purchase2{
+	font-size: 30px;
+	text-align: center;
 }
