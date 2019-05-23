@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
   before_action :authenticate_user!
-  
+  before_action :judgment_user
+
   def index
   end
 
@@ -129,9 +130,15 @@ class CartsController < ApplicationController
     end
 
     def item_cart_params
-      params.require(:oitem_cart).permit(
+      params.require(:item_cart).permit(
         :post
       )
     end
+
+    def judgment_user
+			unless current_user.id == params[:id].to_i || current_user.admin == true
+				redirect_to(root_path)
+			end
+		end
 
 end
