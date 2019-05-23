@@ -1,5 +1,5 @@
 class Administrator::ReviewsController < ApplicationController
-    # before_action :admin_user     adminを作って動作確認する時、ここと下のコメントアウト外してください
+    before_action :admin_user
 
     def index
         @reviews = Review.all
@@ -9,8 +9,8 @@ class Administrator::ReviewsController < ApplicationController
         @review = Review.find(params)
     end
 
-    # private
-    # def admin_user
-        # redirect_to(items_path) unless current_user.administrator?
-    # end
+    private
+    def admin_user
+        redirect_to(items_path) unless current_user.admin?
+    end
 end
