@@ -1,9 +1,10 @@
 class FavoritesController < ApplicationController
+  before_action :authenticate_user!
 
 	def index
 		@favorites = @user.favorites.all
 	end
-
+  
 	def create
 		item = Item.find(params[:item_id])
 		favorite = current_user.favorites.new(item_id: item.id)

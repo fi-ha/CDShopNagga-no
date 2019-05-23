@@ -1,4 +1,6 @@
 class Administrator::ResponsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :admin_user
 # namespaceに入っているコントローラーは親コントローラーの名前を書かなければ使用できない
     def create
       @respon = Respon.new(respon_params)
@@ -27,5 +29,9 @@ class Administrator::ResponsController < ApplicationController
     private
     def respon_params
         params.require(:respon).permit(:respon_name, :subject, :body, :contact_id)
+    end
+
+    def admin_user
+        redirect_to(items_path) unless current_user.admin?
     end
 end
