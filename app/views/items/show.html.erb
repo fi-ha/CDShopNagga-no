@@ -59,7 +59,7 @@
 			<td>投稿者</td>
 			<td>レビュー</td>
 			<td></td>
-			<td></td>
+			<%# <td></td> %>
 		</tr>
 		<% @item.reviews.each do |review| %>
 		<tr>
@@ -76,7 +76,7 @@
 					<%= link_to "編集", edit_review_path(review.id), class: "btn btn bg-success" %>
 				</td>
 				<td>
-					<%= link_to "削除", review_path(review.id), class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
+					<%# <%= link_to "削除", review_path(review.id), class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
 				</td>
 			<% else %>
 				<td></td>
