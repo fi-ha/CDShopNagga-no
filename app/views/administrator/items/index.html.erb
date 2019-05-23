@@ -36,9 +36,7 @@
 				</div>
 
 				<div>
-				  <% item.stocks.each do |stock| %>
-		  	  在庫数：<%= stock.count %>
-				  <% end %>
+		  	  在庫数：<%= item.stock.count %>
 				</div>
 
 				<%= link_to '編集', edit_item_path(item.id),class: "btn btn bg-success" %>

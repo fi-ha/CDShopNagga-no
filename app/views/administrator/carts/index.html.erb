@@ -12,13 +12,72 @@
     <%# <%= cart.created_at%>
     の注文</strong>   注文番号：
     <%# <%= cart.cart.id %>
-    ユーザー名：
-    <%# <%= user.user_name %>
+
+    <%# <% cart.users.each do |user|%> %>
+		  ユーザー名：
+      <%# <%= user.user_name %> %>
+		<%# <%end%> %>
+
     注文金額：
     <%# <%= cart.payment%>
-    <button class="btn btn-primary" >
-	  	詳細
-	  </button>
+
+<a class="btn btn-default" data-toggle="collapse" href="#1">
+	詳細
+</a>
+<div class="collapse" id="1">
+	<div class="well">
+
+    <div>
+      <%# <% cart.items.each do |item|%> %>
+      <%# <%= attachment_image_tag(item, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg") %> %>
+		<%# <%end%> %>
+    </div>
+
+    <div>
+    <%# <% cart.items.each do |item|%> %>
+    商品名：
+    <%# <%= item.item_name %> %>
+		<%# <%end%> %>
+    </div>
+
+    <div>
+    <%# <% cart.item_carts.each do |item_cart|%> %>
+    購入枚数：
+    <%# <%= item_cart.count %> %>
+		<%# <%end%> %>
+    </div>
+
+    <div>
+    <%# <% cart.items.each do |item|%> %>
+    価格：
+    <%# <%= item.price %> %>
+		<%# <%end%> %>
+    </div>
+
+
+    <div>
+    <%# <% cart.ship_to_anothers.each do |ship_to_another|%>
+    送付先：
+    <%# <%= ship_to_another.first_name %>
+    <%# <%= ship_to_another.last_name %>
+    <%# <%= ship_to_another.postal_code %>
+    <%# <%= ship_to_another.address %>
+		<%# <%end%> %>
+    </div>
+
+    <div>
+    総計価格：+500円（送料）
+    <%# <%= cart.total_price %> %>
+    </div>
+
+  <div>
+  <strong>Status:</strong>
+    <%# <%= link_to @cart.status, cart_toggle_status_path(@cart), method: :patch %> %>
+  </div>
+
+
+	</div>
+</div>
     </p>
 
 
@@ -27,13 +86,26 @@
     <%# <%= cart.created_at%>
     の注文</strong>   注文番号：
     <%# <%= cart.cart.id %>
-    ユーザー名：
-    <%# <%= user.user_name %>
+
+    <%# <% cart.users.each do |user|%> %>
+		  ユーザー名：
+      <%# <%= user.user_name %> %>
+		<%# <%end%> %>
+
     注文金額：
     <%# <%= cart.payment%>
-    <button class="btn btn-primary" >
-		詳細
-	</button>
+
+
+<a class="btn btn-default" data-toggle="collapse" href="#collapseExample">
+	詳細
+</a>
+<div class="collapse" id="collapseExample">
+	<div class="well">
+		表示したり、折り畳んだりできるコンテンツ。
+	</div>
+</div>
+
+
     </p>
 
 
@@ -41,6 +113,5 @@
 <%# <% end %>
 
 
-    </div>
-  </div>
+</div>
 </div>

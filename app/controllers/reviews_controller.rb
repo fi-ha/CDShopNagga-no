@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
 
   def index
-  	@reviews = Review.all
+    @reviews = @user.reviews.all
   end
 
   def new
@@ -26,13 +26,13 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @review.update(review_params)
     @review.save
-    redirect_to reviews_path
+    redirect_to user_path(current_user.id)
   end
 
   def destroy
     @review = Review.find(params[:id])
     @review.destroy
-    redirect_to reviews_path
+    redirect_to user_path(current_user.id)
   end
 
   private
