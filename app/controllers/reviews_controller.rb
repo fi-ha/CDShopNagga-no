@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
 
   def index
-  	@reviews = @user.reviews.all
+    @reviews = @user.reviews.all
   end
 
   def new
@@ -28,7 +28,7 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @review.update(review_params)
     @review.save
-    redirect_to reviews_path
+    redirect_to user_path(current_user.id)
   end
 
   def destroy
