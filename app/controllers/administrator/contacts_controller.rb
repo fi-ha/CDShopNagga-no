@@ -1,6 +1,6 @@
 class Administrator::ContactsController < ApplicationController
-    # before_action :admin_user     adminを作って動作確認する時、ここと下のコメントアウト外してください
-    # foreignキーが設定されていればユーザーを取り出す
+    before_action :authenticate_user!
+    before_action :admin_user
 
     def find_user(parent)
       return User.find_by(id: parent.user_id) if parent.user_id
@@ -23,9 +23,9 @@ class Administrator::ContactsController < ApplicationController
       @respon = Respon.new
     end
 
-    # private
-    # def admin_user
-        # redirect_to(items_path) unless current_user.administrator?
-    # end
+    private
+    def admin_user
+        redirect_to(items_path) unless current_user.admin?
+    end
     helper_method :find_user
 end

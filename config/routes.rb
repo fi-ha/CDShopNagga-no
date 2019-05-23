@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :favorites
 
   resources :users, only: [:show]
+  
   resources :users, only: [:show] do
     resource :favorites, only: [:index]
   end

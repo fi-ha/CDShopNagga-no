@@ -1,11 +1,14 @@
 class CartsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :judgment_user
+
   def index
   end
 
   def new
   end
 
-  def edits
+  def edit
     # # Cartの中から現在のログインユーザーかつ、statusがカート状態のカートを取り出す関数定義
     # 下記のdefineを別のファイルに保存する場合そのモデルに対応する.rbに書くとよろしい
     # def current_cart_id
@@ -127,9 +130,15 @@ class CartsController < ApplicationController
     end
 
     def item_cart_params
-      params.require(:oitem_cart).permit(
+      params.require(:item_cart).permit(
         :post
       )
     end
+
+    def judgment_user
+			unless current_user.id == params[:id].to_i || current_user.admin == true
+				redirect_to(root_path)
+			end
+		end
 
 end
