@@ -1,10 +1,7 @@
-<h1>ジャンル編集</h1>
 
+<h2>ジャンル名編集</h2>
 <%= form_for(@genre) do |f| %>
+   <%= f.text_field :genre_name, :size => '50' %>
+   <%= f.submit "編集", class: "edit_#{@genre.id} btn btn bg-success"%>
+<% end %>
 
-<h4>ジャンル名
-<%= f.text_field :genre_name %>
-<%= f.submit "編集する", class: "btn btn-success"%>
-</h4>
-
-<%end%>

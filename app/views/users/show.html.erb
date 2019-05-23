@@ -2,6 +2,7 @@
   <div class="row">
      <div class="col-lg-7">
 
+
 <head>
 	<link rel="stylesheet" type="text/css" href="users.scss">
 
@@ -20,6 +21,7 @@
    <%= link_to "Edit User", edit_user_registration_path(@user.id) , class: "user_#{@user.id} btn btn bg-success" %>
 <%= link_to "Account Delite", items_path, method: :delete,  class: "user_#{@user.id} btn btn bg-danger, btn btn-danger dropdown-toggle", "data-confirm" => "本当に削除しますか？" %>
 </div>
+
 
 
 
@@ -46,9 +48,4 @@
 
     </div>
   </div>
-</div>
-
-
-</div>
-</div>
 </div>
