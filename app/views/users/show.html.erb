@@ -1,15 +1,43 @@
-<table>
-	<thead>
-		<tr>
-			<th>
-				<h1>MY PAGE</h1>
-			</th>
-			<th>			</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>data</td>
-		</tr>
-	</tbody>
-</table>
+
+<div class="container">
+  <div class="row">
+     <div class="col-md-10 col-md-offset-1">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="users.scss">
+
+</head>
+
+
+	<div class="mypage">
+		<h1 class="mypage1">MY PAGE</h1>
+	</div>
+
+	<div class="username">
+		<p class="username1"><%= @user.last_name %><%= @user.first_name %></p>
+    </div>
+
+ <div class="button">
+   <%= link_to "Edit User", edit_user_registration_path(@user.id) , class: "user_#{@user.id} btn btn bg-success" %>
+<%= link_to "Account Delite", items_path, method: :delete,  class: "user_#{@user.id} btn btn bg-danger, btn btn-danger dropdown-toggle", "data-confirm" => "本当に削除しますか？" %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
