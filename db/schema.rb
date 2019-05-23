@@ -107,6 +107,15 @@ ActiveRecord::Schema.define(version: 2019_05_25_103520) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "responses", force: :cascade do |t|
+    t.string "response_name"
+    t.string "subject"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_responses_on_created_at"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.integer "item_id"
     t.integer "user_id"

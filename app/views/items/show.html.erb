@@ -87,11 +87,12 @@
 			<!-- レビュー投稿ユーザーなら”編集”、”削除”を表示させる -->
 			<% if review.user == current_user %>
 				<td>
-					<%= link_to "編集", edit_review_path(review.id), class: "btn btn bg-success" %>
+					<%= link_to "編集", edit_review_path(review.id), class: "btn btn bg-success col-lg-12" %>
 				</td>
 				<td>
 					<%= link_to "削除", review_path(review.id), class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
 				</td>
+
 			<% else %>
 				<td></td>
 				<td></td>

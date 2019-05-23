@@ -5,18 +5,18 @@
 	<div class="">
 		<table>
 			<tr>
-				<td>
+				<td class="col-lg-4">
 				<%= link_to item_path(review.item.id) do %>
 					<%= attachment_image_tag(review.item, :image, :fill, 200, 200, format: 'jpeg') %><br>
 					商品名：<%= review.item.item_name %>
 				<% end %>
 				</td>
-				<td style="width: 800px;">
+				<td class="col-lg-4">
 					本文：<%= review.body %>
 				</td>
-				<td style="width: 250px;">
-					<%= link_to '編集', edit_review_path(review.id), class: "btn btn bg-success" %>
-					<%= link_to '削除', review_path(review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn bg-danger" %>
+				<td class="col-lg-4">
+					<%= link_to '編集', edit_review_path(review.id), class: "btn btn bg-success col-lg-12" %>
+					<%= link_to '削除', review_path(review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn bg-danger col-lg-12" %>
 				</td>
 			</tr>
 		</table>
