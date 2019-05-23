@@ -32,7 +32,7 @@
   <%= form.text_area :body %>
   <br>
   <button id="exit-button" type="button" name="button">閉じる</button>
-  <%= form.submit  "送信"%>
+  <%= form.submit  "送信", id: "send-button"%>
 
 <% end %>
 
@@ -41,4 +41,9 @@
   $('#exit-button').on('click', function(){
     $('.modal-window').removeClass('show');
   });
+  // =========================以下はなぜか動かない=================================
+  $('#send-butoon').on('click', function(){
+    $(".modal-window").append("<p>送信中</p>");
+  });
+  // ===========================================================================
 </script>
