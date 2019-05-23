@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
 
   def index
   	@reviews = Review.all
@@ -7,9 +8,6 @@ class ReviewsController < ApplicationController
   def new
     @review = Review.new
     @item = Item.find(params[:item_id])
-  end
-
-  def show
   end
 
   def create

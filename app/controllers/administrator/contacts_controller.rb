@@ -1,4 +1,5 @@
 class Administrator::ContactsController < ApplicationController
+    before_action :authenticate_user!
     before_action :admin_user
 
     def find_user(parent)

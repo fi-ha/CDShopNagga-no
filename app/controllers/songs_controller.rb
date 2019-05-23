@@ -1,5 +1,6 @@
 class SongsController < ApplicationController
-
+	before_action :authenticate_user!
+	
 	def create
 		@song = Song.new(song_params)
 		@song.save

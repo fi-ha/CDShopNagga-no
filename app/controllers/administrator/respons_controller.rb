@@ -1,4 +1,5 @@
 class Administrator::ResponsController < ApplicationController
+  before_action :authenticate_user!
   before_action :admin_user
 # namespaceに入っているコントローラーは親コントローラーの名前を書かなければ使用できない
     def create
