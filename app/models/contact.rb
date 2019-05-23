@@ -6,6 +6,6 @@ class Contact < ApplicationRecord
     validates :subject,   length:{in: 1..60}
     validates :body,      length:{in: 1..5000},presence: true
 
-    belongs_to :user, optional: true
-    has_one :response
+    belongs_to :user,  optional: true
+    has_one :respon
 end

@@ -1,0 +1,22 @@
+<!-- 奇跡的にって言うか超便利的にここの部分はresupons_controller.rbに対応してくれてるらしい -->
+メール送信完了！！
+<table>
+  <tbody>
+    <tr>
+      <td colspan="2"><p><strong>返信日時:</strong>
+        <%= @respon.created_at %></p></td>
+      <td colspan="2"><p><strong>返信者:</strong>
+        <%= @respon.respon_name %></p></td>
+    </tr>
+    <tr>
+      <td colspan="3"><p><strong>題名:</strong><%= @respon.subject %></p></td>
+      <td ></td>
+    </tr>
+    <tr>
+      <td colspan="4">本文</td>
+    </tr>
+    <tr>
+      <td colspan="4"><%= @respon.body %></td>
+    </tr>
+  </tbody>
+</table>
