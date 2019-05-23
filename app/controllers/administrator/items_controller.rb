@@ -31,8 +31,7 @@ class Administrator::ItemsController < ApplicationController
       item_genres_attributes: [:id, :genre_id, :_destroy],
       songs_attributes: [:id, :song_name, :disk, :number, :_destroy])
     end
-
-    private
+    
     def admin_user
         redirect_to(items_path) unless current_user.admin?
     end
