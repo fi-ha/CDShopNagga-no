@@ -11,7 +11,6 @@ class ContactsController < ApplicationController
           # 一致するユーザーが入ればユーザーidを入れる
           @contact.user_id = user.id
         end
-
       # htmlに返すインスタンスを複数設定する場合にrespond_toを使用する
       respond_to do |format|
         if @contact.save
@@ -27,6 +26,7 @@ class ContactsController < ApplicationController
           format.html { render :new }
           format.json { render json: @contact.errors, status: :unprocessable_entity }
         end
+      end
     end
 
     def index
