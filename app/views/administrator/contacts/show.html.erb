@@ -8,7 +8,7 @@
         <td colspan="2"><p><strong>投稿日時:</strong><%= @contact.created_at %></p></td>
         <td colspan="2"><p><strong>投稿者:</strong>
           <%= if @user
-          link_to "#{@user.first_name + @user.first_name}様"
+          link_to "#{@user.last_name + @user.first_name}様", user_path(@user.id)
           else
           @contact.email
           end %></p></td>
@@ -51,7 +51,7 @@
           <td colspan="2"><p><strong>投稿日時:</strong><%= replyedcontact.created_at %></p></td>
           <td colspan="2"><p><strong>投稿者:</strong>
             <%= if @user
-            link_to "#{@user.first_name + @user.first_name}様"
+            link_to "#{@user.last_name + @user.first_name}様", user_path(@user.id)
             else
             replyedcontact.email
             end %></p></td>
