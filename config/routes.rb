@@ -35,7 +35,6 @@ Rails.application.routes.draw do
   get  'carts/:id/finish',              to: 'carts#finish',  as: 'finish'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :items do
-    resource :item_carts,   only: [:create, :update, :destroy]
     resource :item_singers, only: [:create]
     resources :item_genres,      only: [:create, :update]
     resource :reviews,      only: [:new, :create]
@@ -46,12 +45,13 @@ Rails.application.routes.draw do
   resources :reviews,           only: [:index, :edit, :update, :destroy]
   resources :item_singers,      only: [:update]
   resources :genres,           only: [:index, :new, :edit, :create, :update, :destroy]
-  resources :carts,            only: [:index, :new, :create, :update]
+  resources :carts,            only: [:index, :new, :show, :edit, :create, :update] do
+    resource :item_carts,   only: [:create, :edit, :update, :destroy]
+  end
+
   resources :ship_to_anothers, only: [:create, :new, :update]
 
   resources :labels, only: [:index, :create, :edit, :update, :destroy]
-  resources :contacts, only: [:new, :create]
-  resources :responses, only: [:new, :create]
   resources :contacts,         only: [:new, :create]
   resources :responses,        only: [:new, :create]
 

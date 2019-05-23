@@ -47,7 +47,7 @@
           <li><%= link_to "ログイン", genres_path %></li><!--ログアウト時のみ表示link_to_ifを使うと便利 -->
           <li><%= link_to "新規登録", genres_path %></li><!--ログアウト時のみ表示link_to_ifを使うと便利 -->
           <li><%= link_to 'お問い合わせ', new_contact_path, remote: true %></li>
-          <li><%= link_to "ログアウト", genres_path %></li><!--ログイン時のみ表示link_to_ifを使うと便利 -->
+          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li><!--ログイン時のみ表示link_to_ifを使うと便利 -->
         </ul>
       </nav>
     </header>

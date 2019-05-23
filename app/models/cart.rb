@@ -1,7 +1,5 @@
 class Cart < ApplicationRecord
 
-　include ApplicationHelper
-
   # アソシエーション設定
   belongs_to :user            # usersモデルにアソシエーション
   has_many   :item_carts      # item_carts中間モデルにアソシエーション
@@ -13,4 +11,5 @@ class Cart < ApplicationRecord
   # enumでの関連付けをここで宣言することでビューでラベルのみで数字をモデルに入力するすることが出来る
   enum payment: {銀行振込:1, 代金引換:2, クレジットカード:3}
   enum status:  {カート:1, 未発送:2, 発送済み:3}
+
 end
