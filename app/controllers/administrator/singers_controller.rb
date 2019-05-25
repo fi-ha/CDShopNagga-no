@@ -1,6 +1,6 @@
 class Administrator::SingersController < ApplicationController
 	   before_action :authenticate_user!
-
+		 before_action :admin_user
 
 	def create
 	  singer = Singer.new(singer_params)
@@ -32,5 +32,9 @@ class Administrator::SingersController < ApplicationController
 	private
 	 def singer_params
 	 	params.require(:singer).permit(:singer_name)
+	 end
+
+	 def admin_user
+			 redirect_to(items_path) unless current_user.admin?
 	 end
 end

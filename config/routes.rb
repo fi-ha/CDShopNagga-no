@@ -44,12 +44,12 @@ Rails.application.routes.draw do
   resources :carts,           only: [:index, :new, :create, :update]
   resources :ship_to_anothers,only: [:create, :new, :update]
 
-  resources :labels,   only: [:index, :create, :edit, :update, :destroy]
   resources :contacts, only: [:new, :create]
 
   resources :songs, only: [:create, :update, :destroy]
 
   namespace :administrator do
+    resources :labels,   only: [:index, :create, :edit, :update, :destroy]
     resources :singers,  only: [:index, :edit, :create, :update, :destroy]
     resources :items,    only: [:new, :index, :edit, :update, :destroy]
     resources :carts,    only: [:index, :show]
