@@ -77,23 +77,44 @@ class CartsController < ApplicationController
 
 
   def cartedit
-
+     # # カートページからはitemに対応するitem_cart.countとその時の価格を保存する
+     # def multi_update(item_cart_params)
+     #   item_cart_params.to_h.map do |id, item_cart_param|
+     #     item_cart = self.find(id)
+     #     item_cart.update_attributes!(item_cart_param)
+     #   end
+     # end
+     # Item_cart.multi_update(item_cart_params)
+    # redirect_to ship_to_another_edit_path
   end
 
   def ship
-
+     # # Cartの中から現在のログインユーザーかつ、statusがカート状態のカートを取り出す関数定義
+     # def current_cart_id
+     #   current_cart = Cart.where(user_id: current_user.id).where(status: 1)
+     #   current_cart_id = current_cart.id
+     #   return current_cart_id
+     # end
+     # @user = User.find(id: current_user.id)
   end
 
   def shipedit
-
+    # @ship = Ship_to_another.new
+    # # attributesメソッドで一気にカラムを指定できるが設定方法これで合ってるのか？
+    # @ship.attributes = {first_name: first_name, last_name: last_name, first_name_kana: first_name_kana, last_name_kana: last_name_kana, postal_codeaddress: postal_codeaddress, email: email}
+    # # 保存が必要
+    # @ship.save
+    # redirect_to payment_edit_path
   end
 
   def pay
-
+     # 特に呼び出すものなし画面を表示しているだけ
   end
 
   def payedit
-
+    # cart = current_cart_id
+    # cart.update(post_params)
+    # redirect_to confirm_edit_path
   end
 
   def confirm
