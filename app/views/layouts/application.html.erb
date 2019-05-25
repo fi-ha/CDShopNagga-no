@@ -56,6 +56,7 @@
           <li><%= link_to "カート", new_user_registration_path %></li>
           <% end %>
           <li><%= link_to 'お問い合わせ', new_contact_path, remote: true %></li>
+          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li><!--ログイン時のみ表示link_to_ifを使うと便利 -->
         </ul>
       </nav>
     </header>
