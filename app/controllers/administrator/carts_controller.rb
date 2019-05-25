@@ -5,6 +5,7 @@ class Administrator::CartsController < ApplicationController
     def index
         @carts = Cart.all
         @users = User.all
+        @ship_to_anothers = ShipToAnother.all
     end
 
     def show
