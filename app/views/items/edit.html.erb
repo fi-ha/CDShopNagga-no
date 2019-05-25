@@ -68,7 +68,7 @@
       <% end %>
 
       <h4>在庫数</h4>
-      <%= f.fields_for :stocks do |stock| %>
+      <%= f.fields_for :stock do |stock| %>
         <%= stock.text_field :count %>
       <%end%>
 
@@ -99,7 +99,7 @@
       <%= f.text_area :description %>
 
       <h4>在庫数</h4>
-      <%= f.fields_for :stocks do |stock| %>
+      <%= f.fields_for :stock do |stock| %>
         <%= stock.text_field :count %>
       <% end %>
 
