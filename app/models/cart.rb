@@ -2,7 +2,7 @@ class Cart < ApplicationRecord
   # アソシエーション設定
   belongs_to :user            # usersモデルにアソシエーション
   has_many   :item_carts      # item_carts中間モデルにアソシエーション
-  has_one    :ship_to_another # ship_to_anotherモデルにアソシエーション
+  belongs_to    :ship_to_another # ship_to_anotherモデルにアソシエーション
 
   # フォームを入れ子にする場合入れ子にしたフォームを認識させる為に以下が必要
   accepts_nested_attributes_for :item_carts
