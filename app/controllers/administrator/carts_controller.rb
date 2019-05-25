@@ -4,6 +4,7 @@ class Administrator::CartsController < ApplicationController
 
     def index
         @carts = Cart.all
+        @users = User.all
     end
 
     def show
