@@ -29,11 +29,10 @@ class Item < ApplicationRecord
 	# 中間テーブルfavoritesにおいて、ユーザーidに基づくitemsが存在するかどうかの判別式を定義
 	# http://railsdoc.com/references/where
 	# http://railsdoc.com/references/exists%3F
+
 	def favorited_by?(user)
 		favorites.where(user_id: user.id).exists?
 	end
-
-
 
     def self.search(search)
         if search

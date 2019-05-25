@@ -1,3 +1,7 @@
+<!-- 未ログインの状態でカート追加、購入ボタンクリック時に表示 -->
+<% if flash[:alert] %>
+	<p><%= flash[:alert] %></p>
+<% end %>
 <h1><%= @item.item_name %>の詳細</h1>
 <div class="">
 	<div class="">
@@ -38,10 +42,10 @@
 			</p>
 		<% end %>
 		<p>
-			<%= link_to 'カートに追加する', new_cart_path, class: "btn btn bg-warning" %>
+			<%= link_to 'カートに追加する', carts_path(@item), method: :post, class: "btn btn bg-warning" %>
 		</p>
 		<p>
-			<%= link_to '購入', new_cart_path %>
+			<%= link_to '購入', carts_path(@item), method: :post %>
 		</p>
 		<p>
 			<%= link_to 'レビューを投稿する', new_item_reviews_path(@item.id) %>
@@ -59,7 +63,7 @@
 			<td>投稿者</td>
 			<td>レビュー</td>
 			<td></td>
-			<%# <td></td> %>
+			<td></td>
 		</tr>
 		<% @item.reviews.each do |review| %>
 		<tr>
@@ -76,7 +80,7 @@
 					<%= link_to "編集", edit_review_path(review.id), class: "btn btn bg-success" %>
 				</td>
 				<td>
-					<%# <%= link_to "削除", review_path(review.id), class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
+					<%= link_to "削除", review_path(review.id), class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
 				</td>
 			<% else %>
 				<td></td>
