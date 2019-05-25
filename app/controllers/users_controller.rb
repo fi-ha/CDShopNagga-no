@@ -4,11 +4,11 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
-
-		@reviews = @user.reviews.all
+        @purchases = @user.carts
+        @reviews = @user.reviews.all
 		@favorites = @user.favorites.all
 	end
-  
+
   private
 
 		def judgment_user
