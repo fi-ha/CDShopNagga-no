@@ -42,7 +42,7 @@
 			</p>
 		<% end %>
 		<p>
-			<%= link_to 'カートに追加する', carts_path(@item), method: :post, class: "btn btn bg-warning" %>
+			<%= link_to 'カートに追加する', edit_cart_path(@item), method: :post, class: "btn btn bg-warning" %>
 		</p>
 		<p>
 			<%= link_to '購入', carts_path(@item), method: :post %>
