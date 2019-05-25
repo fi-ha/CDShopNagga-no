@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :favorites
 
   resources :users, only: [:show]
-  
+
   resources :users, only: [:show] do
     resource :favorites, only: [:index]
   end
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   namespace :administrator do
     resources :items,    only: [:index, :edit, :update, :destroy]
     resources :carts,    only: [:index, :show]
-    resources :reviews,  only: [:index, :edit]
+    resources :reviews,  only: [:index, :edit, :destroy]
     resources :users,    only: [:index]
     resources :contacts, only: [:index, :show]
     resources :respons,only: [:create, :new, :show]

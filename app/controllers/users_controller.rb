@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 		@reviews = @user.reviews.all
 		@favorites = @user.favorites.all
 	end
-  
+
   private
     def user_params
     end
