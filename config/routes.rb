@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   root :to => "items#index"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :singers
   resources :singers, only: [:index, :edit, :create, :update, :destroy]
   resources :favorites
   resources :users, only: [:show]
@@ -45,8 +44,13 @@ Rails.application.routes.draw do
     resource :item_carts,   only: [:edit, :update]
   end
   resources :item_carts, only: [:destroy, :update]
+  resources :reviews,         only: [:index, :edit, :update, :destroy]
+  resources :stocks,          only: [:create, :update]
+  resources :item_singers,    only: [:update]
+  resources :carts,           only: [:index, :new, :create, :update]
+  resources :ship_to_anothers,only: [:create, :new, :update]
 
-  resources :ship_to_anothers, only: [:create, :new, :update]
+  resources :contacts, only: [:new, :create]
 
   resources :labels, only: [:index, :create, :edit, :update, :destroy]
   resources :contacts,         only: [:new, :create]
@@ -54,12 +58,15 @@ Rails.application.routes.draw do
   resources :songs, only: [:create, :update, :destroy]
 
   namespace :administrator do
-    resources :items,    only: [:index, :edit, :update, :destroy]
+    resources :genres,   only: [:index, :new, :edit, :create, :update, :destroy]
+    resources :labels,   only: [:index, :create, :edit, :update, :destroy]
+    resources :singers,  only: [:index, :edit, :create, :update, :destroy]
+    resources :items,    only: [:new, :index, :edit, :update, :destroy]
     resources :carts,    only: [:index, :show]
     resources :reviews,  only: [:index, :edit]
     resources :users,    only: [:index]
     resources :contacts, only: [:index, :show]
-    resources :respons,only: [:create, :new, :show]
+    resources :respons,  only: [:create, :new, :show]
   end
 
   resources :concepts, only: [:index]

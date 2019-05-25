@@ -14,15 +14,6 @@ class ItemsController < ApplicationController
     @review = Review.new
   end
 
-  # .build ・・・fields_forでネストした子モデルのデータを作成するメソッド
-  def new
-    @item = Item.new
-    @item.songs.build
-    @item.build_stock
-    @item.item_singers.build
-    @item.item_genres.build
-  end
-
   def edit
     # 編集ビュー作成
     @item = Item.find(params[:id])
