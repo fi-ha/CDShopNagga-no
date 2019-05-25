@@ -161,15 +161,13 @@ class CartsController < ApplicationController
     redirect_to finish_path
   end
 
-  def update
-  end
-
   private
 
 
     def cart_params
       params.require(:cart).permit(:user_id, :ship_to_another_id, :payment, :total_price, :status,
         item_carts_attributes: [:item_id, :cart_id, :count, :price])
+    end
 
     def post_params
       # ストロングパラメーター、ビューフォームからのコントローラーへの情報受け渡しを以下のカラムのみ許可

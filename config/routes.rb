@@ -49,9 +49,7 @@ Rails.application.routes.draw do
   resources :item_singers,    only: [:update]
   resources :carts,           only: [:index, :new, :create, :update]
   resources :ship_to_anothers,only: [:create, :new, :update]
-
   resources :contacts, only: [:new, :create]
-
   resources :labels, only: [:index, :create, :edit, :update, :destroy]
   resources :contacts,         only: [:new, :create]
   resources :responses,        only: [:new, :create]
