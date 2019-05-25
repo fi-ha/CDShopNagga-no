@@ -6,8 +6,10 @@ class Administrator::ReviewsController < ApplicationController
         @reviews = Review.all
     end
 
-    def edit
-        @review = Review.find(params)
+    def destroy
+        review = Review.find(params[:id])
+        review.destroy
+        redirect_to administrator_reviews_path
     end
 
     private

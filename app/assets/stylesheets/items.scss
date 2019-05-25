@@ -20,3 +20,9 @@ h4 {
 	float: left;
 	text-align: center;
 }
+
+.clearfix::after{
+	content: "";
+	display: block;
+	clear: both;
+}
