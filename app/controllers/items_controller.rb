@@ -1,8 +1,11 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
 
   def index
     # 一覧表示ビュー作成
     @items = Item.all
+    @items = Item.search(params[:search])
+
   end
 
   def show

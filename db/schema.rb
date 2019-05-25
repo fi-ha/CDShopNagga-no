@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_20_072406) do
+ActiveRecord::Schema.define(version: 2019_05_21_121557) do
 
   create_table "carts", force: :cascade do |t|
     t.integer "user_id"
@@ -98,6 +98,15 @@ ActiveRecord::Schema.define(version: 2019_05_20_072406) do
     t.index ["label_name"], name: "index_labels_on_label_name"
   end
 
+  create_table "respons", force: :cascade do |t|
+    t.integer "contact_id"
+    t.string "respon_name"
+    t.string "subject"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "responses", force: :cascade do |t|
     t.string "response_name"
     t.string "subject"
@@ -175,7 +184,6 @@ ActiveRecord::Schema.define(version: 2019_05_20_072406) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

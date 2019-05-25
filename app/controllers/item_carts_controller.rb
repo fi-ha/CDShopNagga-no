@@ -1,8 +1,9 @@
 class ItemCartsController < ApplicationController
 
+  before_action :authenticate_user!
+
   def new
   	@item_cart = ItamCart.new
-  end
 
   def update
   	@item_cart = ItemCart.find(params[:id])

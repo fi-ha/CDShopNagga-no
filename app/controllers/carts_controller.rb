@@ -1,5 +1,8 @@
 class CartsController < ApplicationController
 
+  before_action :authenticate_user!
+  before_action :judgment_user
+
   def edit
     # createメソッドからのパラメータを受け取る
     @cart = Cart.find(params[:id])
@@ -51,7 +54,25 @@ class CartsController < ApplicationController
   end
 
   def edits
-
+    # # Cartの中から現在のログインユーザーかつ、statusがカート状態のカートを取り出す関数定義
+    # 下記のdefineを別のファイルに保存する場合そのモデルに対応する.rbに書くとよろしい
+    # def current_cart_id
+    #   current_cart = Cart.where(user_id: current_user.id).where(status: 1)
+    #   current_cart_id = current_cart.id
+    #   return current_cart_id
+    # end
+    # # cartのidとアソシエーションしているItem_cartを取り出す
+    # item_carts = Item_carts.find(cart_id: current_cart_id)
+    # # 更にitem_cartsとアソシエーションしているitemsを取り出す
+    # @items = item_carts.items
+    # # itemとアソシエーションしているitem_singers、item_genres、を取り出す
+    # @item_singers = @items.item_singers
+    # @item_genres = @items.item_genres
+    # # Genre,Stocks,Singer,Labelsからアソシエーションで関連しているデータを取り出す。
+    # @genres = @item_genres.Genres
+    # @stocks = @item.Stocks
+    # @singers = @item_singers.Singer
+    # @labels = @items.Labels
   end
 
 
@@ -124,9 +145,20 @@ class CartsController < ApplicationController
 
   private
 
+
     def cart_params
       params.require(:cart).permit(:user_id, :ship_to_another_id, :payment, :total_price, :status,
         item_carts_attributes: [:item_id, :cart_id, :count, :price])
+
+    def post_params
+      # ストロングパラメーター、ビューフォームからのコントローラーへの情報受け渡しを以下のカラムのみ許可
+        params.require(:cart).permit(:title, :body, :payment, :status)
     end
+
+    def judgment_user
+			unless current_user.id == params[:id].to_i || current_user.admin == true
+				redirect_to(root_path)
+			end
+		end
 
 end

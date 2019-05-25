@@ -1,3 +1,8 @@
+
+
+
+<!---- いらないビューかも ---->
+
 <h1>商品編集</h1>
 
 <%= form_for(@item) do |f| %>
@@ -48,7 +53,7 @@
       <% end %>
 
 	<h4>在庫数</h4>
-	<%= f.fields_for :stocks do |stock| %>
+	<%= f.fields_for :stock do |stock| %>
         <%= stock.text_field :count %>
     <%end%>
 

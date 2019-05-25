@@ -1,3 +1,60 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*MY PAGE部分のcss
+*/
+.mypage{
+	width: 40%;
+	float: left;
+}
+
+
+.mypage1{
+	margin-left: 10px;
+	font-size: 60px;
+	font-weight: bold;
+	}
+
+/*アカウント名表示のcss
+*/
+.username{
+	width: 40%;
+    float: right;
+}
+
+.username1{
+    font-size: 40px;
+    margin-top: 20px;
+ }
+
+/*編集&削除ボタン&ボタン装飾のcss
+*/
+.btn{
+    display: table-cell;
+    float: right;
+    margin-left: 90px;
+     }
+
+.btn-square {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background: #FF0040;/*ボタン色*/
+  color: #FFF;
+  border-bottom: solid 4px #627295;
+  border-radius: 3px;
+}
+.btn-square:active {
+  /*ボタンを押したとき*/
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px);/*下に動く*/
+  border-bottom: none;/*線を消す*/
+}
+
+
+
+.pre{
+	text-align: center;
+	font-size: 30px;
+}

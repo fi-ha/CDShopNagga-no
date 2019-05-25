@@ -1,0 +1,60 @@
+<!---左のタブの部分テンプレート--->
+<%= render 'administrator/tab' %>
+<h1>問い合わせ閲覧</h1>
+<div class="">
+  <h2>未返信</h2>
+  <table>
+    <% @unreplycontacts.each do |unreplycontact| %>
+    <% user = find_user(unreplycontact) %>
+    <tbody>
+      <tr>
+        <td colspan="2"><p><strong>投稿日時:</strong><%= unreplycontact.created_at %></p></td>
+        <td colspan="2"><p><strong>投稿者:</strong>
+          <%= if user
+          link_to "#{user.last_name + user.first_name}様", user_path(user.id)
+          else
+          unreplycontact.email
+          end %></p></td>
+        </tr>
+        <tr>
+          <td colspan="3"><p><strong>題名:</strong><%= unreplycontact.subject %></p></td>
+          <td > <%= link_to "返信", administrator_contact_path(unreplycontact) %> </td>
+        </tr>
+        <tr>
+          <td colspan="4">本文</td>
+        </tr>
+        <tr>
+          <td colspan="4"><%= unreplycontact.body %></td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+    <h2>返信済み</h2>
+    <table>
+      <% @replyedcontacts.each do |replyedcontact| %>
+      <% user = find_user(replyedcontact) %>
+      <tbody>
+        <tr>
+          <td colspan="2"><p><strong>投稿日時:</strong><%= replyedcontact.created_at %></p></td>
+          <td colspan="2"><p><strong>投稿者:</strong>
+            <%= if user
+            link_to "#{user.last_name + user.first_name}様", user_path(user.id)
+            else
+            replyedcontact.email
+            end %></p></td>
+          </tr>
+          <tr>
+            <td colspan="3"><p><strong>題名:</strong><%= replyedcontact.subject %></p></td>
+            <td > <%= link_to "返信", administrator_contact_path(replyedcontact) %> </td>
+          </tr>
+          <tr>
+            <td colspan="4">本文</td>
+          </tr>
+          <tr>
+            <td colspan="4"><%= replyedcontact.body %></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+
+</div>
