@@ -146,9 +146,9 @@ ActiveRecord::Schema.define(version: 2019_05_25_102534) do
 
   create_table "stocks", force: :cascade do |t|
     t.integer "item_id"
-    t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "stock_count"
     t.index ["updated_at"], name: "index_stocks_on_updated_at"
   end
 
