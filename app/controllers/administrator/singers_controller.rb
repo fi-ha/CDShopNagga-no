@@ -1,16 +1,16 @@
-class SingersController < ApplicationController
+class Administrator::SingersController < ApplicationController
 	   before_action :authenticate_user!
 
 
 	def create
 	  singer = Singer.new(singer_params)
 	  singer.save
-	  redirect_to singers_path
+	  redirect_to administrator_singers_path
 	end
 
 	def index
 		@singer = Singer.new
-       @singers =Singer.all
+    @singers =Singer.all
 	end
 
 	def edit
@@ -20,13 +20,13 @@ class SingersController < ApplicationController
 	def destroy
 		singer = Singer.find(params[:id])
 		singer.destroy
-		redirect_to singers_path
+		redirect_to administrator_singers_path
 	end
 
 	def update
 	   singer = Singer.find(params[:id])
 	   singer.update(singer_params)
-	   redirect_to singers_path
+	   redirect_to administrator_singers_path
 	end
 
 	private

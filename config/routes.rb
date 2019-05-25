@@ -7,8 +7,6 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :singers
-  resources :singers, only: [:index, :edit, :create, :update, :destroy]
 
   resources :favorites
 
@@ -52,6 +50,7 @@ Rails.application.routes.draw do
   resources :songs, only: [:create, :update, :destroy]
 
   namespace :administrator do
+    resources :singers,  only: [:index, :edit, :create, :update, :destroy]
     resources :items,    only: [:new, :index, :edit, :update, :destroy]
     resources :carts,    only: [:index, :show]
     resources :reviews,  only: [:index, :edit]
