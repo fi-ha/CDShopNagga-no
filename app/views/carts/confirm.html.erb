@@ -17,7 +17,7 @@
     <% stock  = item.stocks %>
     <% label  = item.labels %>
     <!-- 商品ごとの合計金額をここで出す -->
-    <% count        = @item_carts.find_by(id: item.id).count %>
+    <% count        = @item_carts.find_by(id: item.id).item_count %>
     <% count_price  = item.price * count %>
 
     <!-- もしCDだったら -->

@@ -128,8 +128,9 @@ class CartsController < ApplicationController
     # for で itemsをitemに変換し繰り返すその中で計算合計を出すさらにitem_stockにpriceを保管、sumpriceをcartに保管@sumprice
     @sumprice = 0
     for item in @items do
-      price = item.price * item.@item_carts.count
-      @sumprice += price
+      b = item.@item_carts.item_count
+      a = item.price * b
+      @sumprice += a
     end
 
     cart.total_price = @sumprice
@@ -141,18 +142,17 @@ class CartsController < ApplicationController
 
     case cart.payment
       when 1 then
-       @payment = "<p>銀行振込</p><%= link_to "購入確定", confirm_ginko_path %>"
+       @payment = "<p>銀行振込</p><%= link_to '購入確定', confirm_ginko_path %>"
 
       when 2 then
-       @payment = "<p>代金引換</p><%= link_to "購入確定", confirm_daibiki_path %>"
+       @payment = "<p>代金引換</p><%= link_to '購入確定', confirm_daibiki_path %>"
 
       when 3 then
-       @payment = "<p>クレジットカード</p><%= link_to "購入確定", confirm_cred_path %>"
+       @payment = "<p>クレジットカード</p><%= link_to '購入確定', confirm_cred_path %>"
 
      else
-       @peyment = "<%= link_to "支払い方法選択に戻る" , payment_edit_path %>"
+       @peyment = "<%= link_to '支払い方法選択に戻る' , payment_edit_path %>"
      end
-
   end
 
   def ginko
@@ -178,7 +178,7 @@ class CartsController < ApplicationController
   private
     def cart_params
       params.require(:cart).permit(:user_id, :ship_to_another_id, :payment, :total_price, :status,
-        item_carts_attributes: [:item_id, :cart_id, :count, :price])
+        item_carts_attributes: [:item_id, :cart_id, :item_count, :price])
     end
 
     def post_params
