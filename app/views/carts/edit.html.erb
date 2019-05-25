@@ -1,5 +1,41 @@
 <h1>Cart</h1>
-<% @cart.item_carts.each do |item_cart| %>
-<%= item_cart.item.item_name %>
-<%= item_cart.count %>
-<% end %>
+
+<table>
+    <tr>
+      <td>商品画像</td>
+      <td>商品名/アーティスト名</td>
+      <td>注文数量</td>
+      <td>価格（税込）</td>
+      <td></td>
+    </tr>
+  <% @cart.item_carts.each do |item_cart| %>
+    <tr>
+      <td>
+        <%= attachment_image_tag(item_cart.item, :image, :fill, 60, 60, format: "jpeg") %>
+      </td>
+      <td>
+        <%= item_cart.item.item_name %>/<br>
+          <% item_cart.item.singers.each do |singer| %>
+            <%= singer.singer_name %>
+          <% end %>
+      </td>
+      <td>
+        <%= form_for(item_cart, url: item_cart_path(item_cart.id)) do |f| %>
+          <%= f.number_field :count, step: '1', min: '1', max: item_cart.item.stock.count.to_i, required: true %>
+          <%= f.submit '購入数変更' %>
+        <% end %>
+      </td>
+      <td>
+        <%= (item_cart.commerce_price * BigDecimal("1.08")).ceil %>円
+      </td>
+      <td>
+        <%= link_to 'カートから削除', item_cart_path(item_cart.id), method: :delete, "data-confirm" => "本当にカートから削除しますか？" %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<h4>送料：一律５００円</h4>
+<h2>合計金額:<%= ((@cart.total_price.to_i) * BigDecimal("1.08")).ceil + 500 %></h2>
+
+<%= link_to 'お買い物に戻る', root_path %><br>
+<%= link_to '発送先選択へ', ship_to_another_edit_path(@cart.id) %>

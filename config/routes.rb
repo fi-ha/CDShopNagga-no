@@ -46,8 +46,9 @@ Rails.application.routes.draw do
   resources :item_singers,      only: [:update]
   resources :genres,           only: [:index, :new, :edit, :create, :update, :destroy]
   resources :carts,            only: [:index, :new, :show, :edit, :create, :update] do
-    resource :item_carts,   only: [:create, :edit, :update, :destroy]
+    resource :item_carts,   only: [:edit, :update]
   end
+  resources :item_carts, only: [:destroy, :update]
 
   resources :ship_to_anothers, only: [:create, :new, :update]
 

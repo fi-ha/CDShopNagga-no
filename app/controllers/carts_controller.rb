@@ -1,8 +1,5 @@
 class CartsController < ApplicationController
 
-  def show
-  end
-
   def edit
     # createメソッドからのパラメータを受け取る
     @cart = Cart.find(params[:id])
@@ -12,6 +9,12 @@ class CartsController < ApplicationController
     @cart = Cart.find(params[:id])
     @cart.update
     redirect_to ship_to_another_edit_path(@cart.id)
+  end
+
+  def destroy
+    @cart = Cart.find(params[:id])
+    @cart.destroy
+    redirect_to edit_cart_path(cart.id)
   end
 
   def create
@@ -122,7 +125,8 @@ class CartsController < ApplicationController
   private
 
     def cart_params
-      params.require(:cart).permit(:user_id, :ship_to_another_id, :payment, :total_price, :status)
+      params.require(:cart).permit(:user_id, :ship_to_another_id, :payment, :total_price, :status,
+        item_carts_attributes: [:item_id, :cart_id, :count, :price])
     end
 
 end
