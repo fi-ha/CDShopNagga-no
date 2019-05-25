@@ -40,7 +40,6 @@ Rails.application.routes.draw do
   resources :reviews,         only: [:index, :edit, :update, :destroy]
   resources :stocks,          only: [:create, :update]
   resources :item_singers,    only: [:update]
-  resources :genres,          only: [:index, :new, :edit, :create, :update, :destroy]
   resources :carts,           only: [:index, :new, :create, :update]
   resources :ship_to_anothers,only: [:create, :new, :update]
 
@@ -49,6 +48,7 @@ Rails.application.routes.draw do
   resources :songs, only: [:create, :update, :destroy]
 
   namespace :administrator do
+    resources :genres,   only: [:index, :new, :edit, :create, :update, :destroy]
     resources :labels,   only: [:index, :create, :edit, :update, :destroy]
     resources :singers,  only: [:index, :edit, :create, :update, :destroy]
     resources :items,    only: [:new, :index, :edit, :update, :destroy]
