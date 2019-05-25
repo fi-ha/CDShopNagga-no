@@ -62,7 +62,7 @@ Rails.application.routes.draw do
     resources :singers,  only: [:index, :edit, :create, :update, :destroy]
     resources :items,    only: [:new, :index, :edit, :update, :destroy]
     resources :carts,    only: [:index, :show]
-    resources :reviews,  only: [:index, :edit]
+    resources :reviews,  only: [:index, :edit, :destroy]
     resources :users,    only: [:index]
     resources :contacts, only: [:index, :show]
     resources :respons,  only: [:create, :new, :show]
