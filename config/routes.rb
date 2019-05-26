@@ -70,4 +70,12 @@ Rails.application.routes.draw do
   end
 
   resources :concepts, only: [:index]
+
+
+
+  resources :carts do
+    patch :toggle_status
+  end
+
+
 end
