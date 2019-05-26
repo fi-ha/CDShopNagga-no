@@ -125,29 +125,17 @@ class CartsController < ApplicationController
 
   def confirm
     # 現在のカートを取り出す
-    cart = Cart.find(params[:id])
+    @cart = Cart.find(params[:id])
     # cartのidとアソシエーションしているItem_cartを取り出す
-    @item_carts = cart.item_carts
-    unless shipToAnother.find_by(id: cart.ship_to_another_id).blank?
-      @ship_to_another = cart.ship_to_anothers
+    @item_carts = @cart.item_carts
+    if @cart.ship_to_another_id != nil
+      @ship_to_another = ShipToAnother.find_by(id: @cart.ship_to_another_id)
     end
 
-    case cart.payment
-      when 1 then
-       @payment = "<p>銀行振込</p><%= link_to '購入確定', confirm_ginko_path %>"
-
-      when 2 then
-       @payment = "<p>代金引換</p><%= link_to '購入確定', confirm_daibiki_path %>"
-
-      when 3 then
-       @payment = "<p>クレジットカード</p><%= link_to '購入確定', confirm_cred_path %>"
-
-     else
-       @peyment = "<%= link_to '支払い方法選択に戻る' , payment_edit_path %>"
-     end
   end
 
   def ginko
+    binding.pry
     cart = Cart.find(params[:id])
     cart.status = '未発送'
     cart.save
@@ -165,7 +153,10 @@ class CartsController < ApplicationController
 
   def cred
     # payjp処理
-    # 発送メール送信
+    cart = Cart.find(params[:id])
+    cart.status = '未発送'
+    cart.save
+    Personal.send_when_cred_to_user(cart).deliver
     redirect_to finish_path
   end
 

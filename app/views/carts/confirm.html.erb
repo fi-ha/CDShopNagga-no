@@ -69,32 +69,40 @@
 
 <h3>配送先</h3>
 
-<% if @ship_to_another.isnot %>
+<% unless @ship_to_another %>
 <h4>登録している住所</h4>
 <p>郵便番号</p>
-<%= current_user.postalcode %>
+<%= current_user.postal_code %>
 <p>住所</p>
 <%= current_user.addres %>
 <p>電話番号</p>
-<%= current_user.phonenumber %>
+<%= current_user.phone_number %>
 
 <% else %>
 <h4>他の住所</h4>
+<p>名前</p>
+<%= @ship_to_another.last_name + @ship_to_another.first_name %>
 <p>郵便番号</p>
-<%= @ship_to_another.postalcode %>
+<%= @ship_to_another.postal_code %>
 <p>住所</p>
 <%= @ship_to_another.address %>
-<p>電話番号</p>
-<%= @ship_to_another.phonenumber %>
 
 <% end %>
 
-<%= link_to "住所選択に戻る", ship_to_another_path %>
+<%= link_to "住所選択に戻る",  ship_to_another_shipedit_path %>
 
 <h3>支払い方法</h3>
+<% case @cart.payment %>
+<% when "銀行振込" then %>
+   <p>銀行振込</p>
+   <%= link_to '購入確定', confirm_ginko_path %>
 
-<!-- ここはコントローラーでstatusから表示内容を変えてみる -->
-<%= @payment %>
+<% when "代金引換" then %>
+   <p>代金引換</p>
+   <%= link_to '購入確定', confirm_daibiki_path %>
 
-<%= link_to "支払い方法選択に戻る", payment_edit_path %>
-<%= link_to "購入確定", confirm_ginko_path %>
+<% when "クレジットカード" then %>
+   <p>クレジットカード</p>
+   <%= link_to '購入確定', confirm_cred_path %>
+<% end %>
+<%= link_to "支払い方法選択に戻る", payment_payedit_path %>
