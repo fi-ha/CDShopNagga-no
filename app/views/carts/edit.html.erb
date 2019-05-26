@@ -21,7 +21,7 @@
       </td>
       <td>
         <%= form_for(item_cart, url: item_cart_path(item_cart.id)) do |f| %>
-          <%= f.number_field :count, step: '1', min: '1', max: item_cart.item.stock.stock_count.to_i, required: true %>
+          <%= f.number_field :item_count, step: '1', min: '1', max: item_cart.item.stock.stock_count.to_i, required: true %>
           <%= f.submit '購入数変更' %>
         <% end %>
       </td>
