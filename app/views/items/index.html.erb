@@ -1,28 +1,3 @@
-<head>
-<!-- jQuery.jsの読み込み -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-
-<!-- スムーズスクロール部分の記述 -->
-<script>
-$(function(){
-   // #で始まるアンカーをクリックした場合に処理
-   $('a[href^=#]').click(function() {
-      // スクロールの速度
-      var speed = 400; // ミリ秒
-      // アンカーの値取得
-      var href= $(this).attr("href");
-      // 移動先を取得
-      var target = $(href == "#" || href == "" ? 'html' : href);
-      // 移動先を数値で取得
-      var position = target.offset().top;
-      // スムーススクロール
-      $('body,html').animate({scrollTop:position}, speed, 'swing');
-      return false;
-   });
-});
-</script>
-</head>
-
 <!-- 左側のボタン -->
 <br>
 <br>
@@ -36,10 +11,10 @@ $(function(){
   	<%= link_to "CONSEPT", concepts_path, class: "btn-box" %>
   	<br>
   	<br>
-    <a href="#playerjump" class="btn-box">PLAYER</a>
+    <a href="#playerjump" class="jumpbutton btn-box">PLAYER</a>
   	<br>
   	<br>
-    <a href="#musicjump" class="btn-box">MUSIC</a>
+    <a href="#musicjump" class="jumpbutton btn-box">MUSIC</a>
   </div>
 </div>
 
@@ -148,6 +123,25 @@ $(function(){
 </div>
 </div>
 
+
 <script type="text/javascript">
-   $('#content1').arctext({radius: 490});
+   $(function(){
+
+   	$('#content1').arctext({radius: 490});
+
+   // #で始まるアンカーをクリックした場合に処理
+   // $('.jumpbutton').click(function() {
+   //    // スクロールの速度
+   //    var speed = 400; // ミリ秒
+   //    // アンカーの値取得
+   //    var href= $(this).attr("href");
+   //    // 移動先を取得
+   //    var target = $(href == "#" || href == "" ? 'html' : href);
+   //    // 移動先を数値で取得
+   //    var position = target.offset().top;
+   //    // スムーススクロール
+   //    $('body,html').animate({scrollTop:position}, speed, 'swing');
+   //    return false;
+   // });
+});
 </script>
