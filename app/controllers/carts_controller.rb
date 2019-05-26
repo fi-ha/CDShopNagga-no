@@ -20,7 +20,7 @@ class CartsController < ApplicationController
         item_cart.item_id = params[:item_id]
         item_cart.cart_id = cart.id
         item_cart.item_count = 1
-        item_cart.price = item_cart.items.price
+        item_cart.price = item.price
         item_cart.save
       else
         item_cart = cart.item_carts.find_by(item_id: params[:item_id])
@@ -51,7 +51,7 @@ class CartsController < ApplicationController
       item_cart.item_id = params[:item_id]
       item_cart.cart_id = cart.id
       item_cart.item_count = 1
-      item_cart.price = item_cart.items.price
+      item_cart.price = item.price
       item_cart.save
 
       redirect_to cart_edit_path(cart.id)
@@ -60,39 +60,26 @@ class CartsController < ApplicationController
       flash[:alert] = "ログインしてください。"
       redirect_to root_path
     end
-
-    #    # ItemCartの空インスタンスを渡す。モデルは＿を使ってはいけない為Item_cartではなくItemCart
-    #    @item_cart = ItemCart.new
-    #    # カートのカラムにcreate_with()の条件に当てはまるものがあればデータを引っ張る
-    #    # なければ新しくつくる。以下参考メソッド。今回のMVP。
-    #    # http://railsdoc.com/references/find_or_create_by
-    #    cart = Cart.create_with(user_id: current_user.id, status: 1).find_or_create_by(user_id: current_user.id, status: 1)
-    #    # views/items/showからlink_toメソッドでitem_idを送ったところ、
-    #    # carts#create のparamsをbinding.pryで確認したところ、:idではなく:formatでitem_idが渡されていた。
-    #    item = Item.find(params[:format])
-    #    @item_cart.cart_id = cart.id
-    #    @item_cart.item_id = item.id
-    #    # ここ重複商品なら＋１する記述を考えなければならない。
-    #    @item_cart.count = 1
-    #    @item_cart.price = item.price
-    #    @item_cart.save
-    #    # views/carts/:id/editへ、カートIDのパラメータを持たせてリンクを飛ばす。
-    #    redirect_to edit_cart_path(cart.id)
-    # else
-    #  # ログインしてないときは一覧画面に戻る
-    #    flash[:alert] = "ログインしてください。"
-    #    redirect_to root_path
-    #  end
   end
-  
+
   def edit
     # createメソッドからのパラメータを受け取る
-    @cart = Cart.find(params[:id])
+    # Cartの中から現在のログインユーザーかつ、statusがカート状態のカートを取り出す関数定義
+    @cart = Cart.find_by(id: params[:id])
+    # cartのidとアソシエーションしているItem_cartを取り出す
+    @item_carts = @cart.item_carts
+
+    @sumprice = 0
+      for item_cart in @item_carts do
+        a = item_cart.price * item_cart.item_count
+        @sumprice += a
+        return @sumprice
+      end
   end
 
-  def update
+  def cartedit
     @cart = Cart.find(params[:id])
-    @cart.update
+    @cart.update(cart_params)
     redirect_to ship_to_another_edit_path(@cart.id)
   end
 
@@ -109,35 +96,6 @@ class CartsController < ApplicationController
   def new
   end
 
-  def edits
-    # # Cartの中から現在のログインユーザーかつ、statusがカート状態のカートを取り出す関数定義
-    # 下記のdefineを別のファイルに保存する場合そのモデルに対応する.rbに書くとよろしい
-    # # cartのidとアソシエーションしているItem_cartを取り出す
-    # item_carts = Item_carts.find(cart_id: current_cart_id)
-    # # 更にitem_cartsとアソシエーションしているitemsを取り出す
-    # @items = item_carts.items
-    # # itemとアソシエーションしているitem_singers、item_genres、を取り出す
-    # @item_singers = @items.item_singers
-    # @item_genres = @items.item_genres
-    # # Genre,Stocks,Singer,Labelsからアソシエーションで関連しているデータを取り出す。
-    # @genres = @item_genres.Genres
-    # @stocks = @item.Stocks
-    # @singers = @item_singers.Singer
-    # @labels = @items.Labels
-  end
-
-
-  def cartedit
-     # # カートページからはitemに対応するitem_cart.countとその時の価格を保存する
-     # def multi_update(item_cart_params)
-     #   item_cart_params.to_h.map do |id, item_cart_param|
-     #     item_cart = self.find(id)
-     #     item_cart.update_attributes!(item_cart_param)
-     #   end
-     # end
-     # Item_cart.multi_update(item_cart_params)
-    # redirect_to ship_to_another_edit_path
-  end
 
   def ship
      # # Cartの中から現在のログインユーザーかつ、statusがカート状態のカートを取り出す関数定義
