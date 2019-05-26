@@ -135,10 +135,13 @@ class CartsController < ApplicationController
   end
 
   def ginko
-    binding.pry
     cart = Cart.find(params[:id])
     cart.status = '未発送'
     cart.save
+    item_carts = cart.item_carts
+    for item_cart in item_carts do
+      Stock.find_by(item_id: item_cart.item_id).decrement!(:stock_count, item_cart.item_count)
+    end
     PersonalMailer.send_when_daibiki_to_user(cart).deliver
     redirect_to finish_path
   end
@@ -147,6 +150,10 @@ class CartsController < ApplicationController
     cart = Cart.find(params[:id])
     cart.status = '未発送'
     cart.save
+    item_carts = cart.item_carts
+    for item_cart in item_carts do
+      Stock.find_by(item_id: item_cart.item_id).decrement!(:stock_count, item_cart.item_count)
+    end
     #下記記述で問い合わせフォーム専用のメールを送信出来るようにする.deliverを最後に付けることで送信
     PersonalMailer.send_when_daibiki_to_user(cart).deliver
     redirect_to finish_path
@@ -157,6 +164,10 @@ class CartsController < ApplicationController
     cart = Cart.find(params[:id])
     cart.status = '未発送'
     cart.save
+    item_carts = cart.item_carts
+    for item_cart in item_carts do
+      Stock.find_by(item_id: item_cart.item_id).decrement!(:stock_count, item_cart.item_count)
+    end
     PersonalMailer.send_when_daibiki_to_user(cart).deliver
     redirect_to finish_path
   end

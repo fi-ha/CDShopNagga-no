@@ -39,7 +39,6 @@ class PersonalMailer < ApplicationMailer
   # 下記メソッドを使用したい場合はPersonal.send_when_contact_to_user(@contact).deliverと指定する
     def send_when_daibiki_to_user(finish_cart)
       # 引き渡されるvalueに@を付けることでメール画面に反映させられる用にする
-      binding.pry
       @cart = finish_cart
       @user = User.find_by(id: @cart.user_id)
       @item_carts = @cart.item_carts
