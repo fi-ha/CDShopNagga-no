@@ -35,7 +35,10 @@
   <% end %>
 </table>
 <h4>送料：一律５００円</h4>
-<h2>合計金額:<%= ((@cart.total_price.to_i) * BigDecimal("1.08")).ceil + 500 %></h2>
+<h2>合計金額:<%= i = ((@cart.total_price.to_i) * BigDecimal("1.08")).ceil + 500 %></h2>
 
 <%= link_to 'お買い物に戻る', root_path %><br>
-<%= link_to '発送先選択へ', ship_to_another_edit_path(@cart.id) %>
+<%= form_for(@cart, url: cart_total_price_path(@cart.id)) do |f| %>
+  <%= f.hidden_field :total_price, value: i %>
+  <%= f.submit '発送先選択へ' %>
+<% end %>
