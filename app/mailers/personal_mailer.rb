@@ -41,7 +41,20 @@ class PersonalMailer < ApplicationMailer
       # 引き渡されるvalueに@を付けることでメール画面に反映させられる用にする
       @user = current_user
       @cart = finish_cart
-      @item_carts = @cart.item_cart
+      @item_carts = @cart.item_carts
+      mail  to:      @user,
+            from:    ENV['MAIL_ADDRESS_KEY'],
+            subject: 'ご注文が完了致しました。'
+    end
+  #=============================================================================
+
+  #==============================決済メ-ル送信====================================
+  # 下記メソッドを使用したい場合はPersonal.send_when_contact_to_user(@contact).deliverと指定する
+    def send_when_daibiki_to_user(finish_cart)
+      # 引き渡されるvalueに@を付けることでメール画面に反映させられる用にする
+      @user = current_user
+      @cart = finish_cart
+      @item_carts = @cart.item_carts
       mail  to:      @user,
             from:    ENV['MAIL_ADDRESS_KEY'],
             subject: 'ご注文が完了致しました。'

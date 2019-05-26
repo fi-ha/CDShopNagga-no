@@ -169,16 +169,18 @@ class CartsController < ApplicationController
   # end
 
   def ginko
-    cart = current_user.carts.find_by(status: 1)
+    cart = Cart.find(params[:id])
     cart.status = '未発送'
-    cart.total_price = params[:sumprice]
     cart.save
     Personal.send_when_ginko_to_user(cart).deliver
     redirect_to finish_path
   end
 
   def daibiki
-    # 発送メール送信
+    cart = Cart.find(params[:id])
+    cart.status = '未発送'
+    cart.save
+    Personal.send_when_daibiki_to_user(cart).deliver
     redirect_to finish_path
   end
 
