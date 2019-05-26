@@ -14,10 +14,6 @@
  *= require_self
  */
 
- @import "bootstrap-sprockets";
-    @import "bootstrap";
-
-
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -30,6 +26,8 @@
 
 body {
   min-height: 100vh;
+  background-color: black;
+
 }
 
 li {
@@ -105,7 +103,7 @@ header {
   left: 0;
   width: 100%;
   height: 5px;
-  background-color: black;
+  background-color: yellow;
   border-radius: 4px;
   z-index: 13;
 }
@@ -149,7 +147,7 @@ header {
   transition: all .5s;
 }
 .hamburger-menu a {
-  color: black;
+  color: #000000;
 }
 .hamburger-menu.open {
   // 左上の頂点元の位置に戻す
@@ -202,9 +200,9 @@ header {
 footer {
   width: 100%;
   display: flex;
-  position: fixed;
   bottom: 0;
   height: 50px;
+  margin-top: 50px;
   padding-left: 30px;
   padding-right: 30px;
 }

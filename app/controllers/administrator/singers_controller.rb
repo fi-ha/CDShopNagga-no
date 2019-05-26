@@ -10,7 +10,7 @@ class Administrator::SingersController < ApplicationController
 
 	def index
 		@singer = Singer.new
-    @singers =Singer.all
+		@singers =Singer.all
 	end
 
 	def edit

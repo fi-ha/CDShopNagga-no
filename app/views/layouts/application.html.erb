@@ -105,5 +105,18 @@
 
     </script>
     <script type="text/javascript" src=""></script>
+      <!--=================================フッター============================== -->
+  <footer>
+    <div class="footer-left">
+      <%= link_to root_path, class: "footer-logo" do %><!--リンク先はルート設定の後変更して下さい -->
+      <%= image_tag "naganologo.png", alt: "CDショップナッガ〜ノのロゴ", class: "footer-logo-img" %>
+      <% end %>
+    </div>
+    <div class="footer-right">
+      <!-- menu-trigger部分 -->
+      <!-- ここで追加したのはremote: trueの部分です。このオプションを付け加えることで、リンクからの呼び出し先がnew.html.erbからnew.js.erbに変更されます。 -->
+      <%= link_to 'お問い合わせ', new_contact_path, remote: true %>
+    </div>
+  </footer>
   </body>
 </html>

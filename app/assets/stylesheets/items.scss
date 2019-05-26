@@ -1,0 +1,137 @@
+// Place all the styles related to the items controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+/*CD回転&回転する文字*/
+
+#circle { 
+  width: 1050px;
+  height: 1050px;
+  border: 1px solid #333;
+  border-radius: 50%;
+  position: relative;
+  top: -360px;
+  right: -60px;
+  float: right;
+  z-index: -10;
+  border-color: #c0f5fe;
+  border-width: medium;
+}
+
+
+
+#content1 { 
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    left: 25%;
+    top: 1%;
+    transform-origin: center 98%;
+    float: right;
+    color: #fefc93;
+    font-size: 46px;
+    animation: rotate1 10s linear infinite;
+}
+
+@keyframes rotate1 { 
+  0% {
+   transform: rotate(0deg);
+  }
+    100% {  
+    transform: rotate(360deg);
+  }
+}
+
+
+#circle1 {
+  width: 240px;
+  height: 240px;
+  border: 1px solid #333;
+  border-radius: 50%;
+  position: relative;
+  float: right;
+  margin-right: 342px;
+  margin-top: -990px;
+  border-color: #c0f5fe;
+  border-width: medium;
+  z-index: -10;
+}
+
+
+#circle2 { 
+  width: 90px;
+  height: 90px;
+  border: 1px solid #333;
+  border-radius: 50%;
+  position: relative;
+  float: right;
+  margin-right: 75px;
+  margin-top: 75px;
+  border-color: #c0f5fe;
+  border-width: medium;
+}
+
+
+
+
+
+
+/*商品説明*/
+
+.player {
+	margin-bottom: 15px;
+	font-size: 60px;
+	font-weight: bold;
+}
+
+.player1{
+	font-size: 20px;
+}
+
+
+
+.music{
+	margin-bottom: 15px;
+	font-size: 60px;
+	font-weight: bold;
+}
+
+.music1{
+	font-size: 20px;
+}
+
+h4 {
+    padding: 15px;
+}
+
+.main {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.items {
+	width: 30%;
+	float: left;
+	text-align: center;
+}
+
+.clearfix::after{
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.content-left {
+	width: 30%;
+	float: left;
+}
+
+.content-right {
+	width: 60%;
+	float: left;
+}
+
+.songs {
+	border: none;
+}

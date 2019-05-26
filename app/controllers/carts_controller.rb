@@ -89,41 +89,34 @@ class CartsController < ApplicationController
     redirect_to edit_cart_path(cart.id)
   end
 
-
-  def index
+  def total_price_create
+    @cart = Cart.find(params[:id])
+    @cart.update(cart_params)
+    redirect_to ship_to_another_edit_path(@cart.id)
   end
-
-  def new
-  end
-
 
   def ship
-     # # Cartの中から現在のログインユーザーかつ、statusがカート状態のカートを取り出す関数定義
-     # def current_cart_id
-     #   current_cart = Cart.where(user_id: current_user.id).where(status: 1)
-     #   current_cart_id = current_cart.id
-     #   return current_cart_id
-     # end
-     # @user = User.find(id: current_user.id)
+    @cart = Cart.find(params[:id])
+    @ship_to_another = ShipToAnother.new
   end
 
   def shipedit
-    # @ship = Ship_to_another.new
-    # # attributesメソッドで一気にカラムを指定できるが設定方法これで合ってるのか？
-    # @ship.attributes = {first_name: first_name, last_name: last_name, first_name_kana: first_name_kana, last_name_kana: last_name_kana, postal_codeaddress: postal_codeaddress, email: email}
-    # # 保存が必要
-    # @ship.save
-    # redirect_to payment_edit_path
+    @cart = Cart.find(params[:id])
+    @ship_to_another = ShipToAnother.new(ship_to_another_params)
+    @ship_to_another.save
+    @cart.ship_to_another_id = @ship_to_another.id
+    @cart.save
+    redirect_to payment_edit_path(@cart.id)
   end
 
   def pay
-     # 特に呼び出すものなし画面を表示しているだけ
+     @cart = Cart.find(params[:id])
   end
 
   def payedit
-    # cart = current_cart_id
-    # cart.update(post_params)
-    redirect_to confirm_edit_path
+    @cart = Cart.find(params[:id])
+    @cart.update(cart_params)
+    redirect_to confirm_edit_path(@cart.id)
   end
 
   def confirm
@@ -177,6 +170,10 @@ class CartsController < ApplicationController
     def cart_params
       params.require(:cart).permit(:user_id, :ship_to_another_id, :payment, :total_price, :status,
         item_carts_attributes: [:item_id, :cart_id, :item_count, :price])
+    end
+
+    def ship_to_another_params
+      params.require(:ship_to_another).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :postal_code, :address)
     end
 
     def post_params

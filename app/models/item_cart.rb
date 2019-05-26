@@ -4,6 +4,6 @@ class ItemCart < ApplicationRecord
 	belongs_to :cart
 
   def commerce_price
-  	price * count
+  	price * item_count.to_i
   end
 end
