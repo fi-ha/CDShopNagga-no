@@ -14,10 +14,6 @@
  *= require_self
  */
 
- @import "bootstrap-sprockets";
-    @import "bootstrap";
-
-
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -204,9 +200,9 @@ header {
 footer {
   width: 100%;
   display: flex;
-  position: fixed;
   bottom: 0;
   height: 50px;
+  margin-top: 50px;
   padding-left: 30px;
   padding-right: 30px;
 }

@@ -20,7 +20,7 @@ class CartsController < ApplicationController
         item_cart.item_id = params[:item_id]
         item_cart.cart_id = cart.id
         item_cart.item_count = 1
-        item_cart.price = item_cart.items.price
+        item_cart.price = item_cart.item.price
         item_cart.save
       else
         item_cart = cart.item_carts.find_by(item_id: params[:item_id])
@@ -60,31 +60,8 @@ class CartsController < ApplicationController
       flash[:alert] = "ログインしてください。"
       redirect_to root_path
     end
-
-    #    # ItemCartの空インスタンスを渡す。モデルは＿を使ってはいけない為Item_cartではなくItemCart
-    #    @item_cart = ItemCart.new
-    #    # カートのカラムにcreate_with()の条件に当てはまるものがあればデータを引っ張る
-    #    # なければ新しくつくる。以下参考メソッド。今回のMVP。
-    #    # http://railsdoc.com/references/find_or_create_by
-    #    cart = Cart.create_with(user_id: current_user.id, status: 1).find_or_create_by(user_id: current_user.id, status: 1)
-    #    # views/items/showからlink_toメソッドでitem_idを送ったところ、
-    #    # carts#create のparamsをbinding.pryで確認したところ、:idではなく:formatでitem_idが渡されていた。
-    #    item = Item.find(params[:format])
-    #    @item_cart.cart_id = cart.id
-    #    @item_cart.item_id = item.id
-    #    # ここ重複商品なら＋１する記述を考えなければならない。
-    #    @item_cart.count = 1
-    #    @item_cart.price = item.price
-    #    @item_cart.save
-    #    # views/carts/:id/editへ、カートIDのパラメータを持たせてリンクを飛ばす。
-    #    redirect_to edit_cart_path(cart.id)
-    # else
-    #  # ログインしてないときは一覧画面に戻る
-    #    flash[:alert] = "ログインしてください。"
-    #    redirect_to root_path
-    #  end
   end
-  
+
   def edit
     # createメソッドからのパラメータを受け取る
     @cart = Cart.find(params[:id])
@@ -102,70 +79,34 @@ class CartsController < ApplicationController
     redirect_to edit_cart_path(cart.id)
   end
 
-
-  def index
-  end
-
-  def new
-  end
-
-  def edits
-    # # Cartの中から現在のログインユーザーかつ、statusがカート状態のカートを取り出す関数定義
-    # 下記のdefineを別のファイルに保存する場合そのモデルに対応する.rbに書くとよろしい
-    # # cartのidとアソシエーションしているItem_cartを取り出す
-    # item_carts = Item_carts.find(cart_id: current_cart_id)
-    # # 更にitem_cartsとアソシエーションしているitemsを取り出す
-    # @items = item_carts.items
-    # # itemとアソシエーションしているitem_singers、item_genres、を取り出す
-    # @item_singers = @items.item_singers
-    # @item_genres = @items.item_genres
-    # # Genre,Stocks,Singer,Labelsからアソシエーションで関連しているデータを取り出す。
-    # @genres = @item_genres.Genres
-    # @stocks = @item.Stocks
-    # @singers = @item_singers.Singer
-    # @labels = @items.Labels
-  end
-
-
-  def cartedit
-     # # カートページからはitemに対応するitem_cart.countとその時の価格を保存する
-     # def multi_update(item_cart_params)
-     #   item_cart_params.to_h.map do |id, item_cart_param|
-     #     item_cart = self.find(id)
-     #     item_cart.update_attributes!(item_cart_param)
-     #   end
-     # end
-     # Item_cart.multi_update(item_cart_params)
-    # redirect_to ship_to_another_edit_path
+  def total_price_create
+    @cart = Cart.find(params[:id])
+    @cart.update(cart_params)
+    redirect_to ship_to_another_edit_path(@cart.id)
   end
 
   def ship
-     # # Cartの中から現在のログインユーザーかつ、statusがカート状態のカートを取り出す関数定義
-     # def current_cart_id
-     #   current_cart = Cart.where(user_id: current_user.id).where(status: 1)
-     #   current_cart_id = current_cart.id
-     #   return current_cart_id
-     # end
-     # @user = User.find(id: current_user.id)
+    @cart = Cart.find(params[:id])
+    @ship_to_another = ShipToAnother.new
   end
 
   def shipedit
-    # @ship = Ship_to_another.new
-    # # attributesメソッドで一気にカラムを指定できるが設定方法これで合ってるのか？
-    # @ship.attributes = {first_name: first_name, last_name: last_name, first_name_kana: first_name_kana, last_name_kana: last_name_kana, postal_codeaddress: postal_codeaddress, email: email}
-    # # 保存が必要
-    # @ship.save
-    # redirect_to payment_edit_path
+    @cart = Cart.find(params[:id])
+    @ship_to_another = ShipToAnother.new(ship_to_another_params)
+    @ship_to_another.save
+    @cart.ship_to_another_id = @ship_to_another.id
+    @cart.save
+    redirect_to payment_edit_path(@cart.id)
   end
 
   def pay
-     # 特に呼び出すものなし画面を表示しているだけ
+     @cart = Cart.find(params[:id])
   end
 
   def payedit
-    # cart = current_cart_id
-    # cart.update(post_params)
-    # redirect_to confirm_edit_path
+    @cart = Cart.find(params[:id])
+    @cart.update(cart_params)
+    redirect_to confirm_edit_path(@cart.id)
   end
 
   # def confirm
@@ -234,6 +175,10 @@ class CartsController < ApplicationController
     def cart_params
       params.require(:cart).permit(:user_id, :ship_to_another_id, :payment, :total_price, :status,
         item_carts_attributes: [:item_id, :cart_id, :item_count, :price])
+    end
+
+    def ship_to_another_params
+      params.require(:ship_to_another).permit(:first_name, :last_name, :first_name_kana, :last_name_kana, :postal_code, :address)
     end
 
     def post_params
