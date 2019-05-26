@@ -9,7 +9,7 @@ class CartsController < ApplicationController
     # もしユーザーのカートのstatusがカート状態だったら
     # カートを連続使用、ちゃうかったらカート新規作成
     # そもそもログインしてなかったログイン画面に飛ばす
-    if user_signed_in? && current_user.carts.where(status: "カート")
+    if user_signed_in? && current_user.carts.find_by(status: "カート")
       cart = current_user.carts.find_by(status: "カート")
 
       # cartに紐付いたitem_cartsにクリックした商品がなければitem_cart.new
@@ -41,7 +41,7 @@ class CartsController < ApplicationController
       redirect_to cart_edit_path(cart.id)
 
       # 新規登録後だと以下を使用する
-    elsif user_signed_in? && !current_user.carts.where(status: "カート")
+    elsif user_signed_in? && !current_user.carts.find_by(status: "カート")
       cart = Cart.new
       cart.user_id = current_user.id
       cart.status = "カート"
@@ -139,7 +139,7 @@ class CartsController < ApplicationController
     cart = Cart.find(params[:id])
     cart.status = '未発送'
     cart.save
-    Personal.send_when_ginko_to_user(cart).deliver
+    PersonalMailer.send_when_daibiki_to_user(cart).deliver
     redirect_to finish_path
   end
 
@@ -147,7 +147,8 @@ class CartsController < ApplicationController
     cart = Cart.find(params[:id])
     cart.status = '未発送'
     cart.save
-    Personal.send_when_daibiki_to_user(cart).deliver
+    #下記記述で問い合わせフォーム専用のメールを送信出来るようにする.deliverを最後に付けることで送信
+    PersonalMailer.send_when_daibiki_to_user(cart).deliver
     redirect_to finish_path
   end
 
@@ -156,7 +157,7 @@ class CartsController < ApplicationController
     cart = Cart.find(params[:id])
     cart.status = '未発送'
     cart.save
-    Personal.send_when_cred_to_user(cart).deliver
+    PersonalMailer.send_when_daibiki_to_user(cart).deliver
     redirect_to finish_path
   end
 
