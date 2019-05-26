@@ -3,7 +3,70 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-/*CD回転&回転する文字*/
+/*TOPページ左側のボタン*/
+.container1 {
+  font-family: "Yu Gothic", YuGothic, Verdana, 'Hiragino Kaku Gothic ProN','Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'メイリオ', Meiryo, sans-serif;
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background: #000;
+}
+
+.btn-box {
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+  font-size: 16px;
+  color: #9ec34b;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 12px 24px;
+  position: relative;
+  border: 2px solid #9ec34b;
+  transition: .4s;
+}
+
+.btn-box:hover {
+  border: 2px solid transparent;
+  color: #FFF;
+}
+
+.btn-box:before, .btn-box:after {
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  transform: scale(0);
+  transition: .2s;
+}
+
+.btn-box:before {
+  border-bottom: 2px solid #FFF;
+  border-left: 2px solid #FFF;
+  transform-origin: 100% 0%;
+}
+
+.btn-box:after {
+  border-top: 2px solid #FFF;
+  border-right: 2px solid #FFF;
+  transform-origin: 0% 100%;
+}
+
+.btn-box:hover:after,
+.btn-box:hover:before {
+  transform: scale(1);
+}
+
+.col-md-3{
+  margin-left: 50px;
+}
+
+
+/*CD*/
 
 #circle { 
   width: 1050px;
@@ -11,38 +74,13 @@
   border: 1px solid #333;
   border-radius: 50%;
   position: relative;
-  top: -360px;
+  top: -650px;
   right: -60px;
   float: right;
-  z-index: -10;
+  z-index: 1;
   border-color: #c0f5fe;
   border-width: medium;
 }
-
-
-
-#content1 { 
-    width: 50%;
-    height: 50%;
-    position: absolute;
-    left: 25%;
-    top: 1%;
-    transform-origin: center 98%;
-    float: right;
-    color: #fefc93;
-    font-size: 46px;
-    animation: rotate1 10s linear infinite;
-}
-
-@keyframes rotate1 { 
-  0% {
-   transform: rotate(0deg);
-  }
-    100% {  
-    transform: rotate(360deg);
-  }
-}
-
 
 #circle1 {
   width: 240px;
@@ -52,7 +90,7 @@
   position: relative;
   float: right;
   margin-right: 342px;
-  margin-top: -990px;
+  margin-top: -1275px;
   border-color: #c0f5fe;
   border-width: medium;
   z-index: -10;
@@ -71,6 +109,33 @@
   border-color: #c0f5fe;
   border-width: medium;
 }
+
+/*店名の文字*/
+
+#content1 { 
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    left: 25%;
+    top: 1%;
+    transform-origin: center 98%;
+    float: right;
+    color: #9ec34b;
+    font-size: 46px;
+    animation: rotate1 10s linear infinite;
+}
+
+@keyframes rotate1 { 
+  0% {
+   transform: rotate(0deg);
+  }
+    100% {  
+    transform: rotate(360deg);
+  }
+}
+
+
+
 
 
 

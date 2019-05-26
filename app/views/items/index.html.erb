@@ -1,35 +1,75 @@
+<head>
+<!-- jQuery.jsの読み込み -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+
+<!-- スムーズスクロール部分の記述 -->
+<script>
+$(function(){
+   // #で始まるアンカーをクリックした場合に処理
+   $('a[href^=#]').click(function() {
+      // スクロールの速度
+      var speed = 400; // ミリ秒
+      // アンカーの値取得
+      var href= $(this).attr("href");
+      // 移動先を取得
+      var target = $(href == "#" || href == "" ? 'html' : href);
+      // 移動先を数値で取得
+      var position = target.offset().top;
+      // スムーススクロール
+      $('body,html').animate({scrollTop:position}, speed, 'swing');
+      return false;
+   });
+});
+</script>
+</head>
+
+<!-- 左側のボタン -->
+<br>
+<br>
+<br>
+
+<div class="row">
+  <div class="col-md-3">
+  	<%= link_to "LOGIN", new_user_session_path, class: "btn-box" %>
+    <br>
+  	<br>
+  	<%= link_to "CONSEPT", concepts_path, class: "btn-box" %>
+  	<br>
+  	<br>
+    <a href="#playerjump" class="btn-box">PLAYER</a>
+  	<br>
+  	<br>
+    <a href="#musicjump" class="btn-box">MUSIC</a>
+  </div>
+</div>
+
+
+
+
+
 
 <!-- トップビジュアル（円盤） -->
 <br>
 <br>
 <br>
-
 <div id="circle">
 <div id="content1">CD SHOP NAGGANO</div>
-<script type="text/javascript">
-   $('#content1').arctext({radius: 490});
-</script>
 </div>
-
 <div id="circle1">
 <div id="circle2">
 </div>
 </div>
 
 
+
+
 <div class="container">
   <div class="row">
 <div class="col-md-10 col-md-offset-1">
 
-
-
-<br>
-<br>
-<br>
-
-
-
 <!-- プレイヤー説明 -->
+<!-- ページ内のリンク先の指定はIDを利用 -->
+<h1 id="playerjump"></h1>
  <div class="">
 	<h1 class="player">Player</h1>
 	<p class="player1">持ち運びも簡単！</p>
@@ -52,6 +92,9 @@
 
   </div>
 
+
+
+
 <!-- プレーヤー表示（skippr) -->
 
 	<div class="container">
@@ -69,6 +112,8 @@
 	</div>
 
 <!-- MUSIC説明 -->
+<h1 id="musicjump"></h1>
+
 
     <div class="content-text2", style="float:left; ">
 		<h1 class="music">Music</h1>
@@ -102,3 +147,7 @@
 </div>
 </div>
 </div>
+
+<script type="text/javascript">
+   $('#content1').arctext({radius: 490});
+</script>
