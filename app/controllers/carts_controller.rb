@@ -1,7 +1,7 @@
 class CartsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :judgment_user
+  # before_action :judgment_user
 
   def create
     item = Item.find_by(id: params[:item_id])
@@ -182,7 +182,7 @@ class CartsController < ApplicationController
     end
 
     def judgment_user
-			unless current_user.id == Cart.find(params[:id]).user_id || current_user.admin == true
+			unless current_user.id == Cart.find(params[:id]).user_id || current_user.admin == true ||
 				redirect_to(root_path)
 			end
 		end
