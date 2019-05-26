@@ -40,7 +40,7 @@
         <ul class="hamburger-menu">
           <!--リンク先は各ページ設定の後、変更して下さい -->
           <li><%= link_to "TOP", root_path %></li>
-          <li><%= link_to "おすすめプレーヤー", genres_path %></li>
+          <li><%= link_to "おすすめプレーヤー", root_path %></li>
           <li><%= link_to "商品一覧", root_path %></li>
           <li><%= link_to "コンセプト", concepts_path %></li>
           <% if user_signed_in? %>
@@ -75,7 +75,7 @@
   <!--=================================フッター============================== -->
   <footer>
     <div class="footer-left">
-      <%= link_to genres_path, class: "footer-logo" do %><!--リンク先はルート設定の後変更して下さい -->
+      <%= link_to root_path, class: "footer-logo" do %><!--リンク先はルート設定の後変更して下さい -->
       <%= image_tag "naganologo.png", alt: "CDショップナッガ〜ノのロゴ", class: "footer-logo-img" %>
       <% end %>
     </div>
@@ -102,6 +102,6 @@
 
 
     </script>
-
+    <script type="text/javascript" src=""></script>
   </body>
 </html>

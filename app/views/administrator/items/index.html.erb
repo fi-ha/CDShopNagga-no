@@ -36,11 +36,11 @@
 				</div>
 
 				<div>
-		  	  在庫数：<%= item.stock.count %>
+		  	  在庫数：<%= item.stock.stock_count %>
 				</div>
 
-				<%= link_to '編集', edit_item_path(item.id),class: "btn btn bg-success" %>
-				<%= link_to '削除', item_path(item.id),class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
+				<%= link_to '編集', edit_administrator_item_path(item.id),class: "btn btn bg-success" %>
+				<%= link_to '削除', administrator_item_path(item.id),class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
 			</div>
 			<% end %>
 
