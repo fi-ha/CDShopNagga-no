@@ -17,8 +17,8 @@
           <%= cart.user.last_name %><%= cart.user.first_name %>
           <strong>注文金額（送料込み）</strong>：
           <%= cart.total_price + 500 %>円
-          <strong><%= cart.status %></strong>
-          <%# <%= link_to @cart.status, cart_toggle_status_path(@cart), method: :patch %>
+          <strong>Status：</strong>
+          <%= link_to cart.status, cart_toggle_status_path(cart), method: :patch %>
           </p>
 <!-------- カートの中身 --------------->
 

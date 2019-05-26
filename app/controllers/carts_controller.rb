@@ -2,6 +2,15 @@ class CartsController < ApplicationController
   before_action :authenticate_user!
   before_action :judgment_user
 
+
+  before_action :set_cart, only:[:toggle_status]
+
+
+  def toggle_status
+    @cart.toggle_status!
+    redirect_to administrator_carts_path
+  end
+
   def index
   end
 
@@ -140,5 +149,17 @@ class CartsController < ApplicationController
 				redirect_to(root_path)
 			end
 		end
+
+
+
+
+
+
+    private
+    def set_cart
+      @cart = Cart.find(params[:id] || params[:cart_id])
+    end
+
+
 
 end
