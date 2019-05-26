@@ -87,6 +87,7 @@ class CartsController < ApplicationController
     @cart = Cart.find(params[:id])
     @cart.update(cart_params)
     redirect_to ship_to_another_edit_path(@cart.id)
+  end
 
   # enum変更用
   def toggle_status
