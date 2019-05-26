@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   # Cart画面は上から順にこのルーティングで進んで行きます。あとから修正している為ちょっと無理矢理感のあるルーティングとなっています。
   patch 'carts/:id/total_price_create',  to: 'carts#total_price_create', as: 'cart_total_price'
+  post 'carts/edit',                    to: 'carts#create',  as: 'cart_create'
   get  'carts/:id/edit',                to: 'carts#edit',    as: 'cart_edit'
   post 'carts/:id/edit',                to: 'carts#cartedit',as: 'cart_cartedit'
   get  'carts/:id/ship_to_another/edit',to: 'carts#ship',    as: 'ship_to_another_edit'

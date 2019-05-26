@@ -37,7 +37,7 @@ class PersonalMailer < ApplicationMailer
 
   #==============================決済メ-ル送信====================================
   # 下記メソッドを使用したい場合はPersonal.send_when_contact_to_user(@contact).deliverと指定する
-    def send_when_finish_to_user(finish_cart)
+    def send_when_ginko_to_user(finish_cart)
       # 引き渡されるvalueに@を付けることでメール画面に反映させられる用にする
       @user = current_user
       @cart = finish_cart
