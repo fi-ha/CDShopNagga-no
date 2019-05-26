@@ -123,50 +123,33 @@ class CartsController < ApplicationController
   def payedit
     # cart = current_cart_id
     # cart.update(post_params)
-    # redirect_to confirm_edit_path
+    redirect_to confirm_edit_path
   end
 
-  # def confirm
-  #   # 現在のカートを取り出す
-  #   cart = current_user.carts.find_by(status: 1)
-  #   # cartのidとアソシエーションしているItem_cartを取り出す
-  #   @item_carts = cart.item_carts
-  #   # 更にitem_cartsとアソシエーションしているitemsを取り出す
-  #   @items = @item_carts.items
-  #   # itemとアソシエーションしているitem_singers、item_genres、を取り出す
-  #   @item_singers = @items.item_singers
-  #   @item_genres = @items.item_genres
-  #   # Genre,Stocks,Singer,Labelsからアソシエーションで関連しているデータを取り出す。
-  #   @genres = @item_genres.genres
-  #   @labels = @items.labels
-  #   # for で itemsをitemに変換し繰り返すその中で計算合計を出すさらにitem_stockにpriceを保管、sumpriceをcartに保管@sumprice
-  #   @sumprice = 0
-  #   for item in @items do
-  #     a = item.price * item.@item_carts.item_count
-  #     @sumprice += a
-  #   end
-  #
-  #   cart.total_price = @sumprice
-  #   cart.save
-  #
-  #   if cart.ship_to_another
-  #     @ship_to_another = cart.ship_to_anothers
-  #   end
-  #
-  #   case cart.payment
-  #     when 1 then
-  #      @payment = "<p>銀行振込</p><%= link_to '購入確定', confirm_ginko_path %>"
-  #
-  #     when 2 then
-  #      @payment = "<p>代金引換</p><%= link_to '購入確定', confirm_daibiki_path %>"
-  #
-  #     when 3 then
-  #      @payment = "<p>クレジットカード</p><%= link_to '購入確定', confirm_cred_path %>"
-  #
-  #    else
-  #      @peyment = "<%= link_to '支払い方法選択に戻る' , payment_edit_path %>"
-  #    end
-  # end
+  def confirm
+    # 現在のカートを取り出す
+    cart = Cart.find(params[:id])
+    # cartのidとアソシエーションしているItem_cartを取り出す
+    @item_carts = cart.item_carts
+
+    unless cart.ship_to_anothers.blank?
+      @ship_to_another = cart.ship_to_anothers
+    end
+
+    case cart.payment
+      when 1 then
+       @payment = "<p>銀行振込</p><%= link_to '購入確定', confirm_ginko_path %>"
+
+      when 2 then
+       @payment = "<p>代金引換</p><%= link_to '購入確定', confirm_daibiki_path %>"
+
+      when 3 then
+       @payment = "<p>クレジットカード</p><%= link_to '購入確定', confirm_cred_path %>"
+
+     else
+       @peyment = "<%= link_to '支払い方法選択に戻る' , payment_edit_path %>"
+     end
+  end
 
   def ginko
     cart = Cart.find(params[:id])
@@ -202,7 +185,7 @@ class CartsController < ApplicationController
     end
 
     def judgment_user
-			unless current_user.id == params[:id].to_i || current_user.admin == true
+			unless current_user.id == Cart.find(params[:id]).user_id || current_user.admin == true
 				redirect_to(root_path)
 			end
 		end
