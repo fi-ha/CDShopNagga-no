@@ -22,29 +22,67 @@ class CartsController < ApplicationController
 
   def create
     # ユーザーがログイン状態の時
-    if user_signed_in?
-      # ItemCartの空インスタンスを渡す。モデルは＿を使ってはいけない為Item_cartではなくItemCart
-      @item_cart = ItemCart.new
-      # カートのカラムにcreate_with()の条件に当てはまるものがあればデータを引っ張る
-      # なければ新しくつくる。以下参考メソッド。今回のMVP。
-      # http://railsdoc.com/references/find_or_create_by
-      cart = Cart.create_with(user_id: current_user.id, status: 1).find_or_create_by(user_id: current_user.id, status: 1)
-      # views/items/showからlink_toメソッドでitem_idを送ったところ、
-      # carts#create のparamsをbinding.pryで確認したところ、:idではなく:formatでitem_idが渡されていた。
-      item = Item.find(params[:format])
-      @item_cart.cart_id = cart.id
-      @item_cart.item_id = item.id
-      # ここ重複商品なら＋１する記述を考えなければならない。
-      @item_cart.count = 1
-      @item_cart.price = item.price
-      @item_cart.save
-      # views/carts/:id/editへ、カートIDのパラメータを持たせてリンクを飛ばす。
-      redirect_to edit_cart_path(cart.id)
-   else
-    # ログインしてないときは一覧画面に戻る
+    # もしユーザーのカートのstatusがカート状態だったら
+    # カートを連続使用、ちゃうかったらカート新規作成
+    # そもそもログインしてなかったログイン画面に飛ばす
+    if user_signed_in? && current_user.carts.where(status: "カート")
+      cart = current_user.carts.where(status: "カート")
+
+      unless cart.respond_to? :item_carts
+        binding.pry
+        item_cart = ItemCart.new
+        item_cart.item_id = params[:item_id]
+        item_cart.cart_id = cart.id
+        item_cart.item_count = 1
+        item_cart.save
+      else
+        if cart.item_carts.where(item_id: params[:item_id])
+          item_cart = cart.item_carts.where(item_id: params[:item_id])
+          item_cart.item_count.increment!
+        end
+      end
+
+      redirect_to
+
+    elsif user_signed_in? && !current_user.carts.where(status: "カート")
+      cart = Cart.new
+      cart.user_id = current_user.id
+      cart.status = "カート"
+      cart.save
+
+      item_cart = Item_cart.new
+      item_cart.item_id = params[:item_id]
+      item_cart.cart_id = cart.id
+      item_cart.item_count = 1
+      item_cart.save
+
+    else
       flash[:alert] = "ログインしてください。"
       redirect_to root_path
     end
+
+   #    # ItemCartの空インスタンスを渡す。モデルは＿を使ってはいけない為Item_cartではなくItemCart
+   #    @item_cart = ItemCart.new
+   #    # カートのカラムにcreate_with()の条件に当てはまるものがあればデータを引っ張る
+   #    # なければ新しくつくる。以下参考メソッド。今回のMVP。
+   #    # http://railsdoc.com/references/find_or_create_by
+   #    cart = Cart.create_with(user_id: current_user.id, status: 1).find_or_create_by(user_id: current_user.id, status: 1)
+   #    # views/items/showからlink_toメソッドでitem_idを送ったところ、
+   #    # carts#create のparamsをbinding.pryで確認したところ、:idではなく:formatでitem_idが渡されていた。
+   #    item = Item.find(params[:format])
+   #    @item_cart.cart_id = cart.id
+   #    @item_cart.item_id = item.id
+   #    # ここ重複商品なら＋１する記述を考えなければならない。
+   #    @item_cart.count = 1
+   #    @item_cart.price = item.price
+   #    @item_cart.save
+   #    # views/carts/:id/editへ、カートIDのパラメータを持たせてリンクを飛ばす。
+   #    redirect_to edit_cart_path(cart.id)
+   # else
+   #  # ログインしてないときは一覧画面に戻る
+   #    flash[:alert] = "ログインしてください。"
+   #    redirect_to root_path
+   #  end
   end
 
   def index
