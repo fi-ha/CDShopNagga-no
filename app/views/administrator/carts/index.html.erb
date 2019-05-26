@@ -16,7 +16,7 @@
 		      <strong>ユーザー名</strong>：
           <%= cart.user.last_name %><%= cart.user.first_name %>
           <strong>注文金額（送料込み）</strong>：
-          <%= cart.total_price + 500 %>円
+          <%# <%= cart.total_price + 500 %>円 %>
           <strong>Status：</strong>
           <%= link_to cart.status, cart_toggle_status_path(cart), method: :patch %>
           </p>
@@ -36,15 +36,15 @@
 
     <div>
     <% cart.item_carts.each do |item_cart|%>
-    購入枚数：<%= item_cart.count %>
+    <%# 購入枚数：<%= item_cart.count %> %>
 		<%end%>
     </div>
 
     <div>
-    <% cart.item_carts.each do |item_cart|%>
-    価格(税込)：<% item_cart.price = item_cart.count * item_cart.item.price %>
-    <%= (item_cart.price * BigDecimal("1.08")).ceil %>円
-    <% end %>
+    <%# <% cart.item_carts.each do |item_cart|%> %>
+    <%# 価格(税込)：<% item_cart.price = item_cart.count * item_cart.item.price %> %>
+    <%# <%= (item_cart.price * BigDecimal("1.08")).ceil %>円 %>
+    <%# <% end %> %>
     </div>
 
 
@@ -80,9 +80,8 @@
 		      <strong>ユーザー名</strong>：
           <%= cart.user.last_name %><%= cart.user.first_name %>
           <strong>注文金額</strong>：
-          <%= cart.total_price %>円
+          <%# <%= cart.total_price %>円 %>
           <strong><%= cart.status %></strong>
-          <%# <%= link_to @cart.status, cart_toggle_status_path(@cart), method: :patch %>
           </p>
 <!-------- カートの中身 --------------->
         <div>
@@ -99,15 +98,15 @@
 
     <div>
     <% cart.item_carts.each do |item_cart|%>
-    購入枚数：<%= item_cart.count %>
+    <%# 購入枚数：<%= item_cart.count %> %>
 		<%end%>
     </div>
 
     <div>
-    <% cart.item_carts.each do |item_cart|%>
-    価格(税込)：<% item_cart.price = item_cart.count * item_cart.item.price %>
-    <%= (item_cart.price * BigDecimal("1.08")).ceil %>円
-    <% end %>
+    <%# <% cart.item_carts.each do |item_cart|%> %>
+    <%# 価格(税込)：<% item_cart.price = item_cart.count * item_cart.item.price %> %>
+    <%# <%= (item_cart.price * BigDecimal("1.08")).ceil %>円 %>
+    <%# <% end %> %>
     </div>
 
 
