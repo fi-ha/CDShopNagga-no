@@ -2,6 +2,9 @@ class CartsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :judgment_user
+  # enum変更用
+  before_action :set_cart, only:[:toggle_status]
+
 
   def create
     item = Item.find_by(id: params[:item_id])
@@ -79,11 +82,19 @@ class CartsController < ApplicationController
     redirect_to edit_cart_path(cart.id)
   end
 
+
   def total_price_create
     @cart = Cart.find(params[:id])
     @cart.update(cart_params)
     redirect_to ship_to_another_edit_path(@cart.id)
   end
+
+  # enum変更用
+  def toggle_status
+    @cart.toggle_status!
+    redirect_to administrator_carts_path
+  end
+
 
   def ship
     @cart = Cart.find(params[:id])
@@ -191,5 +202,17 @@ class CartsController < ApplicationController
 				redirect_to(root_path)
 			end
 		end
+
+
+
+
+
+# enum変更用
+    private
+    def set_cart
+      @cart = Cart.find(params[:id] || params[:cart_id])
+    end
+
+
 
 end
