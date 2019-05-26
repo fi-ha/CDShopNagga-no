@@ -20,7 +20,7 @@ class CartsController < ApplicationController
         item_cart.item_id = params[:item_id]
         item_cart.cart_id = cart.id
         item_cart.item_count = 1
-        item_cart.price = item_cart.items.price
+        item_cart.price = item_cart.item.price
         item_cart.save
       else
         item_cart = cart.item_carts.find_by(item_id: params[:item_id])
