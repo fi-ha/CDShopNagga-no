@@ -76,11 +76,11 @@
   <% if @cart.ship_to_another_id == nil %>
   <h4>登録している住所</h4>
   <p>郵便番号</p>
-  <%= current_user.postal_code %>
+  <%= @user.postal_code %>
   <p>住所</p>
-  <%= current_user.addres %>
+  <%= @user.addres %>
   <p>電話番号</p>
-  <%= current_user.phone_number %>
+  <%= @user.phone_number %>
 
   <% else %>
   <h4>他の住所</h4>
