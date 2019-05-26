@@ -32,17 +32,25 @@
 			</ul>
 	</div>
 	<div class="">
-		<% if @item.favorited_by?(current_user) %>
-			<p>
-				<%= link_to 'お気に入り登録済み', item_favorites_path(@item), method: :delete, class: "btn btn bg-info" %>
-			</p>
+		<% if user_signed_in? %>
+		
+			<% if @item.favorited_by?(current_user) %>
+				<p>
+					<%= link_to 'お気に入り登録済み', item_favorites_path(@item), method: :delete, class: "btn btn bg-info" %>
+				</p>
+			<% else %>
+				<p>
+					<%= link_to 'お気に入り登録する', item_favorites_path(@item), method: :post, class: "btn btn bg-info" %>
+				</p>
+			<% end %>
 		<% else %>
 			<p>
-				<%= link_to 'お気に入り登録する', item_favorites_path(@item), method: :post, class: "btn btn bg-info" %>
+				<%= link_to 'お気に入り登録する', root_path, class: "btn btn bg-info" %>
 			</p>
 		<% end %>
+
 		<p>
-			<%= link_to 'カートに追加する', carts_path(@item), method: :post, class: "btn btn bg-warning" %>
+			<%= link_to 'カートに追加する', cart_create_path(item_id: @item.id), method: :post, class: "btn btn bg-warning" %>
 		</p>
 		<p>
 			<%= link_to '購入', carts_path(@item), method: :post %>

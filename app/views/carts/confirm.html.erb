@@ -9,90 +9,92 @@
   <table>
 
     <!-- カート内のitemを繰り返し表示 -->
-    <%# @items.each do |item| %>
+   <% @items.each do |item| %>
 
-    <!-- ここで該当する歌手、ジャンル、レーベル、、ストックを取り出す -->
-    <%# singer = @singers.find(id: item.@item_singers.singer_id) %>
-    <%# genre = @genres.find(id: item.@item_genres.genre_id) %>
-    <%# stock = @stocks.find(id: item.item_id) %>
-    <%# label = @labels.find(id: item.label_id) %>
-    <%# price =  item.price * @item_carts(id: item.id).count %>
+    <!-- ここで該当する歌手、ジャンル、レーベル、ストックを取り出す -->
+    <% singer = item.@item_singers.singers %>
+    <% genre  = item.@item_genres.genres %>
+    <% stock  = item.stocks %>
+    <% label  = item.labels %>
+    <!-- 商品ごとの合計金額をここで出す -->
+    <% count        = @item_carts.find_by(id: item.id).item_count %>
+    <% count_price  = item.price * count %>
 
     <!-- もしCDだったら -->
-    <%# if item.description.empty? %>
+    <% if item.description.empty? %>
     <tbody class="cart-in-CD">
       <tr>
-        <td rowspan="5"><%= "attachment_image_tag モデル名, :image, :fill, 横幅の数値(例: 100), 縦幅の数値, format: '拡張子名(例: jpg)'" %></td>
-        <td rowspan="2"><p>CDタイトル</p><h3><%= "item.name" %></h3></td>
+        <td rowspan="5"><%= attachment_image_tag(item, :image, :fill, 300, 300, format: 'jpeg') %></td>
+        <td rowspan="2"><p>CDタイトル</p><h3><%= item.item_name %></h3></td>
         <td></td>
-        <td class='multiply_price' rowspan="5"><%= " price.to_s(:delimited) " %>円</td>
+        <td class='multiply_price' rowspan="5"><%=  item.price.to_s(:delimited) %>円</td>
       </tr>
       <tr>
-        <td rowspan="5"><p><%=" @item_carts(id: item.id).count" %>枚</p></td>
+        <td rowspan="5"><p><%= count %>枚</p></td>
       </tr>
       <tr>
-        <td><p>歌手</p><%= "singer.name" %></td>
+        <td><p>歌手</p><%= singer.name %></td>
       </tr>
       <tr>
-        <td><p>レーベル名</p><%= "label.name" %></td>
+        <td><p>レーベル名</p><%= label.name %></td>
       </tr>
       <tr>
-        <td><p>ジャンル</p><%= "genre.name" %></td>
+        <td><p>ジャンル</p><%= genre.name %></td>
       </tr>
     </tbody>
 
-    <%# もしプレイヤーだったら %>
-    <%# else %>
+    <!-- もしプレイヤーだったら -->
+    <% else %>
     <tbody class="cart-in-Player">
       <tr>
-        <td rowspan="4"><%= "attachment_image_tag モデル名, :image, :fill, 横幅の数値(例: 100), 縦幅の数値, format: '拡張子名(例: jpg)'" %></td>
-        <td rowspan="4"><p>プレーヤー名</p><h3><%= "item.name" %></h3></td>
+        <td rowspan="4"><%= attachment_image_tag(item, :image, :fill, 300, 300, format: 'jpeg') %></td>
+        <td rowspan="4"><p>プレーヤー名</p><h3><%= item.item_name %></h3></td>
         <td></td>
-        <td class='multiply_price' rowspan="4"><%= "price.to_s(:delimited)" %>円</td>
+        <td class='multiply_price' rowspan="4"><%=  item.price.to_s(:delimited) %>円</td>
       </tr>
       <tr>
-        <td><p><%= " @item_carts(id: item.id).count" %>台</p></td>
+        <td><p><%= count %>台</p></td>
       </tr>
     </tbody>
 
-    <%# end %>
+    <% end %>
 
-    <%# end %>
+   <% end %>
   </table>
 </section>
 
-<h4>合計<%= "@sumprice"  %></h4>
+<h4>合計<%= @sumprice %></h4>
 <h4>送料全国どこでも500円</h4>
-<h4>総合計<%= "@sumprice + 500" %></h4>
+<h4>総合計<%= @sumprice + 500 %></h4>
 
 <h3>配送先</h3>
 
-<%#if @ship_to_another.isnot %>
+<% if @ship_to_another.isnot %>
 <h4>登録している住所</h4>
 <p>郵便番号</p>
-<%= "@User.postalcode" %>
+<%= current_user.postalcode %>
 <p>住所</p>
-<%= "@User.address" %>
+<%= current_user.addres %>
 <p>電話番号</p>
-<%= " @User.phonenumber" %>
+<%= current_user.phonenumber %>
 
-<%# else %>
+<% else %>
 <h4>他の住所</h4>
 <p>郵便番号</p>
-<%= "@ship_to_another.postalcode" %>
+<%= @ship_to_another.postalcode %>
 <p>住所</p>
-<%= "@ship_to_another.address" %>
+<%= @ship_to_another.address %>
 <p>電話番号</p>
-<%= "@ship_to_another.phonenumber" %>
+<%= @ship_to_another.phonenumber %>
 
-<%# end %>
+<% end %>
 
-<%#= link_to "住所選択に戻る", ship_to_another_path %>
+<%= link_to "住所選択に戻る", ship_to_another_path %>
 
 <h3>支払い方法</h3>
 
 <!-- ここはコントローラーでstatusから表示内容を変えてみる -->
-<%= "@payment" %>
+<%= @payment %>
 
 <%= link_to "支払い方法選択に戻る", payment_edit_path %>
-<%= link_to "購入確定", confirm_ginko_path %>
+<%= link_to "購入確定", confirm_ginko_path, sumprice: @sumprice %>
