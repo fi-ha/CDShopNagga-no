@@ -36,7 +36,7 @@
 
 
 <%# 以下の金額選択ボタンは別の発送先ラジオボタンをクリックすると消える %>
-  <%= link_to '金額選択', payment_edit_path, class: 'link active' %>
+  <%= link_to '金額選択', payment_edit_path(nilnil: true), class: 'link active' %>
 
 <script type="text/javascript">
   $(function() {

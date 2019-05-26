@@ -110,7 +110,11 @@ class CartsController < ApplicationController
   end
 
   def pay
-     @cart = Cart.find(params[:id])
+    @cart = Cart.find(params[:id])
+    if params[:nilnil] == 'true'
+      @cart.ship_to_another_id = nil
+      @cart.save
+    end
   end
 
   def payedit
@@ -124,8 +128,7 @@ class CartsController < ApplicationController
     cart = Cart.find(params[:id])
     # cartのidとアソシエーションしているItem_cartを取り出す
     @item_carts = cart.item_carts
-
-    unless cart.ship_to_anothers.blank?
+    unless shipToAnother.find_by(id: cart.ship_to_another_id).blank?
       @ship_to_another = cart.ship_to_anothers
     end
 
