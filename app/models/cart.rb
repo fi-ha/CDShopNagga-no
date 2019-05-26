@@ -17,7 +17,6 @@ class Cart < ApplicationRecord
   def total_price
   	item_carts.to_a.sum { |price| price.commerce_price }
   end
-end
 
 
 # enum変更用
