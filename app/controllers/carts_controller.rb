@@ -24,20 +24,20 @@ class CartsController < ApplicationController
         item_cart.item_id = params[:item_id]
         item_cart.cart_id = cart.id
         item_cart.item_count = 1
-        item_cart.price = item.price
+        item_cart.price = (item.price * 1.08).ceil
         item_cart.save
       else
         item_cart = cart.item_carts.find_by(item_id: params[:item_id])
         item_cart.increment!(:item_count)
         # 開発段階のためpriceが入っていない場合がある為の分岐
         if item_cart.price = 0 || item_cart.price == nil
-          item_cart.price = item.price
+          item_cart.price = (item.price * 1.08).ceil
           item_cart.save
         end
       end
       # 商品が安くなっていた場合、値段を安く更新する
-      if item_cart.price.to_i > item.price.to_i
-        item_cart.price = item.price
+      if item_cart.price.to_i > (item.price * 1.08).ceil
+        item_cart.price = (item.price * 1.08).ceil
         item_cart.save
         flash[:alert] = "お値段が安くなりました。"
       end
@@ -55,7 +55,7 @@ class CartsController < ApplicationController
       item_cart.item_id = params[:item_id]
       item_cart.cart_id = cart.id
       item_cart.item_count = 1
-      item_cart.price = item.price
+      item_cart.price = (item.price * 1.08).ceil
       item_cart.save
 
       redirect_to cart_edit_path(cart.id)

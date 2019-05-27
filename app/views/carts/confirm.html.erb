@@ -57,13 +57,13 @@
 <section class="amount_calculation_field">
   <p>合計</p>
   <h3 id="sum_price">
-    <%= (@cart.total_price * BigDecimal("1.08")).ceil %>円
+    <%= @cart.total_price %>円
   </h3>
   <p>送料全国どこでも</p>
   <h3>500円</h3>
   <p>総合計</p>
   <h3 id="total_price">
-    <%= (@cart.total_price * BigDecimal("1.08")).ceil + 500 %>円
+    <%= @cart.total_price + 500 %>円
   </h3>
 </section>
 
