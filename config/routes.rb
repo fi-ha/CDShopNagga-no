@@ -15,13 +15,14 @@ Rails.application.routes.draw do
   end
 
   # Cart画面は上から順にこのルーティングで進んで行きます。あとから修正している為ちょっと無理矢理感のあるルーティングとなっています。
+  patch 'carts/:id/total_price_create',  to: 'carts#total_price_create', as: 'cart_total_price'
   post 'carts/edit',                    to: 'carts#create',  as: 'cart_create'
   get  'carts/:id/edit',                to: 'carts#edit',    as: 'cart_edit'
   post 'carts/:id/edit',                to: 'carts#cartedit',as: 'cart_cartedit'
   get  'carts/:id/ship_to_another/edit',to: 'carts#ship',    as: 'ship_to_another_edit'
   post 'carts/:id/ship_to_another/edit',to: 'carts#shipedit',as: 'ship_to_another_shipedit'
   get  'carts/:id/payment/edit',        to: 'carts#pay',     as: 'payment_edit'
-  post 'carts/:id/payment/edit',        to: 'carts#payedit', as: 'payment_payedit'
+  patch 'carts/:id/payment/edit',        to: 'carts#payedit', as: 'payment_payedit'
   get  'carts/:id/confirm/edit',        to: 'carts#confirm', as: 'confirm_edit'
   get  'carts/:id/ginko/edit',          to: 'carts#ginko',   as: 'confirm_ginko'
   get  'carts/:id/daibiki/edit',        to: 'carts#daibiki', as: 'confirm_daibiki'
@@ -62,11 +63,19 @@ Rails.application.routes.draw do
     resources :singers,  only: [:index, :edit, :create, :update, :destroy]
     resources :items,    only: [:new, :index, :edit, :update, :destroy]
     resources :carts,    only: [:index, :show]
-    resources :reviews,  only: [:index, :edit]
+    resources :reviews,  only: [:index, :edit, :destroy]
     resources :users,    only: [:index]
     resources :contacts, only: [:index, :show]
     resources :respons,  only: [:create, :new, :show]
   end
 
   resources :concepts, only: [:index]
+
+
+
+  resources :carts do
+    patch :toggle_status
+  end
+
+
 end

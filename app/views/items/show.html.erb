@@ -2,58 +2,65 @@
 <% if flash[:alert] %>
 	<p><%= flash[:alert] %></p>
 <% end %>
-<h1><%= @item.item_name %>の詳細</h1>
-<div class="">
-	<div class="">
-		<%= attachment_image_tag @item,:image, :fill, 300, 300 %>
-	</div>
-	<div class="">
-		<strong>商品名：</strong><%= @item.item_name %><br>
-		<strong>アーティスト名：</strong><% @item.singers.each do |singer| %>
-			<%= singer.singer_name %><br>
-		<% end %>
-		<strong>ジャンル：</strong><% @item.genres.each do |genre| %>
-			<%= genre.genre_name %><br>
-		<% end %>
-		<strong>レーベル名：</strong><%= @item.label.label_name %><br>
-		<strong>価格(税込)：</strong><%= (@item.price*BigDecimal("1.08")).ceil %>円<br>
-		<strong>在庫：</strong><%= @item.stock.stock_count %>点
+
+<div class="main">
+	<div class="clearfix">
+		<h1><%= @item.item_name %></h1>
+		<div class="content-left">
+			<%= attachment_image_tag @item,:image, :fill, 200, 200 %>
+		</div>
+		<div class="content-right">
+			<strong>商品名：</strong><%= @item.item_name %><br>
+			<strong>アーティスト名：</strong><% @item.singers.each do |singer| %>
+				<%= singer.singer_name %><br>
+			<% end %>
+			<strong>ジャンル：</strong><% @item.genres.each do |genre| %>
+				<%= genre.genre_name %><br>
+			<% end %>
+			<strong>レーベル名：</strong><%= @item.label.label_name %><br>
+			<strong>価格(税込)：</strong><%= (@item.price*BigDecimal("1.08")).ceil %>円<br>
+<<<<<<< HEAD
+			<strong>在庫：</strong><%= if @item.stock.stock_count == 0
+						'在庫がありません'
+					else
+						"#{@item.stock.stock_count}点"
+					end%>
+		</div>
 	</div>
 
-	<div class="">
+	<section class="clearfix">
 		<h2>収録曲</h2>
-		<% @item.songs.each do |song| %>
-			<%= song.disk %>
-		<% end %>
-			<ul>
-				<% @item.songs.each do |song| %>
-					<li><%= song.song_name %></li>
-				<% end %>
-			</ul>
-	</div>
-	<div class="">
-		<% if user_signed_in? %>
-		
+		<table>
+			<tr>
+				<td class="songs">DISC</td>
+				<td class="songs">NUMBER</td>
+				<td class="songs">SONG</td>
+			</tr>
+			<% @item.songs.each do |song| %>
+				<tr>
+					<td class="songs"><%= song.disk %></td>
+					<td class="songs"><%= song.number %></td>
+					<td class="songs"><%= song.song_name %></td>
+				</tr>
+			<% end %>
+		</table>
+	</section>
+	<div class="clearfix">
 			<% if @item.favorited_by?(current_user) %>
 				<p>
-					<%= link_to 'お気に入り登録済み', item_favorites_path(@item), method: :delete, class: "btn btn bg-info" %>
+					<%= link_to 'お気に入り登録済み', item_favorites_path(@item), method: :delete %>
 				</p>
 			<% else %>
 				<p>
-					<%= link_to 'お気に入り登録する', item_favorites_path(@item), method: :post, class: "btn btn bg-info" %>
+					<%= link_to 'お気に入り登録する', item_favorites_path(@item), method: :post %>
 				</p>
-			<% end %>
-		<% else %>
-			<p>
-				<%= link_to 'お気に入り登録する', root_path, class: "btn btn bg-info" %>
-			</p>
 		<% end %>
 
 		<p>
-			<%= link_to 'カートに追加する', cart_create_path(item_id: @item.id), method: :post, class: "btn btn bg-warning" %>
+			<%= link_to 'カートに追加する', cart_create_path(item_id: @item.id), method: :post %>
 		</p>
 		<p>
-			<%= link_to '購入', carts_path(@item), method: :post %>
+			<%= link_to '購入', cart_create_path(item_id: @item.id), method: :post %>
 		</p>
 		<p>
 			<%= link_to 'レビューを投稿する', new_item_reviews_path(@item.id) %>
@@ -61,7 +68,7 @@
 	</div>
 
 <%= form_for [@item, @review] do |f| %>
-	レビュー
+	<p>レビュー</p>
 	<%= f.text_area :body %>
 	<%= f.submit '投稿' %>
 <% end %>
@@ -85,11 +92,12 @@
 			<!-- レビュー投稿ユーザーなら”編集”、”削除”を表示させる -->
 			<% if review.user == current_user %>
 				<td>
-					<%= link_to "編集", edit_review_path(review.id), class: "btn btn bg-success" %>
+					<%= link_to "編集", edit_review_path(review.id), class: "btn btn bg-success col-lg-12" %>
 				</td>
 				<td>
 					<%= link_to "削除", review_path(review.id), class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
 				</td>
+
 			<% else %>
 				<td></td>
 				<td></td>

@@ -37,12 +37,15 @@ class PersonalMailer < ApplicationMailer
 
   #==============================決済メ-ル送信====================================
   # 下記メソッドを使用したい場合はPersonal.send_when_contact_to_user(@contact).deliverと指定する
-    def send_when_ginko_to_user(finish_cart)
+    def send_when_daibiki_to_user(finish_cart)
       # 引き渡されるvalueに@を付けることでメール画面に反映させられる用にする
-      @user = current_user
       @cart = finish_cart
-      @item_carts = @cart.item_cart
-      mail  to:      @user,
+      @user = User.find_by(id: @cart.user_id)
+      @item_carts = @cart.item_carts
+      if @cart.ship_to_another_id != nil
+        @ship_to_another = ShipToAnother.find_by(id: @cart.ship_to_another_id)
+      end
+      mail  to:      @user.email,
             from:    ENV['MAIL_ADDRESS_KEY'],
             subject: 'ご注文が完了致しました。'
     end

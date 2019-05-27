@@ -21,7 +21,7 @@ class ItemCartsController < ApplicationController
   private
 
   def item_cart_params
-  	params.require(:item_cart).permit(:count)
+  	params.require(:item_cart).permit(:item_count)
   end
 
 end

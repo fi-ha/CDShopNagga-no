@@ -4,7 +4,6 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="users.scss">
-
 </head>
 
 
@@ -14,12 +13,12 @@
 
 	<div class="username">
 		<p class="username1"><%= @user.last_name %><%= @user.first_name %></p>
-    </div>
+  </div>
 
- <div class="btn">
-   <%= link_to "Edit User", edit_user_registration_path(@user.id) , class: "user_#{@user.id} btn-square" %>
-<%= link_to "Account Delite", items_path, method: :delete,  class: "user_#{@user.id}  btn-square", "data-confirm" => "本当に削除しますか？" %>
-</div>
+	<div class="btn">
+   	<%= link_to "Edit User", edit_user_registration_path(@user.id) , class: "user_#{@user.id} btn-square" %>
+		<%= link_to "Account Delite", items_path, method: :delete,  class: "user_#{@user.id}  btn-square", "data-confirm" => "本当に削除しますか？" %>
+	</div>
 
 <!-- タブ・メニュー -->
 <div>
@@ -35,32 +34,32 @@
 		<h2>Purchase History</h2>
 		<br>
 
-<!-- 未発送状態　-->         
+<!-- 未発送状態 -->
 
-　　　　 <p class="pre">準備中</p>
+ <p class="pre">準備中</p>
 
          <% @purchases.where(status: 2).each do |purchase| %>
          <% end %>
-<!-- 発送済み　-->         
+<!-- 発送済み  -->
 
-　　　　　<p class="pre">発送済</p>
+					<p class="pre">発送済</p>
 
          <% @purchases.where(status: 3).each do |purchase| %>
          <% end %>
-       </div>
+  </div>
 
-　　　　
-
-　　　<div class="tab-pane" id="favorite">
+	<div class="tab-pane" id="favorite">
 		<p><%= render 'favorites/index' %></p>
 	</div>
 
 	<div class="tab-pane" id="review">
 	    <p><%= render 'reviews/index' %></p>
 	</div>
+</div>
 
 </div>
+
+
 </div>
-</div>
-</div>
+	</div>
 </div>
