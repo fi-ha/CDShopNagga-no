@@ -21,7 +21,7 @@
       <% end %>
       <% if user_signed_in? %>
         <%= link_to user_path(current_user), class: "header-icon" do  %><!--リンク先はdevise設定の後、変更して下さい、ボタンの表示はlink_to_ifを使うと便利 -->
-          <i class="fas fa-user"><%= current_user.last_name + "さま" %></i>
+          <i class="fas fa-user"><%= current_user.last_name %><%= current_user.first_name %></i>
         <% end %>
       <% else %>
         ゲストユーザー
@@ -43,10 +43,10 @@
           <!--リンク先は各ページ設定の後、変更して下さい -->
           <li><%= link_to "TOP", root_path %></li>
           <li><%= link_to "おすすめプレーヤー", root_path %></li>
-          <li><%= link_to "商品一覧", root_path %></li>
+          <li><%= link_to "商品一覧", "/#playerjump" %></li>
           <li><%= link_to "コンセプト", concepts_path %></li>
           <% if user_signed_in? %>
-          <li><%= link_to "カート", cart_edit_path(current_user.id) %></li>
+          <!-- <li><%#= link_to "カート", cart_create_path, method: :post %></li> -->
           <li><%= link_to "マイページ", user_path(current_user) %></li>
             <% if current_user.admin == true %>
             <li><%= link_to "管理者ページ", administrator_items_path %></li>
@@ -74,28 +74,11 @@
       <!--================================================================== -->
 
 
-
-  <!--====================================================================== -->
-
-
-  <%= yield %>
-    <script type="text/javascript">
-      // =================ヘッダーのハンバーガーメニュー制御==========================
-      $('.menu-trigger-box').on('click', function(){
-        $(this).children('.menu-trigger').toggleClass('active');
-        $('.hamburger-menu').toggleClass('open');
-      });
-      // =======================================================================
-
-      // =======================中心モーダルウィンドウ制御==========================
-      // =======================================================================
-
-
-    </script>
-    <script type="text/javascript" src=""></script>
-      <!--=================================フッター============================== -->
+  <!--=================================フッター============================== -->
+ <%= yield %>
+ <div style="height: 50px;"></div>
   <footer>
-    <div class="footer-left"> 
+    <div class="footer-left">
       <%= link_to root_path, class: "footer-logo" do %><!--リンク先はルート設定の後変更して下さい -->
       <%= image_tag "naganologo.png", alt: "CDショップナッガ〜ノのロゴ", class: "footer-logo-img" %>
       <% end %>
@@ -106,5 +89,24 @@
       <%= link_to 'お問い合わせ', new_contact_path, remote: true %>
     </div>
   </footer>
+  <!--====================================================================== -->
+
+
+
+    <script type="text/javascript">
+
+
+      // =================ヘッダーのハンバーガーメニュー制御==========================
+      $('.menu-trigger-box').on('click', function(){
+        $(this).children('.menu-trigger').toggleClass('act');
+        $('.hamburger-menu').toggleClass('open');
+      });
+      // =======================================================================
+
+      // =======================中心モーダルウィンドウ制御==========================
+      // =======================================================================
+
+
+    </script>
   </body>
 </html>

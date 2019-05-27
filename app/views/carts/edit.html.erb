@@ -1,44 +1,150 @@
 <h1>Cart</h1>
+<p>内容がよろしければ発送先選択ページへお進み下さい</p>
+  <!-- ======================= こからカートの中身 ============================== -->
+  <section class="cart-items">
+    <table>
 
-<table>
-    <tr>
-      <td>商品画像</td>
-      <td>商品名/アーティスト名</td>
-      <td>注文数量</td>
-      <td>価格（税込）</td>
-      <td></td>
-    </tr>
-  <% @cart.item_carts.each do |item_cart| %>
-    <tr>
-      <td>
-        <%= attachment_image_tag(item_cart.item, :image, :fill, 60, 60, format: "jpeg") %>
-      </td>
-      <td>
-        <%= item_cart.item.item_name %>/<br>
-          <% item_cart.item.singers.each do |singer| %>
-            <%= singer.singer_name %>
-          <% end %>
-      </td>
-      <td>
-        <%= form_for(item_cart, url: item_cart_path(item_cart.id)) do |f| %>
-          <%= f.number_field :item_count, step: '1', min: '1', max: item_cart.item.stock.stock_count.to_i, required: true %>
-          <%= f.submit '購入数変更' %>
+      <% total_price = 0 %>
+      <!-- カート内のitemを繰り返し表示 -->
+      <% @item_carts.each do |item_cart| %>
+      <% price = item_cart.item_count * item_cart.price.to_i %>
+      <% total_price += price %>
+        <!-- もしCDだったら -->
+        <% if item_cart.item.description.blank? %>
+          <tbody class="cart-in-CD">
+            <tr>
+              <td rowspan="5"><%= attachment_image_tag(item_cart.item, :image, :fill, 60, 60, format: "jpeg") %></td>
+              <td rowspan="2"><p>CDタイトル</p><h3><%= item_cart.item.item_name %></h3></td>
+              <td></td>
+              <td class='multiply_price' rowspan="5"><%= (price * BigDecimal("1.08")).ceil %>円</td>
+              <td rowspan="5"><%= link_to 'カートから削除', item_cart_path(item_cart.id), method: :delete, "data-confirm" => "本当にカートから削除しますか？" %></td>
+            </tr>
+            <tr>
+              <td>
+                <%= form_with model: item_cart, url: item_cart_path(item_cart.id), local: true do |f| %>
+                  <%= f.number_field :item_count, class: "number", step: '1', min: '1', max: item_cart.item.stock.stock_count.to_i, value: item_cart.item_count, required: true %>枚
+                  <%= item_cart.item_count %>枚
+                  <%= f.submit '購入数変更' %>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td><p>歌手</p><%= ItemSinger.find_by(item_id: item_cart.item.id).singer.singer_name %></td>
+              <td><p>在庫状況</p><%= item_cart.item.stock.stock_count.to_i %></td>
+            </tr>
+            <tr>
+              <td><p>レーベル名</p><%= item_cart.item.label.label_name %></td>
+              <td rowspan="2"><%= link_to "お気に入り登録",{:controller => "favorites", :action => "create"}, remote: true %></td>
+            </tr>
+            <tr>
+              <td><p>ジャンル</p><%= ItemGenre.find_by(item_id: item_cart.item.id).genre.genre_name %></td>
+            </tr>
+          </tbody>
+          <!-- もしプレイヤーだったら -->
+        <% else %>
+          <tbody class="cart-in-Player">
+            <tr>
+              <td rowspan="4"><%= attachment_image_tag(item_cart.item, :image, :fill, 60, 60, format: "jpeg") %></td>
+              <td rowspan="4"><p>プレーヤー名</p><h3><%= item_cart.item.item_name %></h3></td>
+              <td></td>
+              <td class='multiply_price' rowspan="4"><%= (item_cart.item_count * item_cart.price.to_i * BigDecimal("1.08")).ceil %>円</td>
+              <td rowspan="4"><%= link_to 'カートから削除', item_cart_path(item_cart.id), method: :delete, "data-confirm" => "本当にカートから削除しますか？" %></td>
+            </tr>
+            <tr>
+              <td>
+                <%= form_with model: item_cart, url: item_cart_path(item_cart.id), local: true do |f| %>
+                  <%= f.number_field :item_count, class: "number", step: '1', min: '1', max: item_cart.item.stock.stock_count.to_i, value: item_cart.item_count, required: true %>台
+                  <%= f.submit '購入数変更' %>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td><p>在庫状況</p><%= item_cart.item.stock.stock_count.to_i %></td>
+            </tr>
+            <tr>
+              <td><%= link_to "お気に入り登録",{:controller => "favorites", :action => "create"}, remote: true %></td>
+            </tr>
+          </tbody>
         <% end %>
-      </td>
-      <td>
-        <%= (item_cart.commerce_price * BigDecimal("1.08")).ceil %>円
-      </td>
-      <td>
-        <%= link_to 'カートから削除', item_cart_path(item_cart.id), method: :delete, "data-confirm" => "本当にカートから削除しますか？" %>
-      </td>
-    </tr>
-  <% end %>
-</table>
-<h4>送料：一律５００円</h4>
-<h2>合計金額:<%= i = ((@cart.total_price.to_i) * BigDecimal("1.08")).ceil + 500 %></h2>
+      <% end %>
+    </table>
+  </section>
+  <!-- ====================================================================== -->
+  <!-- ============================合計金額の計算場所============================ -->
+  <section class="amount_calculation_field">
+    <p>合計</p>
+    <h3 id="sum_price">
+      <%= (total_price * BigDecimal("1.08")).ceil %>円
+    </h3>
+    <p>送料全国どこでも</p>
+    <h3>500円</h3>
+    <p>総合計</p>
+    <h3 id="total_price">
+      <%= (total_price * BigDecimal("1.08")).ceil + 500 %>円
+    </h3>
+  </section>
+  <%= link_to "お買い物に戻る",root_path %>
 
-<%= link_to 'お買い物に戻る', root_path %><br>
-<%= form_for(@cart, url: cart_total_price_path(@cart.id)) do |f| %>
-  <%= f.hidden_field :total_price, value: i %>
-  <%= f.submit '発送先選択へ' %>
-<% end %>
+  <%= form_with model: @cart, url: cart_cartedit_path(@cart.id), local: true, method: :post do |f| %>
+    <%= f.hidden_field :total_price, value: total_price %>
+    <%= f.submit '発送先選択へ' %>
+  <% end %>
+
+<script type="text/javascript">
+  $(function() {
+
+    // 関数定義
+    const AmountCalculation = () => {
+      const output = $(this).closest('tbody').find('.multiply_price');
+      // .numberのvalue（）個数を取得
+      const number = $(this).val();
+      // itemの金額を取得
+      const money = 1000;
+      // 個数×金額
+      multiply = money * number;
+      $.ajax(url: '/carts/new', type: "GET", data:{text:"hello world"});
+      const multiplyResult = multiply.toLocaleString() + "円";
+      // outputのテキストを変更する
+      output.text(multiplyResult).data("price", multiply);
+      console.log(output.data("price"));
+      output.text("<input class='money' type='hidden' name='' value="${multiply}" >" + multiplyResult).data("price", multiply);
+      multiply_sum(multiply);
+    };
+
+
+    //================inputの個数から表示金額を変える関数==========================
+    $('.number').on('input', function(event) {
+      const output = $(this).closest('tbody').find('.multiply_price');
+      // .numberのvalue（）個数を取得
+      const number = $(this).val();
+      // itemの金額を取得
+      const money = 1000;
+      // 個数×金額
+      multiply = money * number;
+      // データ属性に金額を含める
+      output.attr("data",multiply);
+      // ここで金額を表示する変数を作成
+      const multiplyResult = multiply.toLocaleString() + "円";
+      // outputのテキストを変更する
+      output.text(multiplyResult);
+      output.text("<input class='money' type='hidden' name='' value="${multiply}" >" + multiplyResult).data("price", multiply);
+      multiply_sum(multiply);
+    }); //.on('input', function(event) {でinput操作を発火
+
+
+    $('.multiply_price').each(function(i. n){
+      p = 0;
+      p = p + $(n).data("price");
+  $("sum_price").text(p);
+  $("total_price").text(p + 500);
+  });
+
+// ここ積んだ聞く
+    const multiply_sum = (multiply) => {
+      const reducer = (accumulator, currentValue) => accumulator + currentValue;
+      multiply_array.push(multiply)
+      const multiplySum = multiply_array.reduce(reducer)
+      $('sum_price').text(multiplySum);
+      };
+  });
+</script>
