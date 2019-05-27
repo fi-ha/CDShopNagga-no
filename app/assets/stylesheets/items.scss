@@ -111,6 +111,7 @@ h4 {
 }
 
 .items {
+  margin-top: 30px;
 	width: 30%;
 	float: left;
 	text-align: center;
@@ -134,4 +135,18 @@ h4 {
 
 .songs {
 	border: none;
+}
+
+.item-align {
+  text-align: left;
+  border: none;
+}
+
+.item-align:nth-child(2n+1) {
+  text-align: right;
+}
+
+.table-border {
+  text-align: left;
+  border: none;
 }
