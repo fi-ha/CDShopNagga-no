@@ -23,6 +23,8 @@
         <%= link_to user_path(current_user), class: "header-icon" do  %><!--リンク先はdevise設定の後、変更して下さい、ボタンの表示はlink_to_ifを使うと便利 -->
           <i class="fas fa-user"><%= current_user.last_name %><%= current_user.first_name %></i>
         <% end %>
+      <% else %>
+        ゲストユーザー
       <% end %>
     </div>
     <!--headerの右側 -->
