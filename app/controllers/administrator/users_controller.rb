@@ -9,6 +9,14 @@ class Administrator::UsersController < ApplicationController
         # binding.pry
     end
 
+    def switch
+      # return unless current_user.is_an_admin?
+      binding.pry
+      sign_in(:user, User.find(params[:id]))
+      redirect_to user_path
+      # redirect_to root_url # or user_root_url
+    end
+
     #ユーザーidと購入済みのステータスでカートを検索してレコードを取る
     #@userbuydesc = Cart.where(user_id: "対象のユーザーID").where(status:"購入済のステータス").limit 1
     #@userbuydesc = userbuydesc.order(created_at : desc).take

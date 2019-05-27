@@ -67,6 +67,7 @@ Rails.application.routes.draw do
     resources :users,    only: [:index]
     resources :contacts, only: [:index, :show]
     resources :respons,  only: [:create, :new, :show]
+    get 'user/:id', to: 'users#switch', as: 'switch'
   end
 
   resources :concepts, only: [:index]
