@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :singers, only: [:index, :edit, :create, :update, :destroy]
   resources :favorites
-  resources :users, only: [:show]
+  resources :users, only: [:show, :update]
 
   resources :users, only: [:show] do
     resource :favorites, only: [:index]
