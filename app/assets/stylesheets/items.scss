@@ -66,9 +66,9 @@
 }
 
 
-/*CD*/
+/*===============================CD===========================================*/
 
-#circle { 
+#circle {
   width: 1050px;
   height: 1050px;
   border: 1px solid #333;
@@ -97,7 +97,7 @@
 }
 
 
-#circle2 { 
+#circle2 {
   width: 90px;
   height: 90px;
   border: 1px solid #333;
@@ -112,7 +112,7 @@
 
 /*店名の文字*/
 
-#content1 { 
+#content1 {
     width: 50%;
     height: 50%;
     position: absolute;
@@ -125,15 +125,16 @@
     animation: rotate1 10s linear infinite;
 }
 
-@keyframes rotate1 { 
+@keyframes rotate1 {
   0% {
    transform: rotate(0deg);
   }
-    100% {  
+    100% {
     transform: rotate(360deg);
   }
 }
 
+/*============================================================================*/
 
 
 

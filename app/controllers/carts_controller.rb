@@ -1,9 +1,10 @@
 class CartsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :judgment_user
+  # before_action :judgment_user
   # enum変更用
-  before_action :set_cart, only:[:toggle_status]
+  # 明日ここ聞く
+  # # before_action :set_cart, only:[:toggle_status]
 
 
   def create
@@ -12,7 +13,7 @@ class CartsController < ApplicationController
     # もしユーザーのカートのstatusがカート状態だったら
     # カートを連続使用、ちゃうかったらカート新規作成
     # そもそもログインしてなかったログイン画面に飛ばす
-    if user_signed_in? && current_user.carts.where(status: "カート")
+    if user_signed_in? && current_user.carts.find_by(status: "カート")
       cart = current_user.carts.find_by(status: "カート")
 
       # cartに紐付いたitem_cartsにクリックした商品がなければitem_cart.new
@@ -23,7 +24,7 @@ class CartsController < ApplicationController
         item_cart.item_id = params[:item_id]
         item_cart.cart_id = cart.id
         item_cart.item_count = 1
-        item_cart.price = item_cart.item.price
+        item_cart.price = item.price
         item_cart.save
       else
         item_cart = cart.item_carts.find_by(item_id: params[:item_id])
@@ -44,7 +45,7 @@ class CartsController < ApplicationController
       redirect_to cart_edit_path(cart.id)
 
       # 新規登録後だと以下を使用する
-    elsif user_signed_in? && !current_user.carts.where(status: "カート")
+    elsif user_signed_in? && !current_user.carts.find_by(status: "カート")
       cart = Cart.new
       cart.user_id = current_user.id
       cart.status = "カート"
@@ -54,7 +55,7 @@ class CartsController < ApplicationController
       item_cart.item_id = params[:item_id]
       item_cart.cart_id = cart.id
       item_cart.item_count = 1
-      item_cart.price = item_cart.items.price
+      item_cart.price = item.price
       item_cart.save
 
       redirect_to cart_edit_path(cart.id)
@@ -67,12 +68,22 @@ class CartsController < ApplicationController
 
   def edit
     # createメソッドからのパラメータを受け取る
-    @cart = Cart.find(params[:id])
+    # Cartの中から現在のログインユーザーかつ、statusがカート状態のカートを取り出す関数定義
+    @cart = Cart.find_by(id: params[:id])
+    # cartのidとアソシエーションしているItem_cartを取り出す
+    @item_carts = @cart.item_carts
+
+    @sumprice = 0
+      for item_cart in @item_carts do
+        a = item_cart.price * item_cart.item_count
+        @sumprice += a
+        return @sumprice
+      end
   end
 
-  def update
+  def cartedit
     @cart = Cart.find(params[:id])
-    @cart.update
+    @cart.update(cart_params)
     redirect_to ship_to_another_edit_path(@cart.id)
   end
 
@@ -111,7 +122,11 @@ class CartsController < ApplicationController
   end
 
   def pay
-     @cart = Cart.find(params[:id])
+    @cart = Cart.find(params[:id])
+    if params[:nilnil] == 'true'
+      @cart.ship_to_another_id = nil
+      @cart.save
+    end
   end
 
   def payedit
@@ -120,65 +135,52 @@ class CartsController < ApplicationController
     redirect_to confirm_edit_path(@cart.id)
   end
 
-  # def confirm
-  #   # 現在のカートを取り出す
-  #   cart = current_user.carts.find_by(status: 1)
-  #   # cartのidとアソシエーションしているItem_cartを取り出す
-  #   @item_carts = cart.item_carts
-  #   # 更にitem_cartsとアソシエーションしているitemsを取り出す
-  #   @items = @item_carts.items
-  #   # itemとアソシエーションしているitem_singers、item_genres、を取り出す
-  #   @item_singers = @items.item_singers
-  #   @item_genres = @items.item_genres
-  #   # Genre,Stocks,Singer,Labelsからアソシエーションで関連しているデータを取り出す。
-  #   @genres = @item_genres.genres
-  #   @labels = @items.labels
-  #   # for で itemsをitemに変換し繰り返すその中で計算合計を出すさらにitem_stockにpriceを保管、sumpriceをcartに保管@sumprice
-  #   @sumprice = 0
-  #   for item in @items do
-  #     a = item.price * item.@item_carts.item_count
-  #     @sumprice += a
-  #   end
-  #
-  #   cart.total_price = @sumprice
-  #   cart.save
-  #
-  #   if cart.ship_to_another
-  #     @ship_to_another = cart.ship_to_anothers
-  #   end
-  #
-  #   case cart.payment
-  #     when 1 then
-  #      @payment = "<p>銀行振込</p><%= link_to '購入確定', confirm_ginko_path %>"
-  #
-  #     when 2 then
-  #      @payment = "<p>代金引換</p><%= link_to '購入確定', confirm_daibiki_path %>"
-  #
-  #     when 3 then
-  #      @payment = "<p>クレジットカード</p><%= link_to '購入確定', confirm_cred_path %>"
-  #
-  #    else
-  #      @peyment = "<%= link_to '支払い方法選択に戻る' , payment_edit_path %>"
-  #    end
-  # end
+  def confirm
+    # 現在のカートを取り出す
+    @cart = Cart.find(params[:id])
+    # cartのidとアソシエーションしているItem_cartを取り出す
+    @item_carts = @cart.item_carts
+    if @cart.ship_to_another_id != nil
+      @ship_to_another = ShipToAnother.find_by(id: @cart.ship_to_another_id)
+    end
+
+  end
 
   def ginko
-    cart = current_user.carts.find_by(status: 1)
+    cart = Cart.find(params[:id])
     cart.status = '未発送'
-    cart.total_price = params[:sumprice]
     cart.save
-    Personal.send_when_ginko_to_user(cart).deliver
+    item_carts = cart.item_carts
+    for item_cart in item_carts do
+      Stock.find_by(item_id: item_cart.item_id).decrement!(:stock_count, item_cart.item_count)
+    end
+    PersonalMailer.send_when_daibiki_to_user(cart).deliver
     redirect_to finish_path
   end
 
   def daibiki
-    # 発送メール送信
+    cart = Cart.find(params[:id])
+    cart.status = '未発送'
+    cart.save
+    item_carts = cart.item_carts
+    for item_cart in item_carts do
+      Stock.find_by(item_id: item_cart.item_id).decrement!(:stock_count, item_cart.item_count)
+    end
+    #下記記述で問い合わせフォーム専用のメールを送信出来るようにする.deliverを最後に付けることで送信
+    PersonalMailer.send_when_daibiki_to_user(cart).deliver
     redirect_to finish_path
   end
 
   def cred
     # payjp処理
-    # 発送メール送信
+    cart = Cart.find(params[:id])
+    cart.status = '未発送'
+    cart.save
+    item_carts = cart.item_carts
+    for item_cart in item_carts do
+      Stock.find_by(item_id: item_cart.item_id).decrement!(:stock_count, item_cart.item_count)
+    end
+    PersonalMailer.send_when_daibiki_to_user(cart).deliver
     redirect_to finish_path
   end
 
@@ -198,7 +200,7 @@ class CartsController < ApplicationController
     end
 
     def judgment_user
-			unless current_user.id == params[:id].to_i || current_user.admin == true
+			unless current_user.id == Cart.find(params[:id]).user_id || current_user.admin == true ||
 				redirect_to(root_path)
 			end
 		end
