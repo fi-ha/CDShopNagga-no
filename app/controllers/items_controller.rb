@@ -1,5 +1,13 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
+  #販売中、販売停止切り替え用
+  before_action :set_item, only:[:toggle_status]
+
+
+  def toggle_status
+    @item.toggle_status!
+    redirect_to administrator_items_path
+  end
 
   def index
     # 一覧表示ビュー作成
@@ -49,4 +57,11 @@ class ItemsController < ApplicationController
       item_genres_attributes: [:id, :genre_id, :_destroy],
       songs_attributes: [:id, :song_name, :disk, :number, :_destroy])
   end
+
+   #販売中、販売停止切り替え用
+  private
+  def set_item
+    @item = Item.find(params[:id] || params[:item_id])
+  end
+
 end

@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :item_genres,      only: [:create, :update]
     resource :reviews,      only: [:new, :create]
     resource :favorites,    only: [:create, :destroy]
+      patch :toggle_status
   end
 
   resources :stocks,            only: [:create, :update]
@@ -61,7 +62,9 @@ Rails.application.routes.draw do
     resources :genres,   only: [:index, :new, :edit, :create, :update, :destroy]
     resources :labels,   only: [:index, :create, :edit, :update, :destroy]
     resources :singers,  only: [:index, :edit, :create, :update, :destroy]
-    resources :items,    only: [:new, :index, :edit, :update, :destroy]
+    resources :items,    only: [:new, :index, :edit, :update, :destroy] do
+      patch :toggle_status
+    end
     resources :carts,    only: [:index, :show]
     resources :reviews,  only: [:index, :edit, :destroy]
     resources :users,    only: [:index]
