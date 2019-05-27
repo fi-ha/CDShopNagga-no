@@ -77,7 +77,7 @@
   top: -650px;
   right: -60px;
   float: right;
-  z-index: 1;
+  z-index: -10;
   border-color: #c0f5fe;
   border-width: medium;
 }
@@ -177,6 +177,7 @@ h4 {
 }
 
 .items {
+  margin-top: 30px;
 	width: 30%;
 	float: left;
 	text-align: center;
@@ -200,4 +201,19 @@ h4 {
 
 .songs {
 	border: none;
+}
+<<<<<<< HEAD
+
+.item-align {
+  text-align: left;
+  border: none;
+}
+
+.item-align:nth-child(2n+1) {
+  text-align: right;
+}
+
+.table-border {
+  text-align: left;
+  border: none;
 }

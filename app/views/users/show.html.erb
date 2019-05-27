@@ -15,10 +15,10 @@
 		<p class="username1"><%= @user.last_name %><%= @user.first_name %></p>
   </div>
 
-	<div class="btn">
-   	<%= link_to "Edit User", edit_user_registration_path(user_id: @user.id) , class: "user_#{@user.id} btn-square" %>
-		<%= link_to "Account Delite", items_path, method: :delete,  class: "user_#{@user.id}  btn-square", "data-confirm" => "本当に削除しますか？" %>
-	</div>
+ <div class="btn">
+	<%= link_to "Edit User", edit_user_registration_path(@user.id) , class: "user_#{@user.id} btn-square" %>
+	<%= link_to "Account Delite", user_registration_path, method: :delete,  class: "user_#{@user.id}  btn-square", "data-confirm" => "本当に削除しますか？" %>
+</div>
 
 <!-- タブ・メニュー -->
 <div>

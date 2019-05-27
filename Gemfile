@@ -75,12 +75,14 @@ gem 'bootstrap-sass', '~> 3.4.1'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 
+# 動的な投稿フォーム作成
 gem "cocoon"
 
 gem 'pry-rails'
 gem 'pry-doc'
 gem 'pry-stack_explorer'
-gem 'pry-byebug'
 
 # 環境変数を設定して各々共有したくない内容を隠せるgem
 gem 'dotenv-rails'
+# 論理削除用
+gem 'paranoia'
