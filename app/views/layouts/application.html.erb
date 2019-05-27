@@ -41,7 +41,7 @@
           <!--リンク先は各ページ設定の後、変更して下さい -->
           <li><%= link_to "TOP", root_path,class: 'btn-box' %></li>
           <li><%= link_to "おすすめプレーヤー", root_path,class: 'btn-box' %></li>
-          <li><%= link_to "商品一覧", root_path,class: 'btn-box' %></li>
+          <li><%= link_to "商品一覧", "/#playerjump",class: 'btn-box' %></li>
           <li><%= link_to "コンセプト", concepts_path,class: 'btn-box' %></li>
           <% if user_signed_in? %>
           <!-- <li><%#= link_to "カート", cart_create_path, method: :post %></li> -->

@@ -5,7 +5,11 @@
 
 <div class="row">
   <div class="col-md-3">
+   <% if user_signed_in? %>
+  	<%= link_to "MYPAGE", user_path(current_user), class: "btn-box" %>
+    <% else %>
   	<%= link_to "LOGIN", new_user_session_path, class: "btn-box" %>
+  	<% end %>
     <br>
   	<br>
   	<%= link_to "CONSEPT", concepts_path, class: "btn-box" %>
