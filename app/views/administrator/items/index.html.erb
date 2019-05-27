@@ -39,6 +39,13 @@
 		  	  在庫数：<%= item.stock.stock_count %>
 				</div>
 
+				<div>
+				<% if item.active == true %>
+				販売中
+				<% else %>
+				販売停止
+				<%end%>
+				</div>
 				<%= link_to '編集', edit_administrator_item_path(item.id),class: "btn btn bg-success" %>
 				<%= link_to '削除', administrator_item_path(item.id),class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
 			</div>
