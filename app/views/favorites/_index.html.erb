@@ -13,7 +13,7 @@
                 </td>
 
 				<td class="col-lg-6">
-					<%= link_to 'カートへ', new_cart_path, class: "btn btn bg-warning" %>
+					<%= link_to 'カートへ追加する', cart_create_path(item_id: favorite.item_id), method: :post, class: "btn btn bg-warning" %>
 				<%= link_to 'お気に入りを解除する', item_favorites_path(favorite.item.id), method: :delete, class: "btn btn bg-info" %>
 				</td>
 			</tr>

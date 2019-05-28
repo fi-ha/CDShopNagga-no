@@ -36,7 +36,7 @@ class CartsController < ApplicationController
         end
       end
       # 商品が安くなっていた場合、値段を安く更新する
-      if item_cart.price.to_i > (item.price * 1.08).ceil
+      if item_cart.price > (item.price * 1.08).ceil
         item_cart.price = (item.price * 1.08).ceil
         item_cart.save
         flash[:alert] = "お値段が安くなりました。"
@@ -167,7 +167,7 @@ class CartsController < ApplicationController
       Stock.find_by(item_id: item_cart.item_id).decrement!(:stock_count, item_cart.item_count)
     end
     #下記記述で問い合わせフォーム専用のメールを送信出来るようにする.deliverを最後に付けることで送信
-    # PersonalMailer.send_when_daibiki_to_user(cart).deliver
+    PersonalMailer.send_when_daibiki_to_user(cart).deliver
     redirect_to finish_path
   end
 
