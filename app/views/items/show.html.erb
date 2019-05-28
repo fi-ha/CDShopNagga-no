@@ -43,7 +43,7 @@
 				<tr>
 					<td class="item-align"><strong>在庫：</strong></td>
 					<td class="item-align">
-						<%= if @item.stock.stock_count == 0
+						<%= if @item.stock.stock_count <= 0
 						'在庫がありません'
 					else
 						"#{@item.stock.stock_count}点"
@@ -84,13 +84,14 @@
 				</p>
 			<% end %>
 		<% end %>
-
+					<% if @item.stock.stock_count > 0 %>
 		<p>
 			<%= link_to 'カートに追加する', cart_create_path(item_id: @item.id), method: :post %>
 		</p>
 		<p>
 			<%= link_to '購入', cart_create_path(item_id: @item.id), method: :post %>
 		</p>
+					<% end %>
 		<p>
 			<%= link_to 'レビューを投稿する', new_item_reviews_path(@item.id) %>
 		</p>
