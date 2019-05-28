@@ -1,0 +1,62 @@
+<div class='container'>
+    <div class='row'>
+<!---左のタブの部分テンプレート--->
+<%= render 'administrator/tab' %>
+
+
+<div class="col-md-8">
+
+
+<h1>
+	<strong>顧客一覧</strong>
+</h1>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>名前</th>
+			<th>メールアドレス</th>
+			<th>最新購入日</th>
+			<th></th>
+		</tr>
+	</thead>
+	<% @users.each do |user| %>
+	<tbody>
+		<tr>
+			<td><%= user.last_name %><%= user.first_name %></td>
+			<td><%= user.email %></td>
+			<% if Cart.exists?(user_id: user.id) %>
+			<td>last buy: <%= user.carts.last.created_at %></td>
+			<% else %>
+			<td>購入履歴がありません</td>
+			<% end %>
+		    <td>
+					<% unless user == current_user  %>
+						<% if user.admin == true %>
+							<%= link_to "ユーザーにする", administrator_adminchange_path(user.id), class: "user_#{user.id} btn btn-success active admin_selecter",remote: true %>
+						<% else %>
+							<%= link_to "管理者にする", administrator_adminchange_path(user.id), class: "user_#{user.id} btn btn-success active admin_selecter",remote: true %>
+						<% end %>
+						<%= link_to "閲覧", administrator_switch_path(user.id), class: "user_#{user.id} btn btn-success active" %>
+
+					<% else %>
+					ログイン中の管理者の為変更出来ません。
+					<%= link_to "閲覧", administrator_switch_path(user.id), class: "user_#{user.id} btn btn-success active" %>
+					<% end %>
+				</td>
+		</tr>
+	</tbody>
+	<% end %>
+</table>
+</div>
+
+<script>
+	$(".admin_selecter").on('ajax:success', function() {
+	  const innertext = $(this).text();
+	  if (innertext == "管理者にする") {
+	    $(this).text("ユーザーにする");
+	  } else {
+	    $(this).text("管理者にする");
+	  }
+	});
+</script>

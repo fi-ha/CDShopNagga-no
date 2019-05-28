@@ -1,0 +1,95 @@
+<!---左のタブの部分テンプレート--->
+<%= render 'administrator/tab' %>
+<h1>返信フォーム</h1>
+<div class="">
+  <table>
+    <tbody>
+      <tr>
+        <td colspan="2"><p><strong>投稿日時:</strong><%= @contact.created_at %></p></td>
+        <td colspan="2"><p><strong>投稿者:</strong>
+          <%= if @user
+          link_to "#{@user.last_name + @user.first_name}様", user_path(@user.id)
+          else
+          @contact.email
+          end %></p></td>
+        </tr>
+        <tr>
+          <td colspan="3"><p><strong>題名:</strong><%= @contact.subject %></p></td>
+          <td ></td>
+        </tr>
+        <tr>
+          <td colspan="4">本文</td>
+        </tr>
+        <tr>
+          <td colspan="4"><%= @contact.body %></td>
+        </tr>
+      </tbody>
+    </table>
+    <i class="fas fa-reply"></i>
+
+    <div class="respon_form">
+      <%= form_with model: @respon, url:administrator_respons_path do |form| %>
+      <%= form.hidden_field :contact_id, value: @contact.id %>
+      <%= form.label :respon_name, "名前（姓・名）" %>
+      <%= form.text_field :respon_name %>
+      <br>
+      <%= form.label :subject ,"題名" %>
+      <%= form.text_field :subject %>
+      <br>
+      <%= form.label :body ,"内容" %>
+      <%= form.text_area :body %>
+      <br>
+      <%= form.submit  "送信"%>
+      <% end %>
+    </div>
+
+    <% @replyedcontacts.each do |replyedcontact| %>
+    <%= respon = @respons.find_by(contact_id: replyedcontact.id) %>
+    <table>
+      <tbody>
+        <tr>
+          <td colspan="2"><p><strong>投稿日時:</strong><%= replyedcontact.created_at %></p></td>
+          <td colspan="2"><p><strong>投稿者:</strong>
+            <%= if @user
+            link_to "#{@user.last_name + @user.first_name}様", user_path(@user.id)
+            else
+            replyedcontact.email
+            end %></p></td>
+          </tr>
+          <tr>
+            <td colspan="3"><p><strong>題名:</strong><%= replyedcontact.subject %></p></td>
+            <td ></td>
+          </tr>
+          <tr>
+            <td colspan="4">本文</td>
+          </tr>
+          <tr>
+            <td colspan="4"><%= replyedcontact.body %></td>
+          </tr>
+        </tbody>
+      </table>
+      <i class="fas fa-reply"></i>
+      <div class="respon_table">
+        <table>
+          <tbody>
+            <tr>
+              <td colspan="2"><p><strong>返信日時:</strong>
+                <%= respon.created_at %></p></td>
+                <td colspan="2"><p><strong>返信者:</strong>
+                  <%= respon.respon_name %></p></td>
+                </tr>
+                <tr>
+                  <td colspan="3"><p><strong>題名:</strong><%= respon.subject %></p></td>
+                  <td ></td>
+                </tr>
+                <tr>
+                  <td colspan="4">本文</td>
+                </tr>
+                <tr>
+                  <td colspan="4"><%= respon.body %></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <% end %>
+</div>

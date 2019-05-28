@@ -1,0 +1,6 @@
+<h2>アーティスト名編集</h2>
+<%= form_for @label, url: administrator_label_path do |f| %>
+
+   <%= f.text_field :label_name, :size => '50' %>
+   <%= f.submit "編集", class: "edit_#{@label.id} btn btn bg-success"%>
+<% end %>

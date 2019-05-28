@@ -1,0 +1,34 @@
+<div class='container'>
+    <div class='row'>
+<!---左のタブの部分テンプレート--->
+<%= render 'administrator/tab' %>
+
+<div class="col-lg-7">
+
+    <%= form_for @singer, url: administrator_singers_path  do |f| %>
+    <h4>
+      アーティスト名<%= f.text_field :singer_name, :size => '40' %>
+      <%= f.submit "登録", class: "btn btn bg-success", data:{confirm:"本当に登録しますか？"} %>
+    </h4>
+    <% end %>
+
+  <h3>登録アーティスト一覧</h3>
+
+  <table class= "table table-striped">
+    <% @singers.each do |singer| %>
+			<tbody>
+				<tr>
+					<td>
+						<%= singer.singer_name %>
+					</td>
+					<td>
+						<%= link_to "編集", edit_administrator_singer_path(singer.id) , class: "singer_#{singer.id} btn btn bg-success" %>
+					</td>
+					<td>
+						<%= link_to "削除", administrator_singer_path(singer.id), method: :delete,  class: "singer_#{singer.id} btn btn bg-danger, btn btn-danger dropdown-toggle", "data-confirm" => "本当に削除しますか？ " %>
+					</td>
+				</tr>
+			</tbody>
+		<% end %>
+  </table>
+</div>

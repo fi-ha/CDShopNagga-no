@@ -1,2 +1,135 @@
-<h1>Items#show</h1>
-<p>Find me in app/views/items/show.html.erb</p>
+<!-- 未ログインの状態でカート追加、購入ボタンクリック時に表示 -->
+<% if flash[:alert] %>
+	<p><%= flash[:alert] %></p>
+<% end %>
+
+<div class="main">
+	<div class="clearfix">
+		<h1><%= @item.item_name %></h1>
+		<div class="content-left">
+			<%= attachment_image_tag @item,:image, :fill, 200, 200 %>
+		</div>
+		<div class="content-right">
+			<table class="table-border">
+				<tr>
+					<td class="item-align"><strong>商品名：</strong></td>
+					<td class="item-align"><%= @item.item_name %></td>
+				</tr>
+				<tr>
+					<td class="item-align"><strong>アーティスト名：</strong></td>
+					<td class="item-align">
+						<% @item.singers.each do |singer| %>
+							<%= singer.singer_name %><br>
+						<% end %>
+					</td>
+				</tr>
+				<tr>
+					<td class="item-align"><strong>ジャンル：</strong></td>
+					<td class="item-align">
+						<% @item.genres.each do |genre| %>
+							<%= genre.genre_name %><br>
+						<% end %>
+					</td>
+				</tr>
+				<tr>
+					<td class="item-align"><strong>レーベル名：</strong></td>
+					<td class="item-align"><%= @item.label.label_name %></td>
+				</tr>
+				<tr>
+					<td class="item-align"><strong>価格(税込)：</strong></td>
+					<td class="item-align"><%= (@item.price*BigDecimal("1.08")).ceil %>円</td>
+				</tr>
+				<tr>
+					<td class="item-align"><strong>在庫：</strong></td>
+					<td class="item-align">
+						<%= if @item.stock.stock_count == 0
+
+						'在庫がありません'
+					else
+						"#{@item.stock.stock_count}点"
+					end %>
+					</td>
+				</tr>
+			</table>
+
+		</div>
+	</div>
+
+	<section class="clearfix">
+		<h2>収録曲</h2>
+		<table>
+			<tr>
+				<td class="songs">DISC</td>
+				<td class="songs">NUMBER</td>
+				<td class="songs">SONG</td>
+			</tr>
+			<% @item.songs.each do |song| %>
+				<tr>
+					<td class="songs"><%= song.disk %></td>
+					<td class="songs"><%= song.number %></td>
+					<td class="songs"><%= song.song_name %></td>
+				</tr>
+			<% end %>
+		</table>
+	</section>
+	<div class="clearfix">
+			<% if @item.favorited_by?(current_user) %>
+				<p>
+					<%= link_to 'お気に入り登録済み', item_favorites_path(@item), method: :delete %>
+				</p>
+			<% else %>
+				<p>
+					<%= link_to 'お気に入り登録する', item_favorites_path(@item), method: :post %>
+				</p>
+		<% end %>
+
+		<p>
+			<%= link_to 'カートに追加する', cart_create_path(item_id: @item.id), method: :post %>
+		</p>
+		<p>
+			<%= link_to '購入', cart_create_path(item_id: @item.id), method: :post %>
+		</p>
+		<p>
+			<%= link_to 'レビューを投稿する', new_item_reviews_path(@item.id) %>
+		</p>
+	</div>
+
+<%= form_for [@item, @review] do |f| %>
+	<p>レビュー</p>
+	<%= f.text_area :body %>
+	<%= f.submit '投稿' %>
+<% end %>
+	<!-- 商品に基づいたレビューを一覧表示させる -->
+	<table class="">
+		<tr>
+			<td>投稿者</td>
+			<td>レビュー</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<% @item.reviews.each do |review| %>
+		<tr>
+			<td>
+				<%= review.user.last_name %>
+				<%= review.user.first_name %>
+			</td>
+			<td>
+				<%= review.body %>
+			</td>
+			<!-- レビュー投稿ユーザーなら”編集”、”削除”を表示させる -->
+			<% if review.user == current_user %>
+				<td>
+					<%= link_to "編集", edit_review_path(review.id), class: "btn btn bg-success" %>
+				</td>
+				<td>
+					<%= link_to "削除", review_path(review.id), class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
+				</td>
+
+			<% else %>
+				<td></td>
+				<td></td>
+			<% end %>
+		</tr>
+		<% end %>
+	</table>
+</div>

@@ -1,0 +1,9 @@
+$("#admin_selecter").bind('ajax:success', function() {
+  console.log($(this).text());
+  const innertext = $(this).text();
+  if (innertext == "管理者にする") {
+    $(this).text("管理者じゃなくする");
+  } else {
+    $(this).text("管理者じゃなくする");
+  }
+});

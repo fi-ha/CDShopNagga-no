@@ -1,0 +1,29 @@
+<div class='col-md-3'>
+  <div style="margin-top: 150px;">
+      <div class="dropdown">
+	    <button class="btn btn-primary dropdown-toggle col-xs-7" type="button" data-toggle="dropdown">
+		  商品マスタ
+	      <span class="caret"></span>
+        </button>
+	    <ul class="dropdown-menu" role="menu">
+          <li role="presentation">
+            <%= link_to "商品登録", new_administrator_item_path %>
+          </li>
+		  <li role="presentation">
+            <%= link_to "アーティスト編集", administrator_singers_path %>
+          </li>
+		  <li role="presentation">
+            <%= link_to "レーベル編集", administrator_labels_path %>
+          </li>
+		  <li role="presentation">
+            <%= link_to "ジャンル編集", administrator_genres_path %>
+          </li>
+	    </ul>
+      </div>
+	  <%= link_to "カート", administrator_carts_path, class: "btn btn bg-primary col-xs-7" %><br>
+	  <%= link_to "商品一覧", administrator_items_path, class: "btn btn bg-primary col-xs-7" %><br>
+	  <%= link_to "顧客一覧", administrator_users_path, class: "btn btn bg-primary col-xs-7" %><br>
+	  <%= link_to "レビュー一覧", administrator_reviews_path, class: "btn btn bg-primary col-xs-7" %><br>
+	  <%= link_to "問い合わせ一覧", administrator_contacts_path, class: "btn btn bg-primary col-xs-7" %><br>
+  </div>
+</div>

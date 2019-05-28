@@ -1,0 +1,49 @@
+<h1>Contact</h1>
+
+<!-- ===========もしエラーメッセージが帰って来ていたらエラー文を以下で表示する========= -->
+<% if contact.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(contact.errors.count, "error") %> prohibited this post from being saved:
+      </h2>
+
+      <ul>
+      <% contact.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+<% end %>
+<!-- ======================================================================= -->
+
+<%= form_with model: contact do |form| %>
+
+  <%= form.label :last_name, "名前（姓・名）" %>
+  <%= form.text_field :last_name %>
+  <%= form.text_field :first_name %>
+  <br>
+  <%= form.label :email ,"メールアドレス" %>
+  <%= form.text_field :email %>
+  <br>
+  <%= form.label :subject ,"題名" %>
+  <%= form.text_field :subject %>
+  <br>
+  <%= form.label :body ,"内容" %>
+  <%= form.text_area :body %>
+  <br>
+  <button id="exit-button" type="button" name="button">閉じる</button>
+  <%= form.submit  "送信", id: "send-button"%>
+
+<% end %>
+
+<script type="text/javascript">
+
+  $('#exit-button').on('click', function(){
+    $('.modal-window').removeClass('show');
+  });
+  // =========================以下はなぜか動かない=================================
+  $('#send-butoon').on('click', function(){
+    $(".modal-window").append("<p>送信中</p>");
+  });
+  // ===========================================================================
+</script>

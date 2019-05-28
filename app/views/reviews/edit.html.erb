@@ -1,0 +1,7 @@
+<h1>Review#edit</h1>
+<%= form_for @review do |f| %>
+
+	本文<br>
+	<%= f.text_area :body %>
+	<%= f.submit '更新する' %>
+<% end %>

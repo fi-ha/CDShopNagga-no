@@ -1,0 +1,34 @@
+<div class='container'>
+    <div class='row'>
+<!---左のタブの部分テンプレート--->
+<%= render 'administrator/tab' %>
+
+<div class="col-lg-7">
+
+    <%= form_for @label, url: administrator_labels_path do |f| %>
+	<h4>
+	  レーベル名<%= f.text_field :label_name, :size => '40' %>
+	  <%= f.submit "登録", class: "btn btn bg-success", data:{confirm:"本当に登録しますか？"} %>
+	</h4>
+	<% end %>
+
+  <h3>登録レーベル一覧</h3>
+
+  <table class= "table table-striped">
+    <% @labels.each do |label| %>
+      <tbody>
+        <tr>
+          <td>
+		    <%= label.label_name %>
+		  </td>
+		  <td>
+		    <%= link_to "編集", edit_administrator_label_path(label.id) , class: "label_#{label.id} btn btn bg-success" %>
+		  </td>
+		  <td>
+			<%= link_to "削除", administrator_label_path(label.id), method: :delete,  class: "label_#{label.id} btn btn bg-danger, btn btn-danger dropdown-toggle", "data-confirm" => "本当に削除しますか？ " %>
+		  </td>
+	    </tr>
+      </tbody>
+	<% end %>
+  </table>
+</div>

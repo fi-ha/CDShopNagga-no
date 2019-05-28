@@ -1,0 +1,6 @@
+
+<h2>ジャンル名編集</h2>
+<%= form_for @genre, url: administrator_genre_path do |f| %>
+   <%= f.text_field :genre_name, :size => '50' %>
+   <%= f.submit "編集", class: "edit_#{@genre.id} btn btn bg-success"%>
+<% end %>

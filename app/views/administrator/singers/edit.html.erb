@@ -1,0 +1,5 @@
+<h2>アーティスト名編集</h2>
+<%= form_for @singer, url: administrator_singer_path do |f| %>
+     <h4>アーティスト名<%= f.text_field :singer_name, :size => '50' %></h4>
+   <%= f.submit "編集", class: "edit_#{@singer.id} btn btn bg-success"%>
+<% end %>

@@ -1,0 +1,8 @@
+// お問い合わせボタンからまずこのファイルに飛んでくる
+// idがcontact-modalとなっているapplication.html.erb中のDivに対して、新規作成用のformをレンダリングしています。
+// contact: @contactとすることでcontactに@contactを入れる事が出来る
+$(".modal-window").html("<%= escape_javascript(render 'form', contact: @contact) %>");
+
+$(".modal-window").addClass("show");
+
+// レンダリングしたフォームに対してmodalで表示するように指示しています。

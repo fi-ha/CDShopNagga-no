@@ -13,8 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
 * {
  text-decoration: none;
  margin: 0;
@@ -22,26 +24,77 @@
  box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #C0C0C0;
+  min-height: 100vh;
+  background-color: black;
+  overflow-x: hidden;
+}
+
+li {
+  list-style-type: none;
+}
+
+.container {
+  height: 500px;
+}
+
+a {
+  color: #1E90FF;
+  display: inline-block;
+  transition: .3s;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+a:visited {
+  color: #00FFFF;
+  display: inline-block;
+  transition: .3s;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+a:hover {
+  color: #00FF00;
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+// ===========================ここからヘッダー=====================================
+
 header {
+  // フレックスボックスを使用しレイアウトする
+  display: flex;
+  // 要素がフロートの時に指定した部分に吸い付いてくれる（この場合flexでfloat、top0で固定）
   position: sticky;
   top: 0;
   height: 50px;
   margin-left: 30px;
   margin-right: 30px;
-  display: flex;
+  z-index: 100;
 }
+
 .header-left {
   height: 50px;
   line-height: 50px;
+  // 右側をautoとすることで右の余白を最大化する
   margin-right: auto;
 }
+
 .header-logo {
   display: inline-block;
   height: 50px;
 }
+
 .logo-img {
   height: 50px;
 }
+
 .header-icon {
   display: inline-block;
   vertical-align: top;
@@ -55,10 +108,12 @@ header {
   margin-left: auto;
 }
 
+// ========================ハンバーガーメニュー====================================
 /* menu-trigger部分のCSS */
 .menu-trigger-box {
   height: 50px;
   padding-top: 16px;
+  z-index: 11;
 }
 .menu-trigger,
 .menu-trigger span {
@@ -70,14 +125,16 @@ header {
   position: relative;
   width: 40px;
   height: 34px;
+  z-index: 12;
 }
 .menu-trigger span {
   position: absolute;
   left: 0;
   width: 100%;
   height: 5px;
-  background-color: black;
+  background-color: #ffff00;
   border-radius: 4px;
+  z-index: 13;
 }
 .menu-trigger span:nth-of-type(1) {
   top: 0;
@@ -89,25 +146,123 @@ header {
   bottom: 0;
 }
 /* menu-trigger部分のCSS.activeが追加された状態ばってんになる */
-.menu-trigger.active {
+.menu-trigger.act {
   -webkit-transform: rotate(360deg);
   transform: rotate(360deg);
 }
-.menu-trigger.active span:nth-of-type(1) {
+.menu-trigger.act span:nth-of-type(1) {
   -webkit-transform: translateY(15px) rotate(-45deg);
   transform: translateY(15px) rotate(-45deg);
 }
-.menu-trigger.active span:nth-of-type(2) {
+.menu-trigger.act span:nth-of-type(2) {
   -webkit-transform: translateY(0) rotate(45deg);
   transform: translateY(0) rotate(45deg);
 }
-.menu-trigger.active span:nth-of-type(3) {
+.menu-trigger.act span:nth-of-type(3) {
   opacity: 0;
 }
 
 .hamburger-menu {
+  width: 250px;
+  height: 100%;
+  padding-top: 100px;
+  background-color: rgba(16, 69, 153, 0.5);
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  // 左上の頂点をwidhtで指定した250px右にずらす
+  transform: translate(250px);
+  transition: all .5s;
+}
+.hamburger-menu a {
+  color: #cfff62;
+  margin-bottom: 20px;
+}
+.hamburger-menu ul {
+  padding-left: 10%;
+}
+.hamburger-menu.open {
+  // 左上の頂点元の位置に戻す
+  transform: translateZ(0);
+}
+// =============================================================================
+
+// ================ここからモーダルウィンドウのメールフォーム==========================
+
+// 配置
+.modal-window {
   display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
 }
-.hamburger-menu.active {
-  display: block;
+
+// デザイン
+.modal-window{
+    background-color: white;
+    margin:2em 0;
+    padding: 0.5em 1.5em;
+    border-top: solid 2px black;
+    border-bottom: solid 2px black;
 }
+.modal-window:before, .modal-window:after{
+    content: '';
+    position: absolute;
+    top: -10px;
+    width: 2px;
+    height: -webkit-calc(100% + 20px);
+    height: calc(100% + 20px);
+    background-color: black;
+}
+.modal-window:before {left: 10px;}
+.modal-window:after {right: 10px;}
+.modal-window p {
+    margin: 0;
+    padding: 0;
+}
+.modal-window .show {
+  display: flex;
+}
+
+// =============================================================================
+
+
+// ============================ここからフッター====================================
+footer {
+  width: 100%;
+  display: flex;
+  bottom: 0;
+  height: 50px;
+  margin-top: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.footer-left {
+  display: inline-block;
+  height: 50px;
+  line-height: 30px;
+  // 右側をautoとすることで右の余白を最大化する
+  margin-right: auto;
+}
+
+.footer-logo {
+  display: inline-block;
+  height: 50px;
+}
+
+.footer-logo-img {
+  height: 30px;
+}
+
+.footer-right {
+  margin-left: auto;
+  margin-right: 30px;
+}
+.footer-right a {
+  line-height: 30px;
+}
+// =============================================================================

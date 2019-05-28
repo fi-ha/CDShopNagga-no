@@ -1,0 +1,56 @@
+<h1>発送先選択</h1>
+<p>内容がよろしければ支払い方法選択ページへお進み下さい</p>
+
+<!-- ================初期住所の表示===================== -->
+<!-- このあとはship_to_anotherに情報が入っているか入っていないかで判断するため以下のボタンはダミー -->
+<p><input type="radio" name="optionsRadios" value="サンプル" checked>登録している住所</p>
+
+<p>〒<%= current_user.postal_code %> </p>
+<p><%= current_user.addres %> </p>
+<!-- ================================================ -->
+
+
+<!-- ================別住所フォームの表示===================== -->
+<p><input class='open' type="radio" name="optionsRadios" value="1">別の発送先を入力する</p>
+
+<%= form_for(@ship_to_another, url: ship_to_another_shipedit_path, html: {class: 'hidden_form'}, local: true) do |f| %>
+
+  <label for="name">名前(姓・名)</label><br>
+  <%= f.text_field :first_name, id: "name" %><br>
+  <%= f.text_field :last_name %><br>
+
+  <label for="kana">名前(カナ姓・カナ名)</label><br>
+  <%= f.text_field :first_name_kana, id: "kana" %><br>
+  <%= f.text_field :last_name_kana %><br>
+
+  <label for="postal">郵便番号　〒</label><br>
+  <%= f.text_field :postal_code, id: "postal" %><br>
+
+  <label for="address">住所</label><br>
+  <%= f.text_field :address, id: "address" %><br>
+
+  <%= f.submit "確定"%>
+
+<% end %>
+<!-- ================================================ -->
+
+
+<%# 以下の金額選択ボタンは別の発送先ラジオボタンをクリックすると消える %>
+  <%= link_to '金額選択', payment_edit_path(nilnil: true), class: 'link active' %>
+
+<script type="text/javascript">
+  $(function() {
+    $('input[name="optionsRadios"]:radio').change(function(){
+      let radioval = $(this).val();
+      console.log(radioval);
+      if(radioval == 1){
+        $('.hidden_form').addClass('active');
+        $('.link').removeClass('active');
+      }else{
+        $('.hidden_form').removeClass('active');
+        $('.link').addClass('active');
+        };
+      });
+
+    });
+  </script>

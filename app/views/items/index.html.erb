@@ -1,30 +1,151 @@
-<!-- トップビジュアル（円盤） -->
+<!-- 左側のボタン -->
+<br>
+<br>
+<br>
 
+<div class="row">
+  <div class="col-md-3">
+   <% if user_signed_in? %>
+  	<%= link_to "MYPAGE", user_path(current_user), class: "btn-box" %>
+    <% else %>
+  	<%= link_to "LOGIN", new_user_session_path, class: "btn-box" %>
+  	<% end %>
+    <br>
+  	<br>
+  	<%= link_to "CONSEPT", concepts_path, class: "btn-box" %>
+  	<br>
+  	<br>
+    <a href="#playerjump" class="jumpbutton btn-box">PLAYER</a>
+  	<br>
+  	<br>
+    <a href="#musicjump" class="jumpbutton btn-box">MUSIC</a>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- トップビジュアル（円盤） -->
+<br>
+<br>
+<br>
+  <div id="circle" class="out_window">
+    <div id="content1" class="out_window">CD SHOP NAGGANO</div>
+  </div>
+  <div id="circle1" class="out_window">
+    <div id="circle2" class="out_window">
+    </div>
+  </div>  
+
+
+
+
+<div class="container">
+  <div class="row">
+<div class="col-md-10 col-md-offset-1">
 
 <!-- プレイヤー説明 -->
-<div class="">
-	<h1 class="">Player</h1>
-	<p class="">持ち運びも簡単！</p>
-	<p class="">お洒落で機能的なプレーヤーを厳選しました！</p>
-</div>
+<!-- ページ内のリンク先の指定はIDを利用 -->
+<h1 id="playerjump"></h1>
+ <div class="">
+	<h1 class="player">Player</h1>
+	<p class="player1">持ち運びも簡単！</p>
+	<p class="player1">お洒落で機能的なプレーヤーを厳選しました！</p>
+
+			<% @items.each do |item| %>
+				<% if item.singers.blank? %>
+					<div class="items">
+						<%= link_to item_path(item.id) do %>
+							<%= attachment_image_tag(item, :image, :fill, 300, 300, format: 'jpeg') %><br>
+							<%= item.item_name %><br>
+							<% item.singers.each do |singer| %>
+								<%= singer.singer_name %><br>
+							<% end %>
+							価格(税込)：<%= (item.price*BigDecimal("1.08")).ceil %>円
+						<% end %>
+					</div>
+				<% end %>
+			<% end %>
+
+  </div>
+
+
+
 
 <!-- プレーヤー表示（skippr) -->
 
+	<div class="container">
+		<div class="theTarget">
+			<%# unless item.description.blank? %>
+				<%# @items.each do |player| %>
+					<div style="background-image: url(no_image.jpg)"></div>
+					<div style="background-image: url(no_image.jpg)"></div>
+					<div style="background-image: url(no_image.jpg)"></div>
+					<div style="background-image: url(no_image.jpg)"></div>
+					<div style="background-image: url(no_image.jpg)"></div>
+				<%# end %>
+			<%# end %>
+		</div>
+	</div>
+
 <!-- MUSIC説明 -->
-<div class="">
-	<h1 class="">Music</h1>
-	<p class="">様々なジャンルを揃えています！</p>
-	<p class="">お気に入りを見つけてみて下さい</p>
+<h1 id="musicjump"></h1>
+
+
+    <div class="content-text2", style="float:left; ">
+		<h1 class="music">Music</h1>
+		<p class="music1">様々なジャンルを揃えています！</p>
+		<p class="music1">お気に入りを見つけてみて下さい</p>
+
+	<!-- 検索ボックス -->
+	<h4>商品名検索</h4>
+	<%= form_tag(items_path,:method => 'get') do %>
+  	<%= text_field_tag :search %>
+  	<%= submit_tag 'Search', :item_name => nil %>
+	<% end %>
+
+
+	<!-- 商品一覧表示 -->
+			<% @items.each do |item| %>
+				<% if item.description.blank? %>
+					<div class="items">
+						<%= attachment_image_tag(item, :image, :fill, 300, 300, format: 'jpeg') %><br>
+						<%= link_to item_path(item.id) do %>
+						<%= item.item_name %>
+						<% item.singers.each do |singer| %>
+							<%= singer.singer_name %><br>
+						<% end %>
+						価格(税込)：<%= (item.price*BigDecimal("1.08")).ceil %>円
+						<% end %>
+					</div>
+				<% end %>
+			<% end %>
+		</div>
+</div>
+</div>
 </div>
 
-<!-- 検索ボックス -->
 
+<script type="text/javascript">
+   $(function(){
 
-<!-- 商品一覧表示 -->
-<table class="">
-	<tr>
-		<td class="">商品１</td>
-		<td class="">商品２</td>
-		<td class="">商品３</td>
-	</tr>
-</table>
+   	$('#content1').arctext({radius: 490});
+
+   // #で始まるアンカーをクリックした場合に処理
+   // $('.jumpbutton').click(function() {
+   //    // スクロールの速度
+   //    var speed = 400; // ミリ秒
+   //    // アンカーの値取得
+   //    var href= $(this).attr("href");
+   //    // 移動先を取得
+   //    var target = $(href == "#" || href == "" ? 'html' : href);
+   //    // 移動先を数値で取得
+   //    var position = target.offset().top;
+   //    // スムーススクロール
+   //    $('body,html').animate({scrollTop:position}, speed, 'swing');
+   //    return false;
+   // });
+});
+</script>
