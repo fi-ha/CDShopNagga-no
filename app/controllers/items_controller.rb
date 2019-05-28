@@ -12,7 +12,6 @@ class ItemsController < ApplicationController
   def show
     # 詳細ビュー作成
     @item = Item.find(params[:id])
-    @review = Review.new
   end
 
   def edit

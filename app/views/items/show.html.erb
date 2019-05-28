@@ -71,6 +71,7 @@
 		</table>
 	</section>
 	<div class="clearfix">
+		<% if user_signed_in? %>
 			<% if @item.favorited_by?(current_user) %>
 				<p>
 					<%= link_to 'お気に入り登録済み', item_favorites_path(@item), method: :delete %>
@@ -79,6 +80,7 @@
 				<p>
 					<%= link_to 'お気に入り登録する', item_favorites_path(@item), method: :post %>
 				</p>
+			<% end %>
 		<% end %>
 
 		<p>
@@ -91,12 +93,6 @@
 			<%= link_to 'レビューを投稿する', new_item_reviews_path(@item.id) %>
 		</p>
 	</div>
-
-<%= form_for [@item, @review] do |f| %>
-	<p>レビュー</p>
-	<%= f.text_area :body %>
-	<%= f.submit '投稿' %>
-<% end %>
 	<!-- 商品に基づいたレビューを一覧表示させる -->
 	<table class="">
 		<tr>

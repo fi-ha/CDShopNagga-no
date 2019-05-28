@@ -154,7 +154,7 @@ class CartsController < ApplicationController
     for item_cart in item_carts do
       Stock.find_by(item_id: item_cart.item_id).decrement!(:stock_count, item_cart.item_count)
     end
-    PersonalMailer.send_when_daibiki_to_user(cart).deliver
+    # PersonalMailer.send_when_daibiki_to_user(cart).deliver
     redirect_to finish_path
   end
 
@@ -167,7 +167,7 @@ class CartsController < ApplicationController
       Stock.find_by(item_id: item_cart.item_id).decrement!(:stock_count, item_cart.item_count)
     end
     #下記記述で問い合わせフォーム専用のメールを送信出来るようにする.deliverを最後に付けることで送信
-    PersonalMailer.send_when_daibiki_to_user(cart).deliver
+    # PersonalMailer.send_when_daibiki_to_user(cart).deliver
     redirect_to finish_path
   end
 
@@ -180,7 +180,7 @@ class CartsController < ApplicationController
     for item_cart in item_carts do
       Stock.find_by(item_id: item_cart.item_id).decrement!(:stock_count, item_cart.item_count)
     end
-    PersonalMailer.send_when_daibiki_to_user(cart).deliver
+    # PersonalMailer.send_when_daibiki_to_user(cart).deliver
     redirect_to finish_path
   end
 
