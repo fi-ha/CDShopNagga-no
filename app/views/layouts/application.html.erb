@@ -45,8 +45,8 @@
       <ul>
         <!--リンク先は各ページ設定の後、変更して下さい -->
         <li><%= link_to "TOP", root_path,class: 'btn-box' %></li>
-        <li><%= link_to "おすすめプレーヤー", root_path,class: 'btn-box' %></li>
-        <li><%= link_to "商品一覧", "/#playerjump",class: 'btn-box' %></li>
+        <li><%= link_to "おすすめプレーヤー", "/#playerjump", class: 'btn-box' %></li>
+        <li><%= link_to "商品一覧", "/#musicrjump", class: 'btn-box' %></li>
         <li><%= link_to "コンセプト", concepts_path,class: 'btn-box' %></li>
         <% if user_signed_in? %>
           <li><%= link_to "マイページ", user_path(current_user),class: 'btn-box' %></li>
@@ -57,7 +57,6 @@
         <% else %>
           <li><%= link_to "ログイン", new_user_session_path,class: 'btn-box' %></li>
           <li><%= link_to "新規登録", new_user_registration_path,class: 'btn-box' %></li>
-          <li><%= link_to "カート", new_user_registration_path,class: 'btn-box' %></li>
         <% end %>
         <li><%= link_to 'お問い合わせ', new_contact_path, remote: true,class: 'btn-box' %></li>
       </ul>
