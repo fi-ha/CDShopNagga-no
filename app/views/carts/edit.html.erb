@@ -7,7 +7,7 @@
       <% total_price = 0 %>
       <!-- カート内のitemを繰り返し表示 -->
       <% @item_carts.each do |item_cart| %>
-      <% price = item_cart.item_count * item_cart.price.to_i %>
+      <% price = item_cart.item_count * item_cart.price %>
       <% total_price += price %>
         <!-- もしCDだったら -->
         <% if item_cart.item.description.blank? %>
@@ -16,7 +16,7 @@
               <td rowspan="5"><%= attachment_image_tag(item_cart.item, :image, :fill, 60, 60, format: "jpeg") %></td>
               <td rowspan="2"><p>CDタイトル</p><h3><%= item_cart.item.item_name %></h3></td>
               <td></td>
-              <td class='multiply_price' rowspan="5"><%= (price * BigDecimal("1.08")).ceil %>円</td>
+              <td class='multiply_price' rowspan="5"><%= price %>円</td>
               <td rowspan="5"><%= link_to 'カートから削除', item_cart_path(item_cart.id), method: :delete, "data-confirm" => "本当にカートから削除しますか？" %></td>
             </tr>
             <tr>
@@ -58,7 +58,7 @@
               <td rowspan="4"><%= attachment_image_tag(item_cart.item, :image, :fill, 60, 60, format: "jpeg") %></td>
               <td rowspan="4"><p>プレーヤー名</p><h3><%= item_cart.item.item_name %></h3></td>
               <td></td>
-              <td class='multiply_price' rowspan="4"><%= (item_cart.item_count * item_cart.price.to_i * BigDecimal("1.08")).ceil %>円</td>
+              <td class='multiply_price' rowspan="4"><%= price %>円</td>
               <td rowspan="4"><%= link_to 'カートから削除', item_cart_path(item_cart.id), method: :delete, "data-confirm" => "本当にカートから削除しますか？" %></td>
             </tr>
             <tr>
@@ -97,13 +97,13 @@
   <section class="amount_calculation_field">
     <p>合計</p>
     <h3 id="sum_price">
-      <%= (total_price * BigDecimal("1.08")).ceil %>円
+      <%= total_price %>円
     </h3>
     <p>送料全国どこでも</p>
     <h3>500円</h3>
     <p>総合計</p>
     <h3 id="total_price">
-      <%= (total_price * BigDecimal("1.08")).ceil + 500 %>円
+      <%= total_price + 500 %>円
     </h3>
   </section>
   <%= link_to "お買い物に戻る","/#playerjump" %>

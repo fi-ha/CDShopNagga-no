@@ -2,7 +2,7 @@ class Item < ApplicationRecord
 	# フォームを保存する際に以下のバリデーションを設定している
 	validates :item_name, presence: true
 	validates :price, presence: true
-	validates :active, presence: true
+
 
 	# アソシエーション設定
 	has_many :songs,      dependent: :destroy
@@ -23,6 +23,10 @@ class Item < ApplicationRecord
 	has_many :favorites, dependent: :destroy
 	belongs_to :label
 
+
+ #販売中、販売停止切り替え用
+	enum active: { 販売中: 1, 販売停止: 2 }
+
 	#画像
 	attachment :image
 
@@ -42,8 +46,14 @@ class Item < ApplicationRecord
         end
     end
 
-
-
+ #販売中、販売停止切り替え用
+	def toggle_status!
+		if 販売中?
+		  販売停止!
+		else
+		  販売中!
+		end
+	  end
 
 
 
