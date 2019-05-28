@@ -4,8 +4,8 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
-        @purchases = @user.carts
-        @reviews = @user.reviews.all
+		@carts = @user.carts.all
+    @reviews = @user.reviews.all
 		@favorites = @user.favorites.all
 	end
 

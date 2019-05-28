@@ -33,6 +33,8 @@
 
 				<div>
 				  価格：<%= item.price %>
+					<%= link_to '削除', administrator_item_path(item.id),class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
+					<%= link_to '編集', edit_administrator_item_path(item.id),class: "btn btn bg-success" %>
 				</div>
 
 				<div>
@@ -42,8 +44,6 @@
 				<div>
 				<%= link_to item.active, item_toggle_status_path(item.id), method: :patch %>
 				</div>
-				<%= link_to '編集', edit_administrator_item_path(item.id),class: "btn btn bg-success" %>
-				<%= link_to '削除', administrator_item_path(item.id),class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
 			</div>
 			<% end %>
 

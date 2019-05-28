@@ -38,24 +38,142 @@
 		<h2>Purchase History</h2>
 		<br>
 
-<!-- 未発送状態 -->
+<!------------購入履歴のタブの中身--------------->
+    <h2>未発送一覧</h2>
+        <% @carts.each do |cart| %>
+        <% if cart.status == '未発送' %>
+        <div class="", style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+          <p><strong>
+          <%= cart.created_at.strftime('%Y/%m/%d') %></strong>の注文
+		      <strong>ユーザー名</strong>：
+          <%= cart.user.last_name %><%= cart.user.first_name %>
+          <strong>購入価格総計（送料込み）</strong>：
+          <%= cart.total_price + 500 %>円
+          <strong>
+          <%= cart.status %>
+          </strong>
+          </p>
+<!-------- カートの中身 --------------->
 
- <p class="pre">準備中</p>
+    <div>
+      <% cart.item_carts.each do |item_cart|%>
+      <%= attachment_image_tag(item_cart.item, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg") %>
+		<%end%>
+    </div>
 
-         <% @purchases.where(status: 2).each do |purchase| %>
-         <% end %>
-<!-- 発送済み  -->
+    <div>
+    <% cart.item_carts.each do |item_cart|%>
+    商品名：<%= item_cart.item.item_name %>
+		<%end%>
+    </div>
 
-					<p class="pre">発送済</p>
+    <div>
+    <% cart.item_carts.each do |item_cart|%>
+    購入枚数：<%= item_cart.item_count %>
+		<%end%>
+    </div>
 
-         <% @purchases.where(status: 3).each do |purchase| %>
-         <% end %>
+    <div>
+    <% cart.item_carts.each do |item_cart| %>
+    価格(税込)：
+    <%= item_cart.price * item_cart.item_count %>円
+    <% end %>
+    </div>
+
+
+
+
+    <div>
+   <% if cart.ship_to_another_id.blank? %>
+       送付先： 〒<%= cart.user.postal_code %><br>
+    <%= cart.user.addres %>
+    <% else %>
+    送付先：<%= cart.ship_to_another.last_name %>
+    <%= cart.ship_to_another.first_name %><br>
+    〒<%= cart.ship_to_another.postal_code %><br>
+    <%= cart.ship_to_another.address %>
+    <% end %>
+    </div>
+
+
+
+        </div>
+<% end %>
+<% end %>
+
+
+
+
+
+
+<h2>発送済一覧</h2>
+        <% @carts.each do |cart| %>
+        <% if cart.status == '発送済み' %>
+        <div class="", style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+          <p><strong>
+          <%= cart.created_at.strftime('%Y/%m/%d') %></strong>の注文
+		      <strong>ユーザー名</strong>：
+          <%= cart.user.last_name %><%= cart.user.first_name %>
+          <strong>購入価格総計</strong>：
+          <%= cart.total_price%>円
+          <strong><%= cart.status %></strong>
+          </p>
+<!-------- カートの中身 --------------->
+        <div>
+      <% cart.item_carts.each do |item_cart|%>
+      <%= attachment_image_tag(item_cart.item, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg") %>
+		<%end%>
+    </div>
+
+    <div>
+    <% cart.item_carts.each do |item_cart|%>
+    商品名：<%= item_cart.item.item_name %>
+		<%end%>
+    </div>
+
+    <div>
+    <% cart.item_carts.each do |item_cart|%>
+    購入枚数：<%= item_cart.item_count %>
+		<%end%>
+    </div>
+
+    <div>
+    <% cart.item_carts.each do |item_cart| %>
+    価格(税込)：
+    <%= item_cart.price * item_cart.item_count %>円
+    <% end %>
+    </div>
+
+
+
+    <div>
+    <% if cart.ship_to_another_id.blank? %>
+       送付先： 〒<%= cart.user.postal_code %><br>
+    <%= cart.user.addres %>
+    <% else %>
+    送付先：<%= cart.ship_to_another.last_name %>
+    <%= cart.ship_to_another.first_name %><br>
+    〒<%= cart.ship_to_another.postal_code %><br>
+    <%= cart.ship_to_another.address %>
+    <% end %>
+    </div>
+
+
+</div>
+<% end %>
+<% end %>
+
+
+
+
   </div>
 
+<!------------お気に入りのタブの中身------------->
 	<div class="tab-pane" id="favorite">
 		<p><%= render 'favorites/index' %></p>
 	</div>
 
+<!------------レビューのタブの中身--------------->
 	<div class="tab-pane" id="review">
 	    <p><%= render 'reviews/index' %></p>
 	</div>
