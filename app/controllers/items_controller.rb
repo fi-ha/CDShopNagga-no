@@ -20,6 +20,10 @@ class ItemsController < ApplicationController
   def show
     # 詳細ビュー作成
     @item = Item.find(params[:id])
+    binding.pry
+    cd_genre_id = ItemGenre.find_by(item_id: @item.id).genre_id
+    players = ItemGenre.joins(:items).where.not(description: nil)
+    @player = players.find_by(genre_id: cd_genre_id)
     @review = Review.new
     if @item.active == "販売停止"
       @items = Item.all
@@ -69,5 +73,5 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id] || params[:item_id])
   end
-  
+
 end
