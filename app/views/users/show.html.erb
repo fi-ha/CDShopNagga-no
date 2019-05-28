@@ -16,7 +16,7 @@
   </div>
 
  <div class="btn">
-	<%= link_to "Edit User", edit_user_registration_path(@user.id) , class: "user_#{@user.id} btn-square" %>
+	<%= link_to "Edit User", edit_user_registration_path , class: "user_#{@user.id} btn-square" %>
 	<%= link_to "Account Delite", user_registration_path, method: :delete,  class: "user_#{@user.id}  btn-square", "data-confirm" => "本当に削除しますか？" %>
 </div>
 
