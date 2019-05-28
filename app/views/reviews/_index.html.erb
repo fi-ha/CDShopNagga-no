@@ -14,9 +14,9 @@
 				<td class="col-lg-4">
 					本文：<%= review.body %>
 				</td>
-				<td>
-					<%= link_to '編集', edit_review_path(review.id), class: "btn btn bg-success col-lg-4" %>
-					<%= link_to '削除', review_path(review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn bg-danger col-lg-4" %>
+				<td class="col-lg-4">
+					<%= link_to '編集', edit_review_path(review.id), class: "btn btn bg-success" %>
+					<%= link_to '削除', review_path(review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn bg-danger" %>
 				</td>
 			</tr>
 		</table>

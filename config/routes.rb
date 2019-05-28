@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :singers, only: [:index, :edit, :create, :update, :destroy]
   resources :favorites
-  resources :users, only: [:show]
+  resources :users, only: [:show, :update]
 
   resources :users, only: [:show] do
     resource :favorites, only: [:index]
@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :item_genres,      only: [:create, :update]
     resource :reviews,      only: [:new, :create]
     resource :favorites,    only: [:create, :destroy]
+      patch :toggle_status
   end
 
   resources :stocks,            only: [:create, :update]
@@ -61,12 +62,16 @@ Rails.application.routes.draw do
     resources :genres,   only: [:index, :new, :edit, :create, :update, :destroy]
     resources :labels,   only: [:index, :create, :edit, :update, :destroy]
     resources :singers,  only: [:index, :edit, :create, :update, :destroy]
-    resources :items,    only: [:new, :index, :edit, :update, :destroy]
+    resources :items,    only: [:new, :index, :edit, :update, :destroy] do
+      patch :toggle_status
+    end
     resources :carts,    only: [:index, :show]
     resources :reviews,  only: [:index, :edit, :destroy]
     resources :users,    only: [:index]
     resources :contacts, only: [:index, :show]
     resources :respons,  only: [:create, :new, :show]
+    get 'user/:id', to: 'users#switch', as: 'switch'
+    get 'adminchange/:id', to: 'users#adminchange', as: 'adminchange'
   end
 
   resources :concepts, only: [:index]

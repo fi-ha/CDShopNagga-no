@@ -5,7 +5,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
   </head>
@@ -13,99 +13,89 @@
   <body class="overlay">
     <!-- ============eader部分float:auto;により常に上部に表示=================== -->
 
-  <header>
-    <!--headerの左側 -->
-    <div class="header-left">
-      <%= link_to root_path, class: "header-logo" do %><!--リンク先はルート設定の後変更して下さい -->
-      <%= image_tag "naganologo.png", alt: "CDショップナッガ〜ノのロゴ",class: "logo-img" %>
-      <% end %>
-      <% if user_signed_in? %>
-        <%= link_to user_path(current_user), class: "header-icon" do  %><!--リンク先はdevise設定の後、変更して下さい、ボタンの表示はlink_to_ifを使うと便利 -->
-          <i class="fas fa-user"><%= current_user.last_name %><%= current_user.first_name %></i>
+    <header>
+      <!--headerの左側 -->
+      <div class="header-left">
+        <%= link_to root_path, class: "header-logo" do %>
+          <!--リンク先はルート設定の後変更して下さい -->
+          <%= image_tag "naganologo.png", alt: "CDショップナッガ〜ノのロゴ",class: "logo-img" %>
         <% end %>
-      <% else %>
-           <i class="fas fa-user"> ゲストユーザー</i>
-      <% end %>
-    </div>
-    <!--headerの右側 -->
-    <div class="header-right">
-      <!-- menu-trigger部分 -->
-      <div class="menu-trigger-box">
-        <a class="menu-trigger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </a>
-      </div>
-      <!--headerのトリガーを押したあとに出てくるmenu -->
-      <nav class="hamburger-menu">
-        <ul class="hamburger-menu">
-          <!--リンク先は各ページ設定の後、変更して下さい -->
-          <li><%= link_to "TOP", root_path %></li>
-          <li><%= link_to "おすすめプレーヤー", "/#playerjump" %></li>
-          <li><%= link_to "商品一覧", "/#musicjump" %></li>
-          <li><%= link_to "コンセプト", concepts_path %></li>
-          <% if user_signed_in? %>
-          <!-- <li><%#= link_to "カート", cart_create_path, method: :post %></li> -->
-          <li><%= link_to "マイページ", user_path(current_user) %></li>
-            <% if current_user.admin == true %>
-            <li><%= link_to "管理者ページ", administrator_items_path %></li>
-            <% end %>
-          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-          <% else %>
-          <li><%= link_to "ログイン", new_user_session_path %></li>
-          <li><%= link_to "新規登録", new_user_registration_path %></li>
+        <% if user_signed_in? %>
+          <%= link_to user_path(current_user), class: "header-icon" do %>
+            <!--リンク先はdevise設定の後、変更して下さい、ボタンの表示はlink_to_ifを使うと便利 -->
+            <i class="fas fa-user"><%= current_user.last_name %><%= current_user.first_name %></i>
           <% end %>
-          <li><%= link_to 'お問い合わせ', new_contact_path, remote: true %></li>
-        </ul>
-      </nav>
-    </header>
-    <!-- ===================================================================================================== -->
+        <% else %>
+        ゲストユーザー
+        <% end %>
+  </div>
+  <!--headerの右側 -->
+  <div class="header-right">
+    <!-- menu-trigger部分 -->
+    <div class="menu-trigger-box">
+      <a class="menu-trigger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
+    </div>
+    
+    <!--headerのトリガーを押したあとに出てくるmenu -->
+    <nav class="hamburger-menu">
+      <ul>
+        <!--リンク先は各ページ設定の後、変更して下さい -->
+        <li><%= link_to "TOP", root_path,class: 'btn-box' %></li>
+        <li><%= link_to "おすすめプレーヤー", root_path,class: 'btn-box' %></li>
+        <li><%= link_to "商品一覧", "/#playerjump",class: 'btn-box' %></li>
+        <li><%= link_to "コンセプト", concepts_path,class: 'btn-box' %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to "マイページ", user_path(current_user),class: 'btn-box' %></li>
+          <% if current_user.admin == true %>
+            <li><%= link_to "管理者ページ", administrator_items_path,class: 'btn-box' %></li>
+          <% end %>
+          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete,class: 'btn-box' %></li>
+        <% else %>
+          <li><%= link_to "ログイン", new_user_session_path,class: 'btn-box' %></li>
+          <li><%= link_to "新規登録", new_user_registration_path,class: 'btn-box' %></li>
+          <li><%= link_to "カート", new_user_registration_path,class: 'btn-box' %></li>
+        <% end %>
+        <li><%= link_to 'お問い合わせ', new_contact_path, remote: true,class: 'btn-box' %></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- ===================================================================================================== -->
 
-
-
-      <!--=====================モーダルウィンドウ表示部分======================== -->
-      <!-- ここは中心に表示させるモーダルウィンドウを表示する部分です。
-        ここの中にrenderでモーダルウィンドウを指定して下さい
-        見本としてフッターからのメール送信モーダルを作成しています。-->
-      <div class="modal-window">
-      </div>
-      <!--================================================================== -->
-
+  <!--=====================モーダルウィンドウ表示部分======================== -->
+  <!-- ここは中心に表示させるモーダルウィンドウを表示する部分です。 ここの中にrenderでモーダルウィンドウを指定して下さい 見本としてフッターからのメール送信モーダルを作成しています。-->
+  <div class="modal-window"></div>
+  <!--================================================================== -->
 
   <!--=================================フッター============================== -->
- <%= yield %>
- <div style="height: 50px;"></div>
+  <%= yield %>
+  <div style="height: 50px;"></div>
   <footer>
     <div class="footer-left">
-      <%= link_to root_path, class: "footer-logo" do %><!--リンク先はルート設定の後変更して下さい -->
-      <%= image_tag "naganologo.png", alt: "CDショップナッガ〜ノのロゴ", class: "footer-logo-img" %>
+      <%= link_to root_path, class: "footer-logo" do %>
+        <!--リンク先はルート設定の後変更して下さい -->
+        <%= image_tag "naganologo.png", alt: "CDショップナッガ〜ノのロゴ", class: "footer-logo-img" %>
       <% end %>
     </div>
-    <div class="footer-right">
-      <!-- menu-trigger部分 -->
-      <!-- ここで追加したのはremote: trueの部分です。このオプションを付け加えることで、リンクからの呼び出し先がnew.html.erbからnew.js.erbに変更されます。 -->
-      <%= link_to 'お問い合わせ', new_contact_path, remote: true %>
-    </div>
-  </footer>
-  <!--====================================================================== -->
+  <div class="footer-right">
+    <!-- menu-trigger部分 -->
+    <!-- ここで追加したのはremote: trueの部分です。このオプションを付け加えることで、リンクからの呼び出し先がnew.html.erbからnew.js.erbに変更されます。 -->
+    <%= link_to 'お問い合わせ', new_contact_path, remote: true %>
+  </div>
+</footer>
+<!--====================================================================== -->
 
+<script type="text/javascript">
 
-
-    <script type="text/javascript">
-
-
-      // =================ヘッダーのハンバーガーメニュー制御==========================
-      $('.menu-trigger-box').on('click', function(){
-        $(this).children('.menu-trigger').toggleClass('act');
-        $('.hamburger-menu').toggleClass('open');
-      });
-      // =======================================================================
-
-      // =======================中心モーダルウィンドウ制御==========================
-      // =======================================================================
-
-
-    </script>
-  </body>
+  // =================ヘッダーのハンバーガーメニュー制御==========================
+  $('.menu-trigger-box').on('click', function () {
+    $(this).children('.menu-trigger').toggleClass('act');
+    $('.hamburger-menu').toggleClass('open');
+  });
+  // ======================================================================= =======================中心モーダルウィンドウ制御========================== =======================================================================
+</script>
+</body>
 </html>

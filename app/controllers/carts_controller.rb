@@ -4,7 +4,7 @@ class CartsController < ApplicationController
   # before_action :judgment_user
   # enum変更用
   # 明日ここ聞く
-  # # before_action :set_cart, only:[:toggle_status]
+  before_action :set_cart, only:[:toggle_status]
 
 
   def create
@@ -24,20 +24,20 @@ class CartsController < ApplicationController
         item_cart.item_id = params[:item_id]
         item_cart.cart_id = cart.id
         item_cart.item_count = 1
-        item_cart.price = item.price
+        item_cart.price = (item.price * 1.08).ceil
         item_cart.save
       else
         item_cart = cart.item_carts.find_by(item_id: params[:item_id])
         item_cart.increment!(:item_count)
         # 開発段階のためpriceが入っていない場合がある為の分岐
         if item_cart.price = 0 || item_cart.price == nil
-          item_cart.price = item.price
+          item_cart.price = (item.price * 1.08).ceil
           item_cart.save
         end
       end
       # 商品が安くなっていた場合、値段を安く更新する
-      if item_cart.price.to_i > item.price.to_i
-        item_cart.price = item.price
+      if item_cart.price > (item.price * 1.08).ceil
+        item_cart.price = (item.price * 1.08).ceil
         item_cart.save
         flash[:alert] = "お値段が安くなりました。"
       end
@@ -55,7 +55,7 @@ class CartsController < ApplicationController
       item_cart.item_id = params[:item_id]
       item_cart.cart_id = cart.id
       item_cart.item_count = 1
-      item_cart.price = item.price
+      item_cart.price = (item.price * 1.08).ceil
       item_cart.save
 
       redirect_to cart_edit_path(cart.id)
@@ -72,6 +72,8 @@ class CartsController < ApplicationController
     @cart = Cart.find_by(id: params[:id])
     # cartのidとアソシエーションしているItem_cartを取り出す
     @item_carts = @cart.item_carts
+    #カート内お気に入り登録
+    @item = Item.find(params[:id])
 
     @sumprice = 0
       for item_cart in @item_carts do
@@ -154,7 +156,7 @@ class CartsController < ApplicationController
     for item_cart in item_carts do
       Stock.find_by(item_id: item_cart.item_id).decrement!(:stock_count, item_cart.item_count)
     end
-    # PersonalMailer.send_when_daibiki_to_user(cart).deliver
+    PersonalMailer.send_when_daibiki_to_user(cart).deliver
     redirect_to finish_path
   end
 
@@ -167,7 +169,7 @@ class CartsController < ApplicationController
       Stock.find_by(item_id: item_cart.item_id).decrement!(:stock_count, item_cart.item_count)
     end
     #下記記述で問い合わせフォーム専用のメールを送信出来るようにする.deliverを最後に付けることで送信
-    # PersonalMailer.send_when_daibiki_to_user(cart).deliver
+    PersonalMailer.send_when_daibiki_to_user(cart).deliver
     redirect_to finish_path
   end
 
@@ -180,7 +182,7 @@ class CartsController < ApplicationController
     for item_cart in item_carts do
       Stock.find_by(item_id: item_cart.item_id).decrement!(:stock_count, item_cart.item_count)
     end
-    # PersonalMailer.send_when_daibiki_to_user(cart).deliver
+    PersonalMailer.send_when_daibiki_to_user(cart).deliver
     redirect_to finish_path
   end
 
@@ -203,6 +205,7 @@ class CartsController < ApplicationController
 			unless current_user.id == Cart.find(params[:id]).user_id || current_user.admin == true ||
 				redirect_to(root_path)
 			end
+
 		end
 
 

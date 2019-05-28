@@ -42,7 +42,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :phone_number
       t.string :email
       t.string :encrypted_password
-      t.boolean :admin
+      t.boolean :admin, default: false
       t.datetime :deleted_at
       t.datetime :created_at
       t.datetime :updated_at

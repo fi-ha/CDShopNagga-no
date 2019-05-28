@@ -10,6 +10,7 @@
 			<%= attachment_image_tag @item,:image, :fill, 200, 200 %>
 		</div>
 		<div class="content-right">
+
 			<table class="table-border">
 				<tr>
 					<td class="item-align"><strong>商品名：</strong></td>
@@ -50,6 +51,7 @@
 					</td>
 				</tr>
 			</table>
+
 		</div>
 	</div>
 
@@ -113,7 +115,7 @@
 			<!-- レビュー投稿ユーザーなら”編集”、”削除”を表示させる -->
 			<% if review.user == current_user %>
 				<td>
-					<%= link_to "編集", edit_review_path(review.id), class: "btn btn bg-success col-lg-12" %>
+					<%= link_to "編集", edit_review_path(review.id), class: "btn btn bg-success" %>
 				</td>
 				<td>
 					<%= link_to "削除", review_path(review.id), class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
