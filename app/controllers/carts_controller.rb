@@ -75,7 +75,6 @@ class CartsController < ApplicationController
     #カート内お気に入り登録
     @item = Item.find(params[:id])
 
-
     @sumprice = 0
       for item_cart in @item_carts do
         a = item_cart.price * item_cart.item_count

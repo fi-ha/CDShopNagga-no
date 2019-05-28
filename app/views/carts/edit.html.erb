@@ -106,7 +106,7 @@
       <%= (total_price * BigDecimal("1.08")).ceil + 500 %>円
     </h3>
   </section>
-  <%= link_to "お買い物に戻る",root_path %>
+  <%= link_to "お買い物に戻る","/#playerjump" %>
 
   <%= form_with model: @cart, url: cart_cartedit_path(@cart.id), local: true, method: :post do |f| %>
     <%= f.hidden_field :total_price, value: total_price %>
