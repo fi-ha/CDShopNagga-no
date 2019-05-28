@@ -26,13 +26,13 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @review.update(review_params)
     @review.save
-    redirect_to user_path(current_user.id)
+    redirect_to item_path(@review.item)
   end
 
   def destroy
     @review = Review.find(params[:id])
     @review.destroy
-    redirect_to user_path(current_user.id)
+    redirect_to item_path(@review.item)
   end
 
   private
