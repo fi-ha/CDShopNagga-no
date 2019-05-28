@@ -10,20 +10,48 @@
 			<%= attachment_image_tag @item,:image, :fill, 200, 200 %>
 		</div>
 		<div class="content-right">
-			<strong>商品名：</strong><%= @item.item_name %><br>
-			<strong>アーティスト名：</strong><% @item.singers.each do |singer| %>
-				<%= singer.singer_name %><br>
-			<% end %>
-			<strong>ジャンル：</strong><% @item.genres.each do |genre| %>
-				<%= genre.genre_name %><br>
-			<% end %>
-			<strong>レーベル名：</strong><%= @item.label.label_name %><br>
-			<strong>価格(税込)：</strong><%= (@item.price*BigDecimal("1.08")).ceil %>円<br>
-			<strong>在庫：</strong><%= if @item.stock.stock_count == 0
+
+			<table class="table-border">
+				<tr>
+					<td class="item-align"><strong>商品名：</strong></td>
+					<td class="item-align"><%= @item.item_name %></td>
+				</tr>
+				<tr>
+					<td class="item-align"><strong>アーティスト名：</strong></td>
+					<td class="item-align">
+						<% @item.singers.each do |singer| %>
+							<%= singer.singer_name %><br>
+						<% end %>
+					</td>
+				</tr>
+				<tr>
+					<td class="item-align"><strong>ジャンル：</strong></td>
+					<td class="item-align">
+						<% @item.genres.each do |genre| %>
+							<%= genre.genre_name %><br>
+						<% end %>
+					</td>
+				</tr>
+				<tr>
+					<td class="item-align"><strong>レーベル名：</strong></td>
+					<td class="item-align"><%= @item.label.label_name %></td>
+				</tr>
+				<tr>
+					<td class="item-align"><strong>価格(税込)：</strong></td>
+					<td class="item-align"><%= (@item.price*BigDecimal("1.08")).ceil %>円</td>
+				</tr>
+				<tr>
+					<td class="item-align"><strong>在庫：</strong></td>
+					<td class="item-align">
+						<%= if @item.stock.stock_count == 0
 						'在庫がありません'
 					else
 						"#{@item.stock.stock_count}点"
-					end%>
+					end %>
+					</td>
+				</tr>
+			</table>
+
 		</div>
 	</div>
 

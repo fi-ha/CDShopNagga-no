@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :singers, only: [:index, :edit, :create, :update, :destroy]
   resources :favorites
-  resources :users, only: [:show]
+  resources :users, only: [:show, :update]
 
   resources :users, only: [:show] do
     resource :favorites, only: [:index]
@@ -70,6 +70,8 @@ Rails.application.routes.draw do
     resources :users,    only: [:index]
     resources :contacts, only: [:index, :show]
     resources :respons,  only: [:create, :new, :show]
+    get 'user/:id', to: 'users#switch', as: 'switch'
+    get 'adminchange/:id', to: 'users#adminchange', as: 'adminchange'
   end
 
   resources :concepts, only: [:index]
