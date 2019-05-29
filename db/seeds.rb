@@ -48,17 +48,17 @@
 # ==============================================================================
 
 #=================================ユーザー=======================================
- (1..20).each do |n|
-   User.create!(
-      email:   "#{n}aa@bbb.ccc",
-      password: "#{n}#{n}#{n}#{n}#{n}#{n}",
-      last_name: "遊佐",
-      first_name: "太郎",
-      last_name_kana: "ユーザー",
-      first_name_kana: "タロウ",
-      postal_code: '1234567',
-      addres: '東京都渋谷区神南１丁目１９−１１',
-      phone_number: '08012345678',
-      admin: 'false'
-   ) end
+# (1..20).each do |n|
+#   User.create!(
+#      email:   "#{n}aa@bbb.ccc",
+#      password: "#{n}#{n}#{n}#{n}#{n}#{n}",
+#      last_name: "遊佐",
+#      first_name: "太郎",
+#      last_name_kana: "ユーザー",
+#      first_name_kana: "タロウ",
+#      postal_code: '1234567',
+#      addres: '東京都渋谷区神南１丁目１９−１１',
+#      phone_number: '08012345678',
+#      admin: 'false'
+#   ) end
 #===============================================================================
