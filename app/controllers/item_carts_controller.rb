@@ -2,6 +2,7 @@ class ItemCartsController < ApplicationController
 
   before_action :authenticate_user!
 
+  # 不要
   def new
   	@item_cart = ItamCart.new
   end
