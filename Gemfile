@@ -54,6 +54,9 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do
@@ -86,3 +89,8 @@ gem 'pry-stack_explorer'
 gem 'dotenv-rails'
 # 論理削除用
 gem 'paranoia'
+
+# 出力結果を表として出力するgem
+gem 'hirb'
+# マルチバイト文字の表示を補正するgem
+gem 'hirb-unicode'

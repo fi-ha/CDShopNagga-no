@@ -4,53 +4,93 @@
 <% end %>
 
 <div class="main">
-	<div class="clearfix">
-		<h1><%= @item.item_name %></h1>
-		<div class="content-left">
+	<div class="container-fluid top-container">
+		<div class="col-xs-6 col-md-4 top-content">
+			<h1><%= @item.item_name %></h1>
 			<%= attachment_image_tag @item,:image, :fill, 200, 200 %>
 		</div>
-		<div class="content-right">
+		<div class="col-xs-6 col-md-4 top-content">
 
 			<table class="table-border">
-				<tr>
-					<td class="item-align"><strong>商品名：</strong></td>
-					<td class="item-align"><%= @item.item_name %></td>
-				</tr>
-				<tr>
-					<td class="item-align"><strong>アーティスト名：</strong></td>
-					<td class="item-align">
-						<% @item.singers.each do |singer| %>
-							<%= singer.singer_name %><br>
-						<% end %>
-					</td>
-				</tr>
-				<tr>
-					<td class="item-align"><strong>ジャンル：</strong></td>
-					<td class="item-align">
-						<% @item.genres.each do |genre| %>
-							<%= genre.genre_name %><br>
-						<% end %>
-					</td>
-				</tr>
-				<tr>
-					<td class="item-align"><strong>レーベル名：</strong></td>
-					<td class="item-align"><%= @item.label.label_name %></td>
-				</tr>
-				<tr>
-					<td class="item-align"><strong>価格(税込)：</strong></td>
-					<td class="item-align"><%= (@item.price*BigDecimal("1.08")).ceil %>円</td>
-				</tr>
-				<tr>
-					<td class="item-align"><strong>在庫：</strong></td>
-					<td class="item-align">
-						<%= if @item.stock.stock_count == 0
-						'在庫がありません'
-					else
-						"#{@item.stock.stock_count}点"
-					end %>
-					</td>
-				</tr>
+				<% if @item.description.blank? %>
+					<tr>
+						<td class="item-align"><strong>商品名：</strong></td>
+						<td class="item-align"><%= @item.item_name %></td>
+					</tr>
+					<tr>
+						<td class="item-align"><strong>アーティスト名：</strong></td>
+						<td class="item-align">
+							<% @item.singers.each do |singer| %>
+								<%= singer.singer_name %><br>
+							<% end %>
+						</td>
+					</tr>
+					<tr>
+						<td class="item-align"><strong>ジャンル：</strong></td>
+						<td class="item-align">
+							<% @item.genres.each do |genre| %>
+								<%= genre.genre_name %><br>
+							<% end %>
+						</td>
+					</tr>
+					<tr>
+						<td class="item-align"><strong>レーベル名：</strong></td>
+						<td class="item-align"><%= @item.label.label_name %></td>
+					</tr>
+					<tr>
+						<td class="item-align"><strong>価格(税込)：</strong></td>
+						<td class="item-align"><%= (@item.price*BigDecimal("1.08")).ceil %>円</td>
+					</tr>
+					<tr>
+						<td class="item-align"><strong>在庫：</strong></td>
+						<td class="item-align">
+							<%= if @item.stock.stock_count <= 0
+							'在庫がありません'
+						else
+							"#{@item.stock.stock_count}点"
+						end %>
+						</td>
+					</tr>
+				<% else %>
+					<tr>
+						<td class="item-align"><strong>商品名：</strong></td>
+						<td class="item-align"><%= @item.item_name %></td>
+					</tr>
+						<td class="item-align"><strong>価格(税込)：</strong></td>
+						<td class="item-align"><%= (@item.price*BigDecimal("1.08")).ceil %>円</td>
+					</tr>
+					<tr>
+						<td class="item-align"><strong>在庫：</strong></td>
+						<td class="item-align">
+							<%= if @item.stock.stock_count <= 0
+							'在庫がありません'
+						else
+							"#{@item.stock.stock_count}点"
+						end %>
+						</td>
+					</tr>
+				<% end %>
 			</table>
+
+		</div>
+
+		<div class="col-xs-6 col-md-4 top-content">
+			<% if @player.present? && @player.id != @item.id %>
+				<h3>おすすめのCDプレーヤーです。</h3>
+				<%= attachment_image_tag @player,:image, :fill, 150, 150 %>
+				<p><%= @player.item_name %></p>
+				<%= link_to '詳細', item_path(@player.id) %>
+				<%= link_to 'カートに追加する', cart_create_path(item_id: @player.id), method: :post %>
+				<% if @player.favorited_by?(current_user) %>
+				<p>
+					<%= link_to 'お気に入り登録済み', item_favorites_path(@player), method: :delete %>
+				</p>
+				<% else %>
+				<p>
+				<%= link_to 'お気に入り登録する', item_favorites_path(@player), method: :post %>
+				</p>
+				<% end %>
+			<% end %>
 
 		</div>
 	</div>
@@ -73,6 +113,7 @@
 		</table>
 	</section>
 	<div class="clearfix">
+		<% if user_signed_in? %>
 			<% if @item.favorited_by?(current_user) %>
 				<p>
 					<%= link_to 'お気に入り登録済み', item_favorites_path(@item), method: :delete %>
@@ -81,24 +122,22 @@
 				<p>
 					<%= link_to 'お気に入り登録する', item_favorites_path(@item), method: :post %>
 				</p>
+			<% end %>
 		<% end %>
-
-		<p>
-			<%= link_to 'カートに追加する', cart_create_path(item_id: @item.id), method: :post %>
-		</p>
-		<p>
-			<%= link_to '購入', cart_create_path(item_id: @item.id), method: :post %>
-		</p>
+		<% if @item.stock.stock_count == 0 %>
+			<p>'在庫が無いため現在購入できません。'</p>
+		<% else %>
+			<p>
+				<%= link_to 'カートに追加する', cart_create_path(item_id: @item.id), method: :post %>
+			</p>
+			<p>
+				<%= link_to '購入', cart_create_path(item_id: @item.id), method: :post %>
+			</p>
+		<% end %>
 		<p>
 			<%= link_to 'レビューを投稿する', new_item_reviews_path(@item.id) %>
 		</p>
 	</div>
-
-<%= form_for [@item, @review] do |f| %>
-	<p>レビュー</p>
-	<%= f.text_area :body %>
-	<%= f.submit '投稿' %>
-<% end %>
 	<!-- 商品に基づいたレビューを一覧表示させる -->
 	<table class="">
 		<tr>

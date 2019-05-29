@@ -172,7 +172,7 @@ h4 {
 }
 
 .main {
-	width: 90%;
+	width: 100%;
 	margin: 0 auto;
 }
 
@@ -183,21 +183,24 @@ h4 {
 	text-align: center;
 }
 
-.clearfix::after{
-	content: "";
-	display: block;
-	clear: both;
+// .clearfix::after{
+// 	content: "";
+// 	display: block;
+// 	clear: both;
+// }
+//
+.top-container {
+  position: relative;
+  height: 300px;
 }
 
-.content-left {
-	width: 30%;
-	float: left;
+.top-content {
+  position: absolute;
+  top: 50%;
+  -webkit-transform : translateY(-50%);
+  transform : translateY(-50%);
 }
 
-.content-right {
-	width: 60%;
-	float: left;
-}
 
 .songs {
 	border: none;
