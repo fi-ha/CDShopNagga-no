@@ -56,6 +56,10 @@
 						<td class="item-align"><strong>商品名：</strong></td>
 						<td class="item-align"><%= @item.item_name %></td>
 					</tr>
+					<tr>
+						<td class="item-align"><strong>説明：</strong></td>
+						<td class="item-align"><%= @item.description %></td>
+					</tr>
 						<td class="item-align"><strong>価格(税込)：</strong></td>
 						<td class="item-align"><%= (@item.price*BigDecimal("1.08")).ceil %>円</td>
 					</tr>
