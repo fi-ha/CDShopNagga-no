@@ -5,8 +5,12 @@ ruby '2.5.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
+
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+
+# ローカルからherokuに変更する為デベロップに移行
+# gem 'sqlite3'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -45,6 +49,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'pry-doc'
+  gem 'sqlite3'
 end
 
 group :development do
@@ -57,6 +62,10 @@ group :development do
 
   gem 'better_errors'
   gem 'binding_of_caller'
+  # 出力結果を表として出力するgem
+  gem 'hirb'
+  # マルチバイト文字の表示を補正するgem
+  gem 'hirb-unicode'
 end
 
 group :test do
@@ -90,7 +99,6 @@ gem 'dotenv-rails'
 # 論理削除用
 gem 'paranoia'
 
-# 出力結果を表として出力するgem
-gem 'hirb'
-# マルチバイト文字の表示を補正するgem
-gem 'hirb-unicode'
+group :production do
+  gem 'pg'
+end

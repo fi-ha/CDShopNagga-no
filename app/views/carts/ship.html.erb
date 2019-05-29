@@ -3,7 +3,7 @@
 
 <!-- ================初期住所の表示===================== -->
 <!-- このあとはship_to_anotherに情報が入っているか入っていないかで判断するため以下のボタンはダミー -->
-<p><input type="radio" name="optionsRadios" value="サンプル" checked>登録している住所</p>
+<p><input type="radio" name="optionsRadios" value="サンプル" checked required>登録している住所</p>
 
 <p>〒<%= current_user.postal_code %> </p>
 <p><%= current_user.addres %> </p>
@@ -11,7 +11,7 @@
 
 
 <!-- ================別住所フォームの表示===================== -->
-<p><input class='open' type="radio" name="optionsRadios" value="1">別の発送先を入力する</p>
+<p><input class='open' type="radio" name="optionsRadios" value="1" required>別の発送先を入力する</p>
 
 <%= form_for(@ship_to_another, url: ship_to_another_shipedit_path, html: {class: 'hidden_form'}, local: true) do |f| %>
 
