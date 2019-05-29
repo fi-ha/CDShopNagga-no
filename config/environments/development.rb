@@ -31,17 +31,6 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    port: 587,
-    address: 'smtp.gmail.com',
-    domain: 'smtp.gmail.com',
-    user_name: ENV['USER_NAME_KEY'],
-    password: ENV['USER_PASS_KEY'],
-    authentication: 'login',
-    enable_starttls_auto: true
-  }
   config.action_mailer.perform_caching = false
 
   # 上記はデフォルトで設定してあったいじっていません
@@ -88,4 +77,10 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  if defined?(BetterErrors) && ENV["SSH_CLIENT"]
+   host = ENV["SSH_CLIENT"].match(/\A([^\s]*)/)[1]
+   BetterErrors::Middleware.allow_ip! host if host
+ end
+
 end

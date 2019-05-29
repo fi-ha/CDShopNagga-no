@@ -4,13 +4,13 @@
 <%= form_for(@cart, url: payment_payedit_path(@cart.id), local: true) do |f| %>
 
 <%# enumを使用する場合先にモデルでenumを宣言する必要がある記載方法は値部分を宣言したラベル名にするだけ受け渡されるのは数字となる %>
-<%= f.radio_button :payment, :銀行振込 %>銀行振込
+<%= f.radio_button :payment, :銀行振込, required: :true, checked: :true %>銀行振込
 <p>最終確認画面で確定後、お客様に振込先メールを送信致します。</p>
 
-<%= f.radio_button :payment, :代金引換 %>代金引換
+<%= f.radio_button :payment, :代金引換, required: :true %>代金引換
 <p>最終確認画面で確定後、商品と引き換えに代金を頂戴致します。</p>
 
-<%= f.radio_button :payment, :クレジットカード %>クレジットカード
+<%= f.radio_button :payment, :クレジットカード, required: :true %>クレジットカード
 <p>最終確認画面で確定後、クレジットカード決済を行います。</p>
 
 <%= f.submit "最終確認画面へ"%>

@@ -20,6 +20,13 @@ class ItemsController < ApplicationController
   def show
     # 詳細ビュー作成
     @item = Item.find(params[:id])
+    cd_genre_id = ItemGenre.find_by(item_id: @item.id).genre_id
+    # item_item_genres = Item.group(:item_genres)
+    # @player = item_item_genres.find_by(genre_id: cd_genre_id, description: true)
+    item_genres = ItemGenre.where(genre_id: cd_genre_id)
+    @players = item_genres.select { |item_genre| item_genre.item.description != nil }
+    @player = @players.first.item
+    @review = Review.new
     if @item.active == "販売停止"
       @items = Item.all
       @items = Item.search(params[:search])

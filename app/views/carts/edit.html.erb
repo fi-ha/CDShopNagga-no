@@ -37,13 +37,13 @@
               <!-- お気に入り登録 -->
 
                 <td rowspan="2">
-                  <% if @item.favorited_by?(current_user) %>
+                  <% if item_cart.item.favorited_by?(current_user) %>
               <p>
-                  <%= link_to 'お気に入り登録済み', item_favorites_path(item_id: @item.id, favorite: 'cart', cart: params[:id]),  method: :delete %>
+                  <%= link_to 'お気に入り登録済み', item_favorites_path(item_id: item_cart.item_id, favorite: 'cart', cart: params[:id]),  method: :delete %>
                 </p>
                  <% else %>
                 <p>
-                  <%= link_to 'お気に入り登録する', item_favorites_path(item_id: @item.id, favorite: 'cart'),  method: :post %>
+                  <%= link_to 'お気に入り登録する', item_favorites_path(item_id: item_cart.item_id, favorite: 'cart'),  method: :post %>
                 </p>
                  <% end %>
              </td>
@@ -76,16 +76,17 @@
             </tr>
             <tr>
               <!-- お気に入り登録 -->
-              <td><% if @item.favorited_by?(current_user) %>
+              <td>
+                <% if item_cart.item.favorited_by?(current_user) %>
                 <p>
-                  <%= link_to 'お気に入り登録済み',item_favorites_path(@item),  method: :delete %>
-                </p>
-                 <% else %>
-                <p>
-                  <%= link_to 'お気に入り登録する',item_favorites_path(@item),  method: :post %>
-                </p>
-                 <% end %>
-             </td>
+                <%= link_to 'お気に入り登録済み', item_favorites_path(item_id: item_cart.item_id, favorite: 'cart', cart: params[:id]),  method: :delete %>
+              </p>
+               <% else %>
+              <p>
+                <%= link_to 'お気に入り登録する', item_favorites_path(item_id: item_cart.item_id, favorite: 'cart'),  method: :post %>
+              </p>
+               <% end %>
+           </td>
             </tr>
           </tbody>
         <% end %>
