@@ -86,3 +86,8 @@ gem 'pry-stack_explorer'
 gem 'dotenv-rails'
 # 論理削除用
 gem 'paranoia'
+
+# 出力結果を表として出力するgem
+gem 'hirb'
+# マルチバイト文字の表示を補正するgem
+gem 'hirb-unicode'
