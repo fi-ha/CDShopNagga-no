@@ -3,7 +3,6 @@
 <!---左のタブの部分テンプレート--->
 <%= render 'administrator/tab' %>
 
-<%= render 'administrator/tab' %>
 <div class="col-md-8">
 
 <h1>
@@ -36,11 +35,11 @@
 						<% else %>
 							<%= link_to "管理者にする", administrator_adminchange_path(user.id), class: "user_#{user.id} btn btn-success active admin_selecter",remote: true %>
 						<% end %>
-						<%= link_to "閲覧", administrator_switch_path(user.id), class: "user_#{user.id} btn btn-success active" %>
+						<%= link_to "閲覧", user_path(user.id), class: "user_#{user.id} btn btn-success active" %>
 
 					<% else %>
 					ログイン中の管理者の為変更出来ません。
-					<%= link_to "閲覧", administrator_switch_path(user.id), class: "user_#{user.id} btn btn-success active" %>
+					<%= link_to "閲覧", user_path(user.id), class: "user_#{user.id} btn btn-success active" %>
 					<% end %>
 				</td>
 		</tr>
