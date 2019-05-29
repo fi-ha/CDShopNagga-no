@@ -37,25 +37,26 @@
   <div id="circle1" class="out_window">
     <div id="circle2" class="out_window">
     </div>
-  </div>  
+  </div>
 
 
 
 
 <div class="container">
   <div class="row">
-<div class="col-md-10 col-md-offset-1">
+	<div class="col-md-12 col-md-offset-1">
 
 <!-- プレイヤー説明 -->
 <!-- ページ内のリンク先の指定はIDを利用 -->
 <h1 id="playerjump"></h1>
- <div class="">
+ <section class="clearfix">
 	<h1 class="player">Player</h1>
 	<p class="player1">持ち運びも簡単！</p>
 	<p class="player1">お洒落で機能的なプレーヤーを厳選しました！</p>
 
 			<% @items.each do |item| %>
 				<% if item.singers.blank? %>
+				<% if item.active == "販売中" %>
 					<div class="items">
 						<%= link_to item_path(item.id) do %>
 							<%= attachment_image_tag(item, :image, :fill, 300, 300, format: 'jpeg') %><br>
@@ -67,34 +68,16 @@
 						<% end %>
 					</div>
 				<% end %>
+				<% end %>
 			<% end %>
+  </section>
 
-  </div>
-
-
-
-
-<!-- プレーヤー表示（skippr) -->
-
-	<div class="container">
-		<div class="theTarget">
-			<%# unless item.description.blank? %>
-				<%# @items.each do |player| %>
-					<div style="background-image: url(no_image.jpg)"></div>
-					<div style="background-image: url(no_image.jpg)"></div>
-					<div style="background-image: url(no_image.jpg)"></div>
-					<div style="background-image: url(no_image.jpg)"></div>
-					<div style="background-image: url(no_image.jpg)"></div>
-				<%# end %>
-			<%# end %>
-		</div>
-	</div>
 
 <!-- MUSIC説明 -->
 <h1 id="musicjump"></h1>
 
 
-    <div class="content-text2", style="float:left; ">
+    <div>
 		<h1 class="music">Music</h1>
 		<p class="music1">様々なジャンルを揃えています！</p>
 		<p class="music1">お気に入りを見つけてみて下さい</p>
@@ -110,16 +93,18 @@
 	<!-- 商品一覧表示 -->
 			<% @items.each do |item| %>
 				<% if item.description.blank? %>
-					<div class="items">
+				<% if item.active == "販売中" %>
+					<div class="items", style="margin-right: 30px;">
 						<%= attachment_image_tag(item, :image, :fill, 300, 300, format: 'jpeg') %><br>
 						<%= link_to item_path(item.id) do %>
-						<%= item.item_name %>
-						<% item.singers.each do |singer| %>
-							<%= singer.singer_name %><br>
-						<% end %>
-						価格(税込)：<%= (item.price*BigDecimal("1.08")).ceil %>円
+							<%= item.item_name %><br>
+							<% item.singers.each do |singer| %>
+								<%= singer.singer_name %><br>
+							<% end %>
+							価格(税込)：<%= (item.price*BigDecimal("1.08")).ceil %>円
 						<% end %>
 					</div>
+				<% end %>
 				<% end %>
 			<% end %>
 		</div>

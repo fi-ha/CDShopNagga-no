@@ -8,11 +8,11 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :singers, only: [:index, :edit, :create, :update, :destroy]
   resources :favorites
-  resources :users, only: [:show, :update]
 
-  resources :users, only: [:show] do
+  resources :users, only: [:show, :edit, :update] do
     resource :favorites, only: [:index]
   end
+  patch 'users/:id/edit', to: 'users#user_update', as: 'user_edit'
 
   # Cart画面は上から順にこのルーティングで進んで行きます。あとから修正している為ちょっと無理矢理感のあるルーティングとなっています。
   patch 'carts/:id/total_price_create',  to: 'carts#total_price_create', as: 'cart_total_price'
@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :item_genres,      only: [:create, :update]
     resource :reviews,      only: [:new, :create]
     resource :favorites,    only: [:create, :destroy]
+      patch :toggle_status
   end
 
   resources :stocks,            only: [:create, :update]
@@ -61,7 +62,9 @@ Rails.application.routes.draw do
     resources :genres,   only: [:index, :new, :edit, :create, :update, :destroy]
     resources :labels,   only: [:index, :create, :edit, :update, :destroy]
     resources :singers,  only: [:index, :edit, :create, :update, :destroy]
-    resources :items,    only: [:new, :index, :edit, :update, :destroy]
+    resources :items,    only: [:new, :index, :edit, :update, :destroy] do
+      patch :toggle_status
+    end
     resources :carts,    only: [:index, :show]
     resources :reviews,  only: [:index, :edit, :destroy]
     resources :users,    only: [:index]

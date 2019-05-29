@@ -9,12 +9,11 @@
 					<%= attachment_image_tag(favorite.item, :image, :fill, 240, 240, format: 'jpeg') %><br>
 					商品名：<%= favorite.item.item_name %><br>
                     <% end %>
-                    価格（税込）：<%= (favorite.item.price*BigDecimal("1.08")).ceil %>円
+                    <p>価格（税込）：<%= (favorite.item.price*BigDecimal("1.08")).ceil %>円</p>
                 </td>
-
 				<td class="col-lg-6">
-					<%= link_to 'カートへ', new_cart_path, class: "btn btn bg-warning col-lg-12" %>
-				<%= link_to 'お気に入りを解除する', item_favorites_path(favorite.item.id), method: :delete, class: "btn btn bg-info col-lg-12" %>
+					<%= link_to 'カートへ追加する', cart_create_path(item_id: favorite.item_id), method: :post, class: "btn btn bg-warning" %>
+				<%= link_to 'お気に入りを解除する', item_favorites_path(favorite.item.id), method: :delete, class: "btn btn bg-info" %>
 				</td>
 			</tr>
 		</table>

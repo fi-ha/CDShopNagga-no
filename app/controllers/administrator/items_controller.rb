@@ -1,6 +1,14 @@
 class Administrator::ItemsController < ApplicationController
     before_action :authenticate_user!
     before_action :admin_user
+ #販売中、販売停止切り替え用
+    before_action :set_item, only:[:toggle_status]
+
+ #販売中、販売停止切り替え用
+    def toggle_status
+      @item.toggle_status!
+      redirect_to administrator_items_path
+    end
 
     # .build ・・・fields_forでネストした子モデルのデータを作成するメソッド
     def new
@@ -44,4 +52,11 @@ class Administrator::ItemsController < ApplicationController
     def admin_user
         redirect_to(items_path) unless current_user.admin?
     end
+
+     #販売中、販売停止切り替え用
+    private
+    def set_item
+      @item = Item.find(params[:id] || params[:item_id])
+    end
+
 end
