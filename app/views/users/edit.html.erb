@@ -3,10 +3,9 @@
 <div class="col-md-8 col-md-offset-2">
 
 
-<h1 class="edit">Edit <%= resource_name.to_s.humanize %></h1>
+<h1 class="edit"><%= @user.last_name %> <%= @user.first_name %> さんの編集ページ</h1>
 
-<%= form_for(resource, as: resource_name, url: user_edit_path(@user.id), html: { method: :patch }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<%= form_for(@user, url: user_edit_path(@user.id), html: { method: :patch }) do |f| %>
 
   <div class="field">
     <%= f.label :"名前(姓・名)" %><br />
@@ -40,31 +39,13 @@
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
-  <div class="field">
-    <%= f.label :"パスワード" %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :encrypted_password, autocomplete: "new-password" %>
-  </div>
 
   <div class="actions">
     <%= f.submit "編集する" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-<%= link_to "Back", :back %>
-
- <%# if current_user.admin == "true"  %>
-  <%# if @user.admin = "true" %>
-  <%#= link_to "管理者じゃなくする", user_path(current_user.id), method: :put, remote: true, id: "admin_selecter" %>
-  <%# else %>
-  <%#= link_to "管理者にする", user_path(current_user.id), method: :put, remote: true, id: "admin_selecter" %>
-  <%# end %>
-<%# end %>
 
 </div>
 </div>

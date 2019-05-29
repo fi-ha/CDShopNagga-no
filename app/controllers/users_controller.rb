@@ -9,6 +9,16 @@ class UsersController < ApplicationController
 		@favorites = @user.favorites.all
 	end
 
+	def edit
+		@user = User.find(params[:id])
+	end
+
+	def user_update
+		@user = User.find(params[:id])
+		@user.update(user_params)
+		redirect_to user_path(@user.id), notice: "編集が完了しました。"
+	end
+
 	def update
 		@user = User.find(params[:id])
 		case @user.admin
@@ -36,6 +46,10 @@ class UsersController < ApplicationController
 	end
 
   private
+
+  		def user_params
+  			params.require(:user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :addres, :phone_number, :email, :password)
+  		end
 
 		def judgment_user
 			unless current_user.id == params[:id].to_i || current_user.admin == true
