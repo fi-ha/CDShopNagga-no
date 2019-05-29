@@ -72,8 +72,6 @@ class CartsController < ApplicationController
     @cart = Cart.find_by(id: params[:id])
     # cartのidとアソシエーションしているItem_cartを取り出す
     @item_carts = @cart.item_carts
-    #カート内お気に入り登録
-    @item = Item.find(params[:id])
 
     @sumprice = 0
       for item_cart in @item_carts do

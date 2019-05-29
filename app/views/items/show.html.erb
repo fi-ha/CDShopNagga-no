@@ -4,12 +4,12 @@
 <% end %>
 
 <div class="main">
-	<div class="clearfix">
-		<h1><%= @item.item_name %></h1>
-		<div class="content-left">
+	<div class="container-fluid top-container">
+		<div class="col-xs-6 col-md-4 top-content">
+			<h1><%= @item.item_name %></h1>
 			<%= attachment_image_tag @item,:image, :fill, 200, 200 %>
 		</div>
-		<div class="content-right">
+		<div class="col-xs-6 col-md-4 top-content">
 
 			<table class="table-border">
 				<% if @item.description.blank? %>
@@ -73,6 +73,26 @@
 			</table>
 
 		</div>
+
+		<div class="col-xs-6 col-md-4 top-content">
+			<% if @player.present? && @player.id != @item.id %>
+				<h3>おすすめのCDプレーヤーです。</h3>
+				<%= attachment_image_tag @player,:image, :fill, 150, 150 %>
+				<p><%= @player.item_name %></p>
+				<%= link_to '詳細', item_path(@player.id) %>
+				<%= link_to 'カートに追加する', cart_create_path(item_id: @player.id), method: :post %>
+				<% if @player.favorited_by?(current_user) %>
+				<p>
+					<%= link_to 'お気に入り登録済み', item_favorites_path(@player), method: :delete %>
+				</p>
+				<% else %>
+				<p>
+				<%= link_to 'お気に入り登録する', item_favorites_path(@player), method: :post %>
+				</p>
+				<% end %>
+			<% end %>
+
+		</div>
 	</div>
 
 	<section class="clearfix">
@@ -104,14 +124,16 @@
 				</p>
 			<% end %>
 		<% end %>
-					<% if @item.stock.stock_count > 0 %>
-		<p>
-			<%= link_to 'カートに追加する', cart_create_path(item_id: @item.id), method: :post %>
-		</p>
-		<p>
-			<%= link_to '購入', cart_create_path(item_id: @item.id), method: :post %>
-		</p>
-					<% end %>
+		<% if @item.stock.stock_count == 0 %>
+			<p>'在庫が無いため現在購入できません。'</p>
+		<% else %>
+			<p>
+				<%= link_to 'カートに追加する', cart_create_path(item_id: @item.id), method: :post %>
+			</p>
+			<p>
+				<%= link_to '購入', cart_create_path(item_id: @item.id), method: :post %>
+			</p>
+		<% end %>
 		<p>
 			<%= link_to 'レビューを投稿する', new_item_reviews_path(@item.id) %>
 		</p>

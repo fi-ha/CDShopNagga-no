@@ -29,7 +29,7 @@
 	<h4>価格</h4>
 	<%= f.text_field :price %>
 
-	<h4>レーベル</h4>
+	<h4>レーベル・販売会社</h4>
 	<%= f.label :label_id %>
     <%= f.collection_select :label_id, Label.all, :id, :label_name %>
 
@@ -37,7 +37,7 @@
 	<%= f.fields_for :item_genres do |item_genre| %>
         <%= item_genre.label :genre_id %>
         <%= item_genre.collection_select :genre_id, Genre.all, :id, :genre_name %>
-    <% end %>
+  <% end %>
 
 	<h4>曲名</h4>
       <%= f.fields_for :songs do |song| %>
