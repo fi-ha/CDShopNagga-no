@@ -38,9 +38,9 @@ Rails.application.routes.draw do
       patch :toggle_status
   end
 
-  resources :stocks,            only: [:create, :update]
-  resources :reviews,           only: [:index, :edit, :update, :destroy]
-  resources :item_singers,      only: [:update]
+  # resources :stocks,            only: [:create, :update]
+  # resources :reviews,           only: [:index, :edit, :update, :destroy]
+  # resources :item_singers,      only: [:update]
   resources :genres,           only: [:index, :new, :edit, :create, :update, :destroy]
 
   resources :carts,            only: [:index, :new, :show, :edit, :create, :update] do

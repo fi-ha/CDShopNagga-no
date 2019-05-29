@@ -80,8 +80,8 @@
           <%= cart.id %>
 		      <strong>ユーザー名</strong>：
           <%= cart.user.last_name %><%= cart.user.first_name %>
-          <strong>注文金額</strong>：
-          <%= cart.total_price%>円
+          <strong>注文金額（送料込み）</strong>：
+          <%= cart.total_price + 500%>円
           <strong><%= cart.status %></strong>
           </p>
 <!-------- カートの中身 --------------->
