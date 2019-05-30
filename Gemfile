@@ -7,9 +7,7 @@ ruby '2.5.5'
 gem 'rails', '~> 5.2.3'
 
 # Use sqlite3 as the database for Active Record
-
-# ローカルからherokuに変更する為デベロップに移行
-# gem 'sqlite3'
+gem 'sqlite3'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
@@ -49,7 +47,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'pry-doc'
-  # gem 'sqlite3'
 end
 
 group :development do
@@ -98,7 +95,3 @@ gem 'pry-stack_explorer'
 gem 'dotenv-rails'
 # 論理削除用
 gem 'paranoia'
-
-group :production do
-  gem 'pg'
-end
