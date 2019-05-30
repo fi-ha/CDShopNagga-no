@@ -58,6 +58,10 @@ a:hover {
   color: #00FF00;
 }
 
+form > input,textarea {
+  color: black;
+}
+
 // ===========================ここからヘッダー=====================================
 
 header {
@@ -195,23 +199,21 @@ header {
 
 // デザイン
 .modal-window{
-    background-color: white;
-    margin:2em 0;
-    padding: 0.5em 1.5em;
-    border-top: solid 2px black;
-    border-bottom: solid 2px black;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px 30px;
+    color: black;
 }
-.modal-window:before, .modal-window:after{
-    content: '';
-    position: absolute;
-    top: -10px;
-    width: 2px;
-    height: -webkit-calc(100% + 20px);
-    height: calc(100% + 20px);
-    background-color: black;
-}
-.modal-window:before {left: 10px;}
-.modal-window:after {right: 10px;}
+// .modal-window:before, .modal-window:after{
+//     content: '';
+//     position: absolute;
+//     top: -10px;
+//     width: 2px;
+//     height: -webkit-calc(100% + 20px);
+//     height: calc(100% + 20px);
+//     background-color: black;
+// }
+// .modal-window:before {left: 10px;}
+// .modal-window:after {right: 10px;}
 .modal-window p {
     margin: 0;
     padding: 0;
