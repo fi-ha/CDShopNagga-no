@@ -5,7 +5,7 @@
 <div class= 'col-lg-7'>
 <h1>問い合わせ閲覧</h1>
   <h2>未返信</h2>
-  <table>
+  <table class="table">
     <% @unreplycontacts.each do |unreplycontact| %>
     <% user = find_user(unreplycontact) %>
     <tbody>
@@ -32,7 +32,7 @@
       <% end %>
     </table>
     <h2>返信済み</h2>
-    <table>
+    <table class="table">
       <% @replyedcontacts.each do |replyedcontact| %>
       <% user = find_user(replyedcontact) %>
       <tbody>
