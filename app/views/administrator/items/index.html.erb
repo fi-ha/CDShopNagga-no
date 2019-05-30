@@ -1,53 +1,52 @@
 <div class='container'>
-    <div class='row'>
-<!---左のタブの部分テンプレート--->
-<%= render 'administrator/tab' %>
+  <div class='row'>
+    <!---左のタブの部分テンプレート--->
+    <%= render 'administrator/tab' %>
 
-		<div class= 'col-lg-7'>
-			<h1>商品一覧画面</h1>
+    <div class='col-lg-7'>
+      <h1>商品一覧画面</h1>
 
-			<p>商品名検索</p>
-			<%= form_tag(administrator_items_path,:method => 'get') do %>
-		  	<%= text_field_tag :search %>
-		  	<%= submit_tag 'Search', :item_name => nil %>
-			<% end %>
+      <p>商品名検索</p>
+      <%= form_tag(administrator_items_path,:method => 'get') do %>
+      <%= text_field_tag :search %>
+      <%= submit_tag 'Search', :item_name => nil %>
+    <% end %>
 
+    <!-- 歌手、ジャンル、ぷれーやーでタブ分け -->
+    <% @items.each do |item| %>
+      <div class="" ,="," style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
 
-			<!-- 歌手、ジャンル、ぷれーやーでタブ分け -->
-			<% @items.each do |item| %>
-			<div class="", style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333; border-radius: 10px;">
+        <div>
+          <%= attachment_image_tag(item, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg") %>
+        </div>
 
-			  <div>
-				  <%= attachment_image_tag(item, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg") %>
-			  </div>
+        <div>
+          商品名：<%= item.item_name %>
+        </div>
 
-				<div>
-				  商品名：<%= item.item_name %>
-				</div>
+        <div>
+          <% item.singers.each do |singer|%>
+            アーティスト名：<%= singer.singer_name %>
+          <%end%>
+        </div>
 
-				<div>
-				  <% item.singers.each do |singer|%>
-				  アーティスト名：<%= singer.singer_name %>
-				  <%end%>
-				</div>
+        <div>
+          価格：<%= item.price %>
+        </div>
 
-				<div>
-				  価格：<%= item.price %>
-				</div>
+        <div>
+          在庫数：<%= item.stock.stock_count %>
+        </div>
 
-				<div>
-		  	  在庫数：<%= item.stock.stock_count %>
-				</div>
+        <div>
+          <%= link_to item.active, item_toggle_status_path(item.id), method: :patch %>
+        </div>
+        <%= link_to '編集', edit_administrator_item_path(item.id),class: "btn btn bg-success" %>
+        <%= link_to '削除', administrator_item_path(item.id),class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      </div>
+    <% end %>
 
-				<div>
-				<%= link_to item.active, item_toggle_status_path(item.id), method: :patch %>
-				</div>
-				<%= link_to '編集', edit_administrator_item_path(item.id),class: "btn btn bg-success" %>
-				<%= link_to '削除', administrator_item_path(item.id),class: "btn btn bg-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
-			</div>
-			<% end %>
+  </div>
 
-		</div>
-
-    </div>
+</div>
 </div>
