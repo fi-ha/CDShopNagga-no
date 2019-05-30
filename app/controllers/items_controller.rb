@@ -25,7 +25,11 @@ class ItemsController < ApplicationController
     # @player = item_item_genres.find_by(genre_id: cd_genre_id, description: true)
     item_genres = ItemGenre.where(genre_id: cd_genre_id)
     @players = item_genres.select { |item_genre| item_genre.item.description != nil }
-    @player = @players.first.item
+
+    unless @players.blank?
+      @player = @players.first.item
+    end
+    
     @review = Review.new
     if @item.active == "販売停止"
       @items = Item.all
