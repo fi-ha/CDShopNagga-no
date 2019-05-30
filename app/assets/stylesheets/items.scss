@@ -113,8 +113,8 @@
 /*店名の文字*/
 
 #content1 {
-    width: 50%;
-    height: 50%;
+    width: 49%;
+    height: 49%;
     position: absolute;
     left: 25%;
     top: 1%;
@@ -122,6 +122,7 @@
     float: right;
     color: #9ec34b;
     font-size: 46px;
+    text-align: center;
     animation: rotate1 10s linear infinite;
 }
 
