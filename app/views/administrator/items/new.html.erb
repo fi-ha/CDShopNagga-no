@@ -113,7 +113,7 @@
 
       <h4>商品説明</h4>
       <%= f.text_area :description, required: true %>
-      
+
       <h4>ジャンル</h4>
       <%= f.fields_for :item_genres do |item_genre| %>
         <%= item_genre.label :genre_id %>
