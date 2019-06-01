@@ -1,8 +1,11 @@
+<div class='container'>
+    <div class='row'>
 <!---左のタブの部分テンプレート--->
 <%= render 'administrator/tab' %>
+<div class= 'col-lg-7'>
 <h1>返信フォーム</h1>
 <div class="">
-  <table>
+  <table class="table">
     <tbody>
       <tr>
         <td colspan="2"><p><strong>投稿日時:</strong><%= @contact.created_at %></p></td>
@@ -45,7 +48,7 @@
 
     <% @replyedcontacts.each do |replyedcontact| %>
     <%= respon = @respons.find_by(contact_id: replyedcontact.id) %>
-    <table>
+    <table class="table">
       <tbody>
         <tr>
           <td colspan="2"><p><strong>投稿日時:</strong><%= replyedcontact.created_at %></p></td>
@@ -70,7 +73,7 @@
       </table>
       <i class="fas fa-reply"></i>
       <div class="respon_table">
-        <table>
+        <table class="table">
           <tbody>
             <tr>
               <td colspan="2"><p><strong>返信日時:</strong>
@@ -92,4 +95,7 @@
             </table>
           </div>
           <% end %>
+</div>
+</div>
+</div>
 </div>
