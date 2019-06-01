@@ -29,7 +29,7 @@ class ItemsController < ApplicationController
     unless @players.blank?
       @player = @players.first.item
     end
-    
+
     @review = Review.new
     if @item.active == "販売停止"
       @items = Item.all
