@@ -1,11 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+チーム開発の体験で作成したCDを販売するECサイトです。
+私達のチームでは販売戦略から考察し、「かっこいいプレーヤーがあればCDを買いたくなるだろう」
+というコンセプトで作成しました。
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version 
 
 * System dependencies
 
